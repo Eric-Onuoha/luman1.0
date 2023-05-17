@@ -13,7 +13,7 @@ const CareersPreview = ({Careers}) => {
         <div id="careersPreviewComponent">
             {Object.keys(Careers).map((Career) =>(
                 <div onClick={handleNavigation} id={Career} className="careerList">
-                    <h1 id={Career}>{Careers[Career]}</h1>
+                    <h1 id={Career}>{Careers[Career]} </h1>
                 </div>
             ))}
         </div>
