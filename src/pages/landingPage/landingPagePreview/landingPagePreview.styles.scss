@@ -1,0 +1,19 @@
+#landingPagePreviewComponent{
+
+    #landingIntro{
+        height: 60vh;
+        position: relative;
+        border: 1px solid;
+
+        #navigationComponent{
+            position: absolute;
+            bottom: 2px;
+            left: 44vw;
+        }
+    }
+
+    #contactDetailsComponent{
+        background-color: beige;
+        height: 39.8vh;
+    }
+}
