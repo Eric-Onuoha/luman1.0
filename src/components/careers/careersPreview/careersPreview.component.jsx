@@ -6,8 +6,7 @@ const CareersPreview = ({Careers}) => {
     const navigate = useNavigate();
 
     const handleNavigation = (e) => {
-        // navigate("/careers/" + e.target.id);
-        console.log(e.target.id);
+        navigate("/careers/" + e.target.id);
     }
     return(
         <div id="careersPreviewComponent">

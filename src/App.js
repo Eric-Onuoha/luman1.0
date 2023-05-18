@@ -1,9 +1,9 @@
 import { Routes, Route } from 'react-router-dom';
 import './App.css';
 
-import Navigation from './components/navigation/navigation.component';
 import LandingPage from './pages/landingPage/landingPage.component';
 import Careers from './components/careers/careers.component';
+import ApplicationPage from './pages/applicationPage/applicationPage.component';
 
 function App() {
   return (
@@ -11,6 +11,7 @@ function App() {
       <Routes>
         <Route path='/' element={<LandingPage/>} />
         <Route path='/careers' element={<Careers/>} />
+        <Route path='/careers/:position' element={<ApplicationPage/>}/>
       </Routes>
     </div>
   );
