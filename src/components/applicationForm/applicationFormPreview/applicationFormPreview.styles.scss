@@ -1,0 +1,29 @@
+#applicationFormPreviewComponent{
+    padding-top: 3em;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+
+
+
+    input, select, textarea{
+        display: block;
+        margin: 3px 0 12px 0;
+        width: 200px;
+    }
+
+    #title{
+        width: 550px;
+    }
+
+    .rsw-editor{
+        width: 96%;
+        margin: 3px 0 12px 0;
+        min-height: 200px;
+    }
+
+    button{
+        margin: 14px 0;
+        min-width: 100px;
+    }
+}
