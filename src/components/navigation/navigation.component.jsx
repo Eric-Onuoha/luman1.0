@@ -1,7 +1,7 @@
 import NavigationPreview from "./navigationPreview/navigationPreview.component"
 
 const Navigation = () => {
-    const navItems = ["careers", "operations"];
+    const navItems = ["Careers", "Operations"];
     return (
         <NavigationPreview navItems={navItems}/>
     )

@@ -1,28 +1,40 @@
+@import url('https://fonts.googleapis.com/css2?family=Oleo+Script&display=swap');
+
 #landingPagePreviewComponent{
+    // margin: 0 20%;
+    width: 100%;
+
+    #navigationComponent{
+        display: block;
+        margin: 15px auto;
+        text-align: center;
+        width: 100%;
+    }
 
     #landingIntro{
         position: relative;
-        border: 1px solid;
-        height: 70vh;
+        // height: 40vh;
 
         #banner{
-            width: 40%;
+            width: 35%;
             display: block;
-            margin: 80px auto 0 auto;
+            margin: 12vh auto 50px auto;
         }
 
-        #navigationComponent{
-            position: absolute;
-            bottom: 2px;
-            left: 44vw;
+        #brandSlogan{
+            text-align: center;
+            font-family: 'Oleo Script', cursive;
+            letter-spacing: 3px;
+            color: #333333;
         }
     }
 
     #contactDetailsComponent{
         background-color: beige;
-        height: 29.8vh;
-        position: absolute;
+        // height: 22vh;
+        margin-top: 300px;
+        position: fixed;
         bottom: 0;
-        width: 100%;
+        width: 80%;
     }
 }

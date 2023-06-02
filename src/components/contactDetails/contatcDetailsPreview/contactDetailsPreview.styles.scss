@@ -1,12 +1,18 @@
 #contactDetailsPreview{
     padding: 30px 100px;
+
     div{
         float: left;
     }
 
     #digitalAddresses{
-        width: 29%;
-        border: 1px solid;
+        width: 40%;
+        iframe{
+            width: 100%;
+            border-radius: 50%;
+            height: 500px;
+            border: 1px solid;
+        }
     }
 
     #feedbackForm{
