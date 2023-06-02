@@ -1,9 +1,15 @@
 #landingPagePreviewComponent{
 
     #landingIntro{
-        height: 60vh;
         position: relative;
         border: 1px solid;
+        height: 70vh;
+
+        #banner{
+            width: 40%;
+            display: block;
+            margin: 80px auto 0 auto;
+        }
 
         #navigationComponent{
             position: absolute;
@@ -14,6 +20,9 @@
 
     #contactDetailsComponent{
         background-color: beige;
-        height: 39.8vh;
+        height: 29.8vh;
+        position: absolute;
+        bottom: 0;
+        width: 100%;
     }
 }
