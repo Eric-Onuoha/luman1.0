@@ -8,14 +8,23 @@ const ApplicationFormPreview = () => {
     const Question = "Sample Question";
 
     const [formResponse, setFormResponse] = useState([]);
+    const [count, setCount] = useState(0);
 
     const {name, contact, email, SpecificQuestion, lastJobPlace, lastJobTitle, contactOfLastEmployer, nameOfPersonalReferee, contactOfPersonalReferee} = formResponse;
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        formResponse["Position"] = position;
-        addCollectionAndDocuments("Applications/", email, formResponse);
-        console.log(formResponse);
+        if (formResponse.length !== 0){
+            formResponse["Position"] = position;
+            addCollectionAndDocuments("Applications", email, formResponse);
+            console.log(formResponse);
+        } else {
+            alert("Check that all fields are filled");
+        }
+    }
+
+    const characterCount = (e) => {
+        setCount(e.target.value.length);
     }
 
     const handleChange = (event) => {
@@ -41,10 +50,11 @@ const ApplicationFormPreview = () => {
             <br />
             <fieldset>
                 <label htmlFor="cvUpload">Upload CV here:</label>
-                <input id="cvUpload" type="file" name="resume" />
+                <input id="cvUpload" type="file" accept=".pdf,.doc,.docx,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document" name="resume" />
                 <br />
-                <label htmlFor="SpecificQuestion">Provide any additional information about your qualification for the job here:</label>
-                <textarea name="SpecificQuestion" id="" cols="30" rows="10"></textarea>
+                <label htmlFor="SpecificQuestion">{Question}</label>
+                <textarea name="SpecificQuestion" maxLength={600} id="" cols="30" rows="10" onChange={characterCount}></textarea>
+                <p>{600 - count} character(s) left</p>
             </fieldset>
             <br />
             <fieldset>
