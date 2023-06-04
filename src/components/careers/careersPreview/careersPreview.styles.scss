@@ -1,10 +1,56 @@
 #careersPreviewComponent{
-    padding: 2vh 15vw;
-    background-color: beige;
 
-    .careerList{
-        padding: 20px 40px;
-        border: 1px solid;
-        margin: 10px 0;
+    #careersComponent{
+        padding: 5px 25% 30px 25%;
+        // position: relative;
+
+        .careerList{
+            padding: 25px 40px;
+            box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
+            margin: 10px 0;
+            position: relative;
+            background-color: #FFFFFF;
+            cursor: pointer;
+        }
+
+        #baker{
+            img{
+                content: url("../../../assets/images/baker.jpeg");
+                height: 80%;
+                position: absolute;
+                right: 30px;
+                bottom: 10%;
+            }
+        }
+
+        #manager{
+            img{
+                content: url("../../../assets/images/manager.jpg");
+                height: 80%;
+                position: absolute;
+                right: 65px;
+                bottom: 10%;
+            }
+        }
+
+        #distributor{
+            img{
+                content: url("../../../assets/images/delivery.jpg");
+                height: 80%;
+                position: absolute;
+                right: 60px;
+                bottom: 10%;
+            }
+        }
+
+        #assistant{
+            img{
+                content: url("../../../assets/images/assistant.png");
+                height: 80%;
+                position: absolute;
+                right: 70px;
+                bottom: 10%;
+            }
+        }
     }
 }

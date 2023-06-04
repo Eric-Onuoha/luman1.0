@@ -15,7 +15,7 @@ const NavigationPreview = ({navItems}) => {
         <div id="navigationPreviewComponent">
             {/* {navItems.map((navItem) => ( */}
                 <p className="navItem " onClick = {handleNavigation}>{navItems[0]} <span id="careers"></span></p>
-                <img id="logo" src={Logo} alt="" />
+                <a href="/"><img id="logo" src={Logo} alt="" /></a> 
                 <p className="navItem" onClick = {handleNavigation}>{navItems[1]}</p>
             {/* ))} */}
         </div>
