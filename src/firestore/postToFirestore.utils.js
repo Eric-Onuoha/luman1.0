@@ -26,10 +26,14 @@ const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
 export const db = getFirestore();
 
-export const addCollectionAndDocuments = async (CollectionKey, docKey, docToAdd, mergeStatus) => {
-  console.log("here");
-    await setDoc(doc(db, CollectionKey, docKey), docToAdd, mergeStatus);
-    alert("Application Submitted!");
+export const addCollectionAndDocuments = async (CollectionKey, docKey, docToAdd, mergeStatus = true) => {
+  try{
+    await setDoc(doc(db, CollectionKey, docKey), docToAdd, mergeStatus = true);
+    alert("Response Recieved");
+  } catch(err){
+    alert("Something went wrong, please refresh and try again");
+  }
+    
 }
 
 // export const uploadDocWithImages = (filesToUpload, CollectionKey, docKey, docToAdd, mergeStatus) => {

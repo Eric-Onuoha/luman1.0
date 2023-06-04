@@ -1,6 +1,29 @@
 import "./contactDetailsPreview.styles.scss";
+import { addCollectionAndDocuments } from "../../../firestore/postToFirestore.utils";
+import { useState } from "react";
 
 const ContactDetailsPreview = () => {
+
+    const [formResponse, setFormResponse] = useState("");
+    const {phoneNumber, feedback} = formResponse;
+
+    const handleChange = (event) => {
+        const {name, value} = event.target;
+        setFormResponse({...formResponse, [name]: value})
+    }
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        if (formResponse.length !== 0){
+            try{
+                addCollectionAndDocuments("Feedback", phoneNumber, formResponse);
+                setFormResponse({phoneNumber:"", feedback:""});
+            } catch(err){
+                alert("Check that all fields are filled");
+            }
+        } 
+    }
+
     return(
         <div id="contactDetailsPreview">
             <div id="physicalAddress">
@@ -9,10 +32,10 @@ const ContactDetailsPreview = () => {
             <div id="feedbackForm">
                 <p>Lush Ovens Ltd. </p>
                 <p>Along phase 3 Road, Opposite Methodist Cathedral. kubwa.</p>
-                <form id="feedbackForm">
+                <form id="feedbackForm" onSubmit={handleSubmit} onChange={handleChange}>
                     <label htmlFor="">We love to hear from our customers</label>
-                    <input type="tel" name="phoneNumber" placeholder="Phone Number" pattern="[0-9]{3}[0-9]{3}[0-9]{3}[0-9]{2}" required />
-                    <textarea name="feedback" placeholder="Please provide some feedback" id="" cols="30" rows="10" required></textarea>
+                    <input type="tel" name="phoneNumber" value={phoneNumber} placeholder="Phone Number" pattern="[0-9]{3}[0-9]{3}[0-9]{3}[0-9]{2}" required />
+                    <textarea name="feedback" value={feedback} placeholder="Please provide some feedback" id="" cols="30" rows="10" required></textarea>
                     <button type="submit">Submit Feedback</button>
                 </form>
             </div>

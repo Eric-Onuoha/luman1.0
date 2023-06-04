@@ -3,6 +3,9 @@ import { addCollectionAndDocuments } from "../../../firestore/postToFirestore.ut
 import "./applicationFormPreview.styles.scss";
 import { useState } from "react";
 
+import Navigation from "../../navigation/navigation.component";
+import ContactDetails from "../../contactDetails/contactDetails.component";
+
 const ApplicationFormPreview = () => {
     const {position} = useParams();
     const Question = "Sample Question";
@@ -16,10 +19,12 @@ const ApplicationFormPreview = () => {
         e.preventDefault();
         if (formResponse.length !== 0){
             formResponse["Position"] = position;
-            addCollectionAndDocuments("Applications", email, formResponse);
-            console.log(formResponse);
-        } else {
-            alert("Check that all fields are filled");
+            try{
+                addCollectionAndDocuments("Applications", email, formResponse);
+            } catch (err){
+                alert("Something went wrong, please refresh and try again");
+            }
+
         }
     }
 
@@ -35,6 +40,11 @@ const ApplicationFormPreview = () => {
     return(
         <div id="applicationFormPreviewComponent">
 
+        <div id="navigationComponent">
+            <Navigation></Navigation>
+        </div>
+
+        <div id="form">
         <form id="applicationForm" onSubmit={handleSubmit} onChange={handleChange}>
             <br />
             <fieldset>
@@ -85,6 +95,8 @@ const ApplicationFormPreview = () => {
             <p>Successful Applicants will be contacted for an Interview</p>
             <button type="submit">Submit</button>
         </form>
+        </div>
+
         </div>
     )
 };

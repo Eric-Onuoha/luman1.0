@@ -12,7 +12,8 @@ function App() {
       <Routes>
         <Route path='/' element={[<LandingPage/>, <ContactDetails/>]} />
           <Route path='careers' element={<Careers/>} />
-          <Route path='careers/:position' element={<ApplicationPage/>}/>
+          <Route path='careers/:position' element={[<ApplicationPage/>, <ContactDetails/>]}/>
+          <Route path='operations' element={[<LandingPage/>, <ContactDetails/>]}/>
       </Routes>
     </div>
   );
