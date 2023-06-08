@@ -19,14 +19,11 @@ const NavigationPreview = ({navItems}) => {
     <Navbar id="navigationPreviewComponent" expand="lg" light bg="light" fixed="top">
         <div id="navContainer">
             <Navbar.Brand href="/"><img id="lushLogo" src={Logo} alt="Lush Ovens ltd. Logo" /></Navbar.Brand>
-            <Navbar.Toggler target="#navbarNav" />
-            <Collapse navbar id="navbarNav">
             <Navbar.Nav id="navItems">
             {navItems.map((navItem) => ( 
-                <Nav.ItemLink id="navItem" key={navItem} href={navItem}>{navItem}</Nav.ItemLink>
+                <Nav.ItemLink className="navItem" key={navItem} href={navItem}>{navItem}</Nav.ItemLink>
             ))}
             </Navbar.Nav>
-            </Collapse>
         </div>
     </Navbar>
     <Outlet/>

@@ -4,7 +4,6 @@ import "./landingPagePreview.styles.scss";
 import { Container, Row } from "bootstrap-4-react/lib/components/layout";
 
 import Navigation from "../../../components/navigation/navigation.component";
-import ContactDetails from "../../../components/contactDetails/contactDetails.component";
 import Banner from "../../../components/banner/banner.component";
 
 

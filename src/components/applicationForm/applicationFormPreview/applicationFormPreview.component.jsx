@@ -4,7 +4,6 @@ import "./applicationFormPreview.styles.scss";
 import { useState } from "react";
 
 import Navigation from "../../navigation/navigation.component";
-import ContactDetails from "../../contactDetails/contactDetails.component";
 
 const ApplicationFormPreview = () => {
     const {position} = useParams();

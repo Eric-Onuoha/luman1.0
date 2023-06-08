@@ -2,8 +2,11 @@
     box-shadow: 0 1px 4px rgb(0 0 0 / 0.2);
     max-height: 85px;
     
-    #navItem{
-        color: #333333;
+    #navItems{
+        align-items: center;
+        .navItem{
+            color: #333333;
+        }
     }
 
     #navContainer{
@@ -13,5 +16,10 @@
 
     #lushLogo{
         width: 100px;
+    }
+
+    #navToggle{
+        position: relative;
+        right: 0;
     }
 }

@@ -2,7 +2,6 @@ import "./careersPreview.styles.scss";
 import { useNavigate } from "react-router-dom";
 
 import Navigation from "../../navigation/navigation.component";
-import ContactDetails from "../../contactDetails/contactDetails.component";
 
 // import Baker from "../../../assets/images/baker.jpeg";
 // import Assistant from "../../../assets/images/assistant.png";
@@ -31,9 +30,6 @@ const CareersPreview = ({Careers}) => {
                 ))}
             </div>
 
-            <div id="contactDetailsComponent">
-                <ContactDetails></ContactDetails>
-            </div>
         </div>
     )
 };
