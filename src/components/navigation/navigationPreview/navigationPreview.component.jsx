@@ -11,7 +11,6 @@ const NavigationPreview = ({navItems}) => {
 
 
     const handleNavigation = (e) => {
-        e.target.className = "navItem active";
         navigate("/" + e.target.textContent);
     }
 
@@ -24,7 +23,7 @@ const NavigationPreview = ({navItems}) => {
             <Collapse navbar id="navbarNav">
             <Navbar.Nav id="navItems">
             {navItems.map((navItem) => ( 
-                <Nav.ItemLink id="navItem" key={navItem} onClick={handleNavigation}>{navItem}</Nav.ItemLink>
+                <Nav.ItemLink id="navItem" key={navItem} href={navItem}>{navItem}</Nav.ItemLink>
             ))}
             </Navbar.Nav>
             </Collapse>
