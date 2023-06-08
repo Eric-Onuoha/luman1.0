@@ -3,11 +3,6 @@ import { useNavigate } from "react-router-dom";
 
 import Navigation from "../../navigation/navigation.component";
 
-// import Baker from "../../../assets/images/baker.jpeg";
-// import Assistant from "../../../assets/images/assistant.png";
-// import Manager from "../../../assets/images/manager.jpg";
-// import Distributor from "../../../assets/images/delivery.jpg";
-
 const CareersPreview = ({Careers}) => {
 
     const navigate = useNavigate();
@@ -15,11 +10,9 @@ const CareersPreview = ({Careers}) => {
     const handleNavigation = (e) => {
         navigate("/careers/" + e.target.id);
     }
+
     return(
         <div id="careersPreviewComponent">
-            <div id="NavigationComponent">
-                <Navigation></Navigation>
-            </div>
 
             <div id="careersComponent">
                 {Object.keys(Careers).map((Career) =>(

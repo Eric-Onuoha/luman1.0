@@ -9,6 +9,10 @@ const ApplicationFormPreview = () => {
     const {position} = useParams();
     const Question = "Sample Question";
 
+    String.prototype.properCase = function () {
+        return this.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
+    };
+
     const [formResponse, setFormResponse] = useState([]);
     const [count, setCount] = useState(0);
 
@@ -38,9 +42,8 @@ const ApplicationFormPreview = () => {
 
     return(
         <div id="applicationFormPreviewComponent">
-
-        <div id="navigationComponent">
-            <Navigation></Navigation>
+        <div id="formIntro">
+            <h2>{position.properCase()} Application Form</h2>
         </div>
 
         <div id="form">

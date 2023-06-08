@@ -21,7 +21,7 @@ const NavigationPreview = ({navItems}) => {
             <Navbar.Brand href="/"><img id="lushLogo" src={Logo} alt="Lush Ovens ltd. Logo" /></Navbar.Brand>
             <Navbar.Nav id="navItems">
             {navItems.map((navItem) => ( 
-                <Nav.ItemLink className="navItem" key={navItem} href={navItem}>{navItem}</Nav.ItemLink>
+                <Nav.ItemLink className="navItem" key={navItem} onClick={handleNavigation}>{navItem}</Nav.ItemLink>
             ))}
             </Navbar.Nav>
         </div>

@@ -2,7 +2,7 @@ import { Routes, Route } from 'react-router-dom';
 import './App.css';
 
 import LandingPage from './pages/landingPage/landingPage.component';
-import Careers from './components/careers/careers.component';
+import CareersPage from './pages/careersPage/careersPage.component';
 import ApplicationPage from './pages/applicationPage/applicationPage.component';
 import Footer from './components/footer/footer.component';
 import Navigation from './components/navigation/navigation.component';
@@ -13,6 +13,11 @@ function App() {
     <Routes>
       <Route path="/" element={[<Navigation />, <Footer/>]}>
         <Route index element={<LandingPage />}/>
+        <Route path='careers' element={<CareersPage/>}></Route>
+        <Route path='careers/:position' element={<ApplicationPage/>}></Route>
+        <Route path='announcements' element={<LandingPage/>}></Route>
+        <Route path='operations' element={<LandingPage/>}></Route>
+        <Route path='pricing' element={<LandingPage/>}></Route>
       </Route>
     </Routes>
     </div>
