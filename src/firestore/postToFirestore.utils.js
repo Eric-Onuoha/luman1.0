@@ -1,4 +1,7 @@
 import { initializeApp } from "firebase/app";
+import objectHash from "object-hash";
+import {v4} from "uuid";
+import {getStorage, getDownloadURL, ref, uploadBytesResumable, uploadBytes} from "firebase/storage";
 
 import {
   getFirestore,
@@ -31,36 +34,38 @@ export const addCollectionAndDocuments = async (CollectionKey, docKey, docToAdd,
     await setDoc(doc(db, CollectionKey, docKey), docToAdd, mergeStatus = true);
     alert("Response Recieved");
   } catch(err){
-    alert("Something went wrong, please refresh and try again");
+    alert("Something went wrong, please refresh and try again" + err);
   }
     
 }
 
-// export const uploadDocWithImages = (filesToUpload, CollectionKey, docKey, docToAdd, mergeStatus) => {
+export const uploadDocWithImages = (filesToUpload, CollectionKey, docKey, docToAdd, mergeStatus = true) => {
 
-//   if (docKey === undefined){
-//   docKey = objectHash.MD5(docToAdd);
-//   }
+  if (docKey === undefined){
+  docKey = objectHash.MD5(docToAdd);
+  }
 
-//   let imageList = [];
-//   filesToUpload.forEach(fileToUpload => {
-//       const reference = ref(Storage, `wipf/images/${CollectionKey}/${docKey}/${fileToUpload.name + v4()}`)
-//       uploadBytes(reference, fileToUpload)
-//       .then(snapshot => {
-//       return getDownloadURL(snapshot.ref)
-//       })
-//       .then(downloadURL => {
-//       console.log('Download URL', downloadURL);
-//       imageList.push(downloadURL);
+  alert(filesToUpload);
 
-//       if(filesToUpload.length == imageList.length){
-//           docToAdd["images"] = imageList;
-//           docToAdd["id"] = docKey;
-//           addCollectionAndDocuments(CollectionKey, docKey, docToAdd, mergeStatus);
-//       }
-//       })
-//   }); 
-// }
+  let imageList = [];
+  filesToUpload.forEach(fileToUpload => {
+      const reference = ref(Storage, `Application/CV/${CollectionKey}/${docKey}/${docKey + v4()}`)
+      uploadBytes(reference, fileToUpload)
+      .then(snapshot => {
+      return getDownloadURL(snapshot.ref)
+      })
+      .then(downloadURL => {
+      console.log('Download URL', downloadURL);
+      imageList.push(downloadURL);
+
+      if(filesToUpload.length == imageList.length){
+          docToAdd["images"] = imageList;
+          docToAdd["id"] = docKey;
+          addCollectionAndDocuments(CollectionKey, docKey, docToAdd, mergeStatus = true);
+      }
+      })
+  }); 
+}
 
 
 

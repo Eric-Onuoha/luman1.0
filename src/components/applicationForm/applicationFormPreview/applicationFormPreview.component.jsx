@@ -4,6 +4,7 @@ import "./applicationFormPreview.styles.scss";
 import { useState } from "react";
 
 import Navigation from "../../navigation/navigation.component";
+import { uploadDocWithImages } from "../../../firestore/postToFirestore.utils";
 
 const ApplicationFormPreview = () => {
     const {position} = useParams();
@@ -15,6 +16,7 @@ const ApplicationFormPreview = () => {
 
     const [formResponse, setFormResponse] = useState([]);
     const [count, setCount] = useState(0);
+    const [imageUpload, setImageUpload] = useState(null);
 
     const {name, contact, email, SpecificQuestion, lastJobPlace, lastJobTitle, contactOfLastEmployer, nameOfPersonalReferee, contactOfPersonalReferee} = formResponse;
 
@@ -23,13 +25,22 @@ const ApplicationFormPreview = () => {
         if (formResponse.length !== 0){
             formResponse["Position"] = position;
             try{
-                addCollectionAndDocuments("Applications", email, formResponse);
+                uploadDocWithImages(imageUpload, "Applications", email, formResponse);
             } catch (err){
-                alert("Something went wrong, please refresh and try again");
+                alert("Something went wrong, please refresh and try again" + err);
             }
-
         }
     }
+
+    const handleImageChange = (e) => {
+        let imagelist = [];
+        if(e.target.files !== null) {
+          for(let i = 0; i < e.target.files.length; i++){
+            imagelist.push(e.target.files[i]);
+          }
+          setImageUpload(imagelist);
+        }
+      }
 
     const characterCount = (e) => {
         setCount(e.target.value.length);
@@ -62,7 +73,7 @@ const ApplicationFormPreview = () => {
             <br />
             <fieldset>
                 <label htmlFor="cvUpload">Upload CV here:</label>
-                <input id="cvUpload" type="file" accept=".pdf,.doc,.docx,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document" name="resume" />
+                <input id="cvUpload" type="file" onChange={handleImageChange} accept=".pdf,.doc,.docx,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document" name="resume" />
                 <br />
                 <label htmlFor="SpecificQuestion">{Question}</label>
                 <textarea name="SpecificQuestion" maxLength={600} id="" cols="30" rows="10" onChange={characterCount}></textarea>

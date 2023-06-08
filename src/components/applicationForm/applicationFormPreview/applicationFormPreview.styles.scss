@@ -1,5 +1,4 @@
 #applicationFormPreviewComponent{
-    // background-color: #FDF5E6;
     position: relative;
 
     #formIntro{
@@ -76,6 +75,28 @@
             }
         }
     }
+}
 
+@media(max-width: 1100px){
+    #applicationFormPreviewComponent{
 
+        #formIntro{
+            h2{
+                font-size: 20px;
+            }
+        }
+
+        form{
+            padding: 0 2% 30px 2%;
+
+            input, select, textarea{
+                margin: 3px 0 12px 0;
+                width: 95%;
+            }
+
+            textarea{
+                width: 80%;
+            }
+        }
+    }
 }

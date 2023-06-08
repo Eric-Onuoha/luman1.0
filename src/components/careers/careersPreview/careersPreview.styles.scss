@@ -59,3 +59,50 @@
         }
     }
 }
+
+
+@media(max-width: 1100px){
+    #careersPreviewComponent{
+
+        #careersComponent{
+            padding: 5px 2% 30px 2%;
+
+            h1{
+                font-size: 16px;
+            }
+
+                
+            #baker{
+                img{
+                    height: 55%;
+                    bottom: 20%;
+                }
+            }
+
+            #manager{
+                img{
+                    height: 60%;
+                    right: 48px;
+                    bottom: 20%;
+                }
+            }
+
+            #distributor{
+                img{
+                    height: 55%;
+                    right: 45px;
+                    bottom: 20%;
+                }
+            }
+
+            #assistant{
+                img{
+                    height: 70%;
+                    right: 40px;
+                    bottom: 15%;
+                }
+            }
+        }
+
+    }
+}
