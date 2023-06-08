@@ -1,24 +1,20 @@
 import React from "react";
 import "./landingPagePreview.styles.scss";
 
+import { Container, Row } from "bootstrap-4-react/lib/components/layout";
+
 import Navigation from "../../../components/navigation/navigation.component";
 import ContactDetails from "../../../components/contactDetails/contactDetails.component";
-
-import BreadBanner from "../../../assets/images/breadBanner.png";
+import Banner from "../../../components/banner/banner.component";
 
 
 const LandingPagePreview = () => {
     return(
-        <div id="landingPagePreviewComponent">
-            <div id="navigationComponent">
-                <Navigation></Navigation>
-            </div>            
-
-            <div id="landingIntro">
-                <img id="banner" src={BreadBanner} alt="An Image of Sliced Bread" />
-                <h1 id="brandSlogan">Breakfast made easy!</h1>
-            </div>
-        </div>
+        <Container id="landingPagePreviewComponent">
+            <Row>
+                <Banner></Banner>
+            </Row>
+        </Container>
     )
 };
 export default LandingPagePreview;

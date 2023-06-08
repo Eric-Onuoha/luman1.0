@@ -1,0 +1,17 @@
+@import url('https://fonts.googleapis.com/css2?family=Oleo+Script&display=swap');
+#BannerPreviewComponent{
+
+    #banner{
+        width: 32em;
+        display: block;
+        margin: 0 auto;
+    }
+
+    #brandSlogan{
+        text-align: center;
+        font-family: 'Oleo Script', cursive;
+        letter-spacing: 3px;
+        color: #333333;
+        margin-top: 35px;
+    }
+}
