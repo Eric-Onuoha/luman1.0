@@ -19,6 +19,7 @@ function App() {
         <Route path='operations' element={<LandingPage/>}></Route>
         <Route path='pricing' element={<LandingPage/>}></Route>
       </Route>
+      <Route path='*' element={[<Navigation></Navigation>, <LandingPage></LandingPage>, <Footer></Footer>]}></Route>
     </Routes>
     </div>
   );
