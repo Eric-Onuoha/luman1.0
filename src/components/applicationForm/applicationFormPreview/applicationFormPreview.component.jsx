@@ -17,11 +17,13 @@ const ApplicationFormPreview = () => {
     const [formResponse, setFormResponse] = useState([]);
     const [count, setCount] = useState(0);
     const [imageUpload, setImageUpload] = useState(null);
+    const [formStatus, setFormStatus] = useState("");
 
     const {name, contact, email, SpecificQuestion, lastJobPlace, lastJobTitle, contactOfLastEmployer, nameOfPersonalReferee, contactOfPersonalReferee} = formResponse;
 
     const handleSubmit = (e) => {
         e.preventDefault();
+        setFormStatus = "Please wait while your CV is uploaded";
         if (formResponse.length !== 0){
             formResponse["Position"] = position;
             try{
@@ -107,6 +109,7 @@ const ApplicationFormPreview = () => {
             </fieldset>
             <p>Successful Applicants will be contacted for an Interview</p>
             <button type="submit">Submit</button>
+            <p>{formStatus}</p>
         </form>
         </div>
 

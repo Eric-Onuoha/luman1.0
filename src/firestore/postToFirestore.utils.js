@@ -25,6 +25,7 @@ const firebaseConfig = {
 // Initialize Firebase
 
 const app = initializeApp(firebaseConfig);
+const Storage = getStorage(app);
 
 const analytics = getAnalytics(app);
 export const db = getFirestore();
@@ -34,7 +35,7 @@ export const addCollectionAndDocuments = async (CollectionKey, docKey, docToAdd,
     await setDoc(doc(db, CollectionKey, docKey), docToAdd, mergeStatus = true);
     alert("Response Recieved");
   } catch(err){
-    alert("Something went wrong, please refresh and try again" + err);
+    alert("Something went wrong, please refresh and try again");
   }
     
 }
@@ -45,11 +46,9 @@ export const uploadDocWithImages = (filesToUpload, CollectionKey, docKey, docToA
   docKey = objectHash.MD5(docToAdd);
   }
 
-  alert(filesToUpload);
-
   let imageList = [];
   filesToUpload.forEach(fileToUpload => {
-      const reference = ref(Storage, `Application/CV/${CollectionKey}/${docKey}/${docKey + v4()}`)
+      const reference = ref(Storage, `Application/CV/${docKey + v4()}`)
       uploadBytes(reference, fileToUpload)
       .then(snapshot => {
       return getDownloadURL(snapshot.ref)
