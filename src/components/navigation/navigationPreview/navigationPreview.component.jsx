@@ -22,6 +22,10 @@ const NavigationPreview = ({navItems}) => {
         navigate("/" + e.target.textContent);
     }
 
+    String.prototype.properCase = function () {
+        return this.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
+    };
+
     return(
     <Fragment>
     <Navbar id="navigationPreviewComponent" expand="lg" light bg="light" fixed="top">
@@ -30,7 +34,7 @@ const NavigationPreview = ({navItems}) => {
             <Navbar.Brand id="laptopLogo" href="/"><img id="lushLogo" src={Logo} alt="Lush Ovens ltd. Logo" /></Navbar.Brand>
             <Navbar.Nav id="navItems">
             {navItems.map((navItem) => ( 
-                <Nav.ItemLink className="navItem" key={navItem} onClick={handleNavigation}>{navItem}</Nav.ItemLink>
+                <Nav.ItemLink className="navItem" key={navItem} onClick={handleNavigation}>{navItem.properCase()}</Nav.ItemLink>
             ))}
             </Navbar.Nav>
         </div>
