@@ -8,7 +8,7 @@ import { uploadDocWithImages } from "../../../firestore/postToFirestore.utils";
 
 const ApplicationFormPreview = () => {
     const {position} = useParams();
-    const Question = "Sample Question";
+    const Question = "Why are you qualified for this role?";
 
     String.prototype.properCase = function () {
         return this.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
