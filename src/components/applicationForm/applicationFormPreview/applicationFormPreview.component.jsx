@@ -63,7 +63,7 @@ const ApplicationFormPreview = () => {
         <form id="applicationForm" onSubmit={handleSubmit} onChange={handleChange}>
             <br />
             <fieldset>
-                <label htmlFor="fullName">Full_Name:</label>
+                <label htmlFor="fullName">Full Name:</label>
                 <input id="fullName" name="name" type="text" />
                 <br />
                 <label htmlFor="phoneNumber">Phone Number:</label>
