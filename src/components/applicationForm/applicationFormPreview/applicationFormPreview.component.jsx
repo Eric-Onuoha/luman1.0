@@ -23,7 +23,7 @@ const ApplicationFormPreview = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        setFormStatus = "Please wait while your CV is uploaded";
+        setFormStatus("Please wait while your CV is uploaded");
         if (formResponse.length !== 0){
             formResponse["Position"] = position;
             try{

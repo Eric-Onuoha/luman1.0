@@ -15,8 +15,9 @@ const CareersPreview = ({Careers}) => {
         <div id="careersPreviewComponent">
 
             <div id="careersComponent">
+                <h4>Application closes on the 21st of June 2023</h4>
                 {Object.keys(Careers).map((Career) =>(
-                    <div onClick={handleNavigation} id={Career} className="careerList">
+                    <div onClick={handleNavigation} id={Career} key={Career} className="careerList">
                         <h1 id={Career}>{Careers[Career]}</h1>
                         <img src="" alt="" />
                     </div>
