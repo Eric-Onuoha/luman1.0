@@ -1,9 +1,7 @@
 import { useParams } from "react-router-dom";
-import { addCollectionAndDocuments } from "../../../firestore/postToFirestore.utils";
 import "./applicationFormPreview.styles.scss";
 import { useState } from "react";
 
-import Navigation from "../../navigation/navigation.component";
 import { uploadDocWithImages } from "../../../firestore/postToFirestore.utils";
 
 const ApplicationFormPreview = () => {
