@@ -12,13 +12,13 @@ import {
 } from 'firebase/firestore';
 
 const firebaseConfig = {
-    apiKey: "AIzaSyDfBhAMiVeEGR_79hy8WcOyOLAefCvTSlE",  
-    authDomain: "womeninpoliticsforumsite.firebaseapp.com",  
-    projectId: "womeninpoliticsforumsite",  
-    storageBucket: "womeninpoliticsforumsite.appspot.com",  
-    messagingSenderId: "304906877555",  
-    appId: "1:304906877555:web:b79ecaf0327678847b0806",  
-    measurementId: "G-W16E91HVYN"
+  apiKey: "AIzaSyCk5WKouY5P-EvbUnK_pZqqizCKDmMpAjQ",
+  authDomain: "lumen-4a58b.firebaseapp.com",
+  projectId: "lumen-4a58b",
+  storageBucket: "lumen-4a58b.appspot.com",
+  messagingSenderId: "615607356284",
+  appId: "1:615607356284:web:2b29d4ccf46f924a80b2f9",
+  measurementId: "G-PLFHCJHKDK"
   };
 
   const firebaseapp = initializeApp(firebaseConfig);

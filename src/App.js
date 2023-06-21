@@ -9,8 +9,12 @@ import Navigation from './components/navigation/navigation.component';
 import OperationsPage from './pages/operationsPage/operationsPage.component';
 
 import Authenticate from './authenticator/authenticate.component';
+import SignUp from './authenticator/signUp/signUp.component';
+import { useSelector } from 'react-redux';
 
 function App() {
+  const currentUser = useSelector((state) => state.currentUser.currentUser) || "";
+
   return (
     <div className="App">
     <Routes>
@@ -19,8 +23,9 @@ function App() {
         <Route path='careers' element={<CareersPage/>}></Route>
         <Route path='careers/:position' element={<ApplicationPage/>}></Route>
         <Route path='announcements' element={<LandingPage/>}></Route>
-        <Route path='operations' element={<Authenticate component={OperationsPage} user={""}/>}></Route>
+        <Route path='operations' element={<Authenticate component={OperationsPage} user={currentUser}/>}></Route>
         <Route path='pricing' element={<LandingPage/>}></Route>
+        <Route path='signup' element={<SignUp/>}></Route>
       </Route>
       <Route path='*' element={[<Navigation></Navigation>, <LandingPage></LandingPage>, <Footer></Footer>]}></Route>
     </Routes>

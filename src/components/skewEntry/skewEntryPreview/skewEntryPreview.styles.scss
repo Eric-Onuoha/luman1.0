@@ -1,0 +1,22 @@
+.dashboardEntry{
+    box-shadow: 1px 1px 4px rgb(0 0 0 / 0.2);
+    background-color: #FFFFFF;
+    padding: 0 15px 2px 15px;
+    width: 30%;
+    margin: 0 12px;
+
+    .displayHeader{
+        font-size: 18px;
+    }
+
+    .indicatorBad{
+        height: 3px;
+        background-color: red;
+    }
+
+    .indicatorGood{
+        height: 3px;
+        background-color: green;
+    }
+
+}

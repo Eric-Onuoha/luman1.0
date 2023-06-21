@@ -35,7 +35,8 @@ const SignUp = ()=> {
             await getUserDocFromAuth(user, username);
             resetForm();
         } catch(error){
-            alert("Error occured in account creation",error.message);
+            console.log(error);
+            alert("Error occured in account creation", error.message);
         }
 
     }

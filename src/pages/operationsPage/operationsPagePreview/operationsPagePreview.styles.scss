@@ -1,0 +1,63 @@
+#dashboardComponent{
+    padding: 86px 0 0 0;
+
+    #dashboardRow{
+        height: 100vh;
+
+        #dashboardMenu, #dashboardItems{
+            height: inherit;
+        }
+    
+        #dashboardMenu{
+            background-color: #252525;
+            color: #FFFFFF;
+            padding: 0;
+
+            .menuItem{
+
+                font-size: 20px;
+                color: rgb(199, 197, 197);
+                // border-bottom: 1px solid #6F767E;
+                cursor: pointer;
+                margin: 0;
+                padding: 0;
+
+                p{
+                    padding: 14px 0 14px 45px;
+                    margin: 0;
+
+                    &:hover{
+                        background-color: rgb(199, 197, 197);
+                        color: #252525;
+                    }
+
+                }
+
+                #mainMenuItem{
+                    
+                    img{
+                        width: 30px;
+                        margin-right: 10px;
+                    }
+                }
+
+                .subMenuItems{
+                    display: none;
+                }
+
+                .subMenuItem{
+                    padding: 10px 0 10px 30px;
+                    margin: 0 0 0 57px;
+                    border-left: 1px solid #6F767E;
+                }
+                
+            }
+
+        }
+
+        #dashboardItems{
+            background-color: #ececf0;
+            padding: 0;
+        }
+    }
+}
