@@ -16,9 +16,12 @@ import { rootReducer } from "./rootReducer";
 //     console.log("Next State: ", store.getState());
 // }
 
-const middlewares = [process.env.NODE_ENV === "development" && logger].filter(
+const middlewares = [process.env.NODE_ENV !== "production" && logger].filter(
     Boolean
 );
-const composedEnhancers = compose(applyMiddleware(...middlewares));
+
+const composedEnhancer = (process.env.NODE_ENV !== 'production' && window && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__) || compose; // to allow redux devtools in development
+
+const composedEnhancers = composedEnhancer(applyMiddleware(...middlewares));
 
 export const reduxStore = legacy_createStore(rootReducer, undefined, composedEnhancers);
