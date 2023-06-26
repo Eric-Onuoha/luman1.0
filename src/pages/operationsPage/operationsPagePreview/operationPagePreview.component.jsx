@@ -8,6 +8,10 @@ import ProductIcon from "../../../assets/images/productIcon.png";
 
 import Targets from "../../../components/targets/targets.component";
 import SalesPage from "../../salesPage/salesPage.component";
+import ExpensePage from "../../expensePage/expensePage.component";
+import DebtPage from "../../debtPage/debtPage.component";
+import StockPage from "../../stockPage/stockPage.component";
+import CashPage from "../../cashPage/cashPage.component";
 
 import { useState } from "react";
 
@@ -36,7 +40,7 @@ const OperationsPagePreview = () => {
                         <p id="mainMenuItem" onClick={showSubMenu}><img src={DailyTransactionsIcon}/>Daily Records</p>
                         <div className={subMenuClass}>
                             <p className="subMenuItem" onClick={changeCurrentTab}>Sales</p>
-                            <p className="subMenuItem" onClick={changeCurrentTab}>Inventory</p>
+                            <p className="subMenuItem" onClick={changeCurrentTab}>Stock</p>
                             <p className="subMenuItem" onClick={changeCurrentTab}>Expense</p>
                             <p className="subMenuItem" onClick={changeCurrentTab}>Debt</p>
                             <p className="subMenuItem" onClick={changeCurrentTab}>Accounts</p>
@@ -55,15 +59,15 @@ const OperationsPagePreview = () => {
                         <Targets></Targets>
                     ) : (menuTab === "Sales" ? (
                         <SalesPage></SalesPage>
-                    ) : (menuTab === "Inventory") ? (
-                        <p>Inventory</p>
+                    ) : (menuTab === "Stock") ? (
+                        <StockPage></StockPage>
                     ) : (menuTab === "Expense") ? (
-                        <p>Expense</p>
-                    ) : (menuTab === "Expenses") ? (
-                        <p>Expenses</p>
-                    ) : (menuTab === "Debt") ? (
-                        <p>Debt</p>
+                        <ExpensePage></ExpensePage>
                     ) : (menuTab === "Accounts") ? (
+                        <CashPage></CashPage>
+                    ) : (menuTab === "Debt") ? (
+                        <DebtPage></DebtPage>
+                    ) : (menuTab === "Account") ? (
                         <p>Accounts</p>
                     ) : (menuTab === "Staff Records") ? (
                         <p>Staff Records</p>

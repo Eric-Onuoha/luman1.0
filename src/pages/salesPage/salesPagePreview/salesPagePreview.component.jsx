@@ -3,6 +3,7 @@ import { Container, Row, Col } from "bootstrap-4-react/lib/components/layout";
 
 import SingleEntry from "../../../components/singleEntry/singleEntry.component";
 import SkewEntry from "../../../components/skewEntry/skewEntry.component";
+import OperationsMenu from "../../../components/operationsMenu/operationsMenu.component";
 
 const SalesPagePreview = () => {
 
@@ -12,8 +13,13 @@ const SalesPagePreview = () => {
 
     return(
         <Container id="salesPagePreviewComponent" fluid="true">
+            <OperationsMenu menu = "Sales"></OperationsMenu>
             <form onChange={handleChange}>
-                <h4>Direct to Consumer (DTC)</h4>
+                <h4>Direct to Consumer (DTC) sales for: <select name="salesDate"> {/* make green when current day */}
+                    <option value="dat1">2nd July 2023</option>
+                    <option value="dat1">Date 1</option>
+                    <option value="dat1">Date 1</option>
+                </select></h4>
                 <Row id="salesRecords">
                     <SingleEntry type = "Family"></SingleEntry>
                     <SingleEntry type = "Mini"></SingleEntry>
