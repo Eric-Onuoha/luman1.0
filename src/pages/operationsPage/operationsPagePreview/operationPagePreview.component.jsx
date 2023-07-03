@@ -12,6 +12,8 @@ import ExpensePage from "../../expensePage/expensePage.component";
 import DebtPage from "../../debtPage/debtPage.component";
 import StockPage from "../../stockPage/stockPage.component";
 import CashPage from "../../cashPage/cashPage.component";
+import ProductsPage from "../../productsPage/productsPage.component";
+import StaffPage from "../../staffPage/staffPage.component";
 
 import { useState } from "react";
 
@@ -67,12 +69,10 @@ const OperationsPagePreview = () => {
                         <CashPage></CashPage>
                     ) : (menuTab === "Debt") ? (
                         <DebtPage></DebtPage>
-                    ) : (menuTab === "Account") ? (
-                        <p>Accounts</p>
                     ) : (menuTab === "Staff Records") ? (
-                        <p>Staff Records</p>
+                        <StaffPage></StaffPage>
                     ) : (menuTab === "Product Records") ? (
-                        <p>Product Records</p>
+                        <ProductsPage></ProductsPage>
                     ) : (
                         <p></p>
                     ))}

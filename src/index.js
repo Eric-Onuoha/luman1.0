@@ -8,13 +8,17 @@ import App from './App';
 
 import { Provider } from 'react-redux';
 import { reduxStore } from "./reduxStore/reduxStore";
+import { PersistGate } from 'redux-persist/integration/react';
+import {persistor} from "./reduxStore/reduxStore";
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <Provider store={reduxStore}>
+    <PersistGate persistor={persistor}>
     <BrowserRouter>
       <App />
     </BrowserRouter>
+    </PersistGate>
     </Provider>
 );
 

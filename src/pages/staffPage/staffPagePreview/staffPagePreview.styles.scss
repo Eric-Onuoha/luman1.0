@@ -1,0 +1,59 @@
+#staffPagePreviewComponent{
+    padding: 15px 40px;
+    height: 90%;
+    overflow-y: scroll;
+
+    .staffList{
+        box-shadow: 1px 1px 4px rgb(0 0 0 / 0.2);
+        background-color: #FFFFFF;
+        margin: 0 0 40px 0;
+        padding: 15px 10px 8px 10px;
+
+        li{
+            margin-bottom: 9px;
+            cursor: pointer;
+            font-size: 17px;
+        }
+    }
+
+    .addStaff{
+        form{
+            display: block;
+        }
+        input, select{
+            display: block;
+            width: 250px;
+        }
+
+        label, input{
+            margin: 3px 0;
+        }
+
+        button{
+            margin-top: 20px;
+        }
+    }
+
+    h4{
+        font-size: 18px;
+    }
+
+    #productRecords{
+        margin-bottom: 50px;
+    }
+
+    button{
+        color: #C82736;
+        background-color: #FFFFFF;
+        padding: 5px 8px;
+        border: 1px solid #C82736;
+        border-radius: 6px;
+        cursor: pointer;
+        display: block;
+
+        &:hover{
+            color: #FFFFFF;
+            background-color: #C82736;
+        }
+    }
+}
