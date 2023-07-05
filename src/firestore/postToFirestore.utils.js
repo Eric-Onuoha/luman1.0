@@ -36,6 +36,7 @@ export const addCollectionAndDocuments = async (CollectionKey, docKey, docToAdd,
     alert("Response Recieved");
   } catch(err){
     alert("Something went wrong, please refresh and try again");
+    console.log(err);
   }
     
 }

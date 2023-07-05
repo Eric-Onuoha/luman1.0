@@ -8,7 +8,7 @@ const DebtPagePreview = () => {
     return(
         <Container id="debtPagePreviewComponent" fluid="true">
             <OperationsMenu menu = "Expense"></OperationsMenu>
-            <form>
+            {/* <form> */}
                 <h4>Debt for: <select name="ExpenseDate"> {/* make green when current day */}
                     <option value="dat1">3rd July 2023</option>
                     <option value="dat1">Date 1</option>
@@ -18,7 +18,7 @@ const DebtPagePreview = () => {
                     <DebtEntry></DebtEntry>
 
                 </Row>
-            </form>
+            {/* </form> */}
         </Container>
     )
 }; export default DebtPagePreview;

@@ -8,7 +8,7 @@ const CashPagePreview = () => {
     return(
         <Container id="cashPagePreviewComponent" fluid="true">
             <OperationsMenu menu = "stock"></OperationsMenu>
-            <form>
+            {/* <form> */}
                 <h4>Debt for: <select name="cashDate"> {/* make green when current day */}
                     <option value="dat1">3rd July 2023</option>
                     <option value="dat1">Date 1</option>
@@ -17,7 +17,7 @@ const CashPagePreview = () => {
                 <Row id="cashRecords">
                     <CashAccount></CashAccount>
                 </Row>
-            </form>
+            {/* </form> */}
         </Container>
     )
 }; export default CashPagePreview;

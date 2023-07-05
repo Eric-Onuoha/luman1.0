@@ -26,7 +26,7 @@ const StaffPagePreview = () => {
                 <button>Add New Staff</button>
                 </Col>
                 <Col className="staffList addStaff">
-                    <form>
+                    {/* <form> */}
                     <Row>
                         <Col>          
                             <label htmlFor="staffName">Full Name:</label>
@@ -52,7 +52,7 @@ const StaffPagePreview = () => {
                             <button type="submit">Submit Staff Record</button>
                         </Col>
                     </Row>
-                    </form>
+                    {/* </form> */}
                 </Col>
             </Row>
         </Container>

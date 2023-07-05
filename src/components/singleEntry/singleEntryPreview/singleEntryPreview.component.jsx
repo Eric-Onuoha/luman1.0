@@ -7,7 +7,7 @@ const SingleEntryPreview = ({type}) => {
             <p className=""></p>
             <p className="displayHeader">Sold from sales point</p>
             <div id="breadSkews">
-                <h4>{type} - <input name={type + "DTC"} type="text" /></h4>
+                <h4>{type} <input name={type + "DTC"} type="text" /></h4>
              </div>
         </Col>
     )

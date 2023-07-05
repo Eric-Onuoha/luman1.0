@@ -8,7 +8,7 @@ const StockPagePreview = () => {
     return(
         <Container id="stockPagePreviewComponent" fluid="true">
             <OperationsMenu menu = "stock"></OperationsMenu>
-            <form>
+            {/* <form> */}
                 <h4>Debt for: <select name="stockDate"> {/* make green when current day */}
                     <option value="dat1">3rd July 2023</option>
                     <option value="dat1">Date 1</option>
@@ -17,7 +17,7 @@ const StockPagePreview = () => {
                 <Row id="stockRecords">
                     <StockEntry></StockEntry>
                 </Row>
-            </form>
+            {/* </form> */}
         </Container>
     )
 }; export default StockPagePreview;

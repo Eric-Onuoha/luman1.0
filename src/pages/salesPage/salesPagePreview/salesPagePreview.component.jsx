@@ -14,7 +14,7 @@ const SalesPagePreview = () => {
     return(
         <Container id="salesPagePreviewComponent" fluid="true">
             <OperationsMenu menu = "Sales"></OperationsMenu>
-            <form onChange={handleChange}>
+            {/* <form onChange={handleChange}> */}
                 <h4>Direct to Consumer (DTC) sales for: <select name="salesDate"> {/* make green when current day */}
                     <option value="dat1">2nd July 2023</option>
                     <option value="dat1">Date 1</option>
@@ -31,7 +31,7 @@ const SalesPagePreview = () => {
                     <SkewEntry></SkewEntry>
                     <SkewEntry></SkewEntry>
                 </Row>
-            </form>
+            {/* </form> */}
         </Container>
     )
 }; export default SalesPagePreview;

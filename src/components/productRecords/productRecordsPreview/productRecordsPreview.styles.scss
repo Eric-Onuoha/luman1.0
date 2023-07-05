@@ -1,16 +1,21 @@
 .productRecords{
-    box-shadow: 1px 1px 4px rgb(0 0 0 / 0.2);
-    background-color: #FFFFFF;
     margin: 0 0 20px 0;
 
     #products{
         display: flex;
         justify-content: space-between;
         padding: 12px 25px 4px 25px;
+        background-color: #FFFFFF;
+        box-shadow: 1px 1px 4px rgb(0 0 0 / 0.2);
+        margin: 2px 0 20px 0;
 
         img{
             height: 25px;
             cursor: pointer;
         }
+
+        // input{
+        //     display: block;
+        // }
     }
 }
