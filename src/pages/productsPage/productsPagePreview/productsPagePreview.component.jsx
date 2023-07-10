@@ -12,41 +12,21 @@ const ProductsPagePreview = () => {
     let dateObj = new Date();
     let year = dateObj.getUTCFullYear();
     const [formResponse, setFormResponse] = useState([]);
-    const {productType, productName, productPriceDTC, productPriceSR, productPriceStaff} = formResponse;
-
+    const {productType, productName, productPriceDTC, productPriceSR} = formResponse;
+    const Products = {"bread": {"familyBread": {}, "miniBread": 40, "smallBread": 80}, "snacks": {"meatpie": 20, "puffpuff": 10, "doughnut": 5}};
+    
     const handleSubmit = (event) => {
         event.preventDefault();
-        if (formResponse.length !== 0){
-            // formResponse["Position"] = position;
+        if (formResponse.length !== 0 && formResponse.productType !== undefined && formResponse.productName !== undefined){
+            Object.assign(Products[productType], {[productName]: {productPriceDTC, productPriceSR}});
+            console.log(Products);
             let date = getMonthAndDay();
-            const test = "sometest"
-            const docData = {
-                stringExample: "Hello world!",
-                booleanExample: true,
-                numberExample: 3.14159265,
-                dateExample: date,
-                arrayExample: [5, true, "hello"],
-                nullExample: null,
-                objectExample: {
-                    a: 5,
-                    b: {
-                        nested: "foo"
-                    }
-                },
-                test: {
-                    a: 5,
-                    b: {
-                        nested: "foo"
-                    }
-                }
-            };
             try{
-                addCollectionAndDocuments(`${"test"+""+year}`, date, docData);
+                addCollectionAndDocuments(`${"Products"+""+year}`, date, Products);
             } catch (err){
                 alert("Something went wrong, please refresh and try again" + err);
             }
         }
-        getMonthAndDay();
     }
 
     const getMonthAndDay = () => {
@@ -61,7 +41,6 @@ const ProductsPagePreview = () => {
     const handleChange = (event) => {
         const {name, value} = event.target;
         setFormResponse({...formResponse, [name]: value});
-        console.log(productType);
     }
 
     return(
