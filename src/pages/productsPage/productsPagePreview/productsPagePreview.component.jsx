@@ -10,7 +10,8 @@ import { addCollectionAndDocuments } from "../../../firestore/postToFirestore.ut
 
 const ProductsPagePreview = () => {
     let dateObj = new Date();
-    let year = dateObj.getUTCFullYear();
+    let chnagedDate = " ";
+    let year;
     const [formResponse, setFormResponse] = useState([]);
     const {productType, productName, productPriceDTC, productPriceSR} = formResponse;
     const Products = {"bread": {"familyBread": {}, "miniBread": 40, "smallBread": 80}, "snacks": {"meatpie": 20, "puffpuff": 10, "doughnut": 5}};
@@ -29,12 +30,24 @@ const ProductsPagePreview = () => {
         }
     }
 
+    const handleDateChange = (e) => {
+        chnagedDate = new Date(e.target.value);
+        year = chnagedDate.getUTCFullYear()
+        console.log(chnagedDate);
+    }
+
     const getMonthAndDay = () => {
-        let month = dateObj.getUTCMonth() + 1; //months from 1-12
+        let month, day;
+        if (chnagedDate !== " "){
+            month = chnagedDate.getUTCMonth() + 1;
+            day = chnagedDate.getUTCDate();
+        } else{
+            month = dateObj.getUTCMonth() + 1;
+            day = dateObj.getUTCDate();
+        }
         let months = ['january', 'february', 'march', 'april',
                 'may', 'june', 'july', 'august', 'september',
                 'october', 'november', 'december'];
-        let day = dateObj.getUTCDate();
         return (months[month - 1] + "" + day);
     }
 
@@ -66,7 +79,7 @@ const ProductsPagePreview = () => {
                 </Col>
             </Row>
             <form onSubmit={handleSubmit} onChange={handleChange}>
-                <h4>Chnage product Prices from: <input type="date"/></h4>
+                <h4>Chnage product Prices from: <input type="date" onChange={handleDateChange}/></h4>
                 <Row id="productRecords">
                     <ProductRecords></ProductRecords>
                 </Row>

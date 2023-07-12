@@ -10,7 +10,6 @@ const ProductRecordsPreview = ({Products, Bread, Snacks}) => {
 
     const [productsRow, setProductsRow] = useState([]);
     const [productsType, setProductType] = useState("bread");
-    const [productsName, setProductName] = useState([]);
 
     const changeProductType = (e) => {
         setProductType(e.target.value);
@@ -61,7 +60,7 @@ const ProductRecordsPreview = ({Products, Bread, Snacks}) => {
                     <select name="productType" defaultValue={"default"} onChange={changeProductType}>
                         <option value="default" disabled >Select Product</option>
                         {Products.map((productName) => (
-                        <option value={productName}>{productName}</option>
+                        <option key={productName} value={productName}>{productName}</option>
                         ))}
                     </select>
                 </h4>
@@ -70,14 +69,14 @@ const ProductRecordsPreview = ({Products, Bread, Snacks}) => {
                         <select name="productName" defaultValue={"default"} required>
                             <option value="default" disabled >Select Bread</option>
                         {Bread.bread.map((breadName) => (
-                            <option value={breadName}>{breadName}</option>
+                            <option key={breadName} value={breadName}>{breadName}</option>
                         ))}
                         </select>
                     ) : (
                         <select name="productType" defaultValue={"default"}>
                             <option value="default" disabled >Select Snack</option>
                         {Snacks.snacks.map((snackName) => (
-                            <option value={snackName}>{snackName}</option>
+                            <option key={snackName} value={snackName}>{snackName}</option>
                         ))}
                         </select>
                     )}
