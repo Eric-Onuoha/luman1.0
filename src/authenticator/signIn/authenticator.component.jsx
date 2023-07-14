@@ -3,7 +3,7 @@ import { useState } from "react";
 import { signIn } from "./signIn.firebase.utils";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { updateCurrentUser } from "../../reduxStore/userReducer/user.reducer";
+import { updateCurrentUser } from "../../reduxStore/reducers/user.reducer";
 import "./authenticator.styles.scss";
 
 const Authenticator = () => {

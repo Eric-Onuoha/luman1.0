@@ -1,4 +1,6 @@
 import { Routes, Route } from 'react-router-dom';
+import { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
 import './App.css';
 
 import LandingPage from './pages/landingPage/landingPage.component';
@@ -11,9 +13,19 @@ import OperationsPage from './pages/operationsPage/operationsPage.component';
 import Authenticate from './authenticator/authenticate.component';
 import SignUp from './authenticator/signUp/signUp.component';
 import { useSelector } from 'react-redux';
+import { getMultipleDocuments } from './firestore/getFromFirestore.utils';
+
+import { updateCurrentUser } from './reduxStore/reducers/user.reducer';
+import { updateProductList } from './reduxStore/reducers/productList.reducer';
 
 function App() {
+  const dispatch = useDispatch();
   const currentUser = useSelector((state) => state.currentUser.currentUser) || "";
+
+  useEffect(() => {
+    console.log("triggered");
+    getMultipleDocuments("Products").then((ProductDB) => dispatch(updateProductList(ProductDB)));
+  }, []);
 
   return (
     <div className="App">

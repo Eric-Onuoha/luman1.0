@@ -22,7 +22,7 @@ import { rootReducer } from "./rootReducer";
 const persistConfig = {
     key: "root",
     storage,
-    blacklist: [""]
+    blacklist: ["productList"]
 }
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
@@ -36,7 +36,9 @@ const composedEnhancer = (process.env.NODE_ENV !== 'production' && window && win
 
 export const ReduxStore = configureStore({
     reducer: persistedReducer,
-    middleware: middlewares,
+    middleware: getDefaultMiddleware => getDefaultMiddleware({
+        immutableCheck: false
+    }).concat(middlewares),
     enhancers: composedEnhancer
 });
 

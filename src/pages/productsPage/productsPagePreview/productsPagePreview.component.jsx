@@ -1,54 +1,48 @@
 import "./productsPagePreview.styles.scss";
 import { Container, Row, Col } from "bootstrap-4-react/lib/components/layout";
 import { useState } from "react";
+import { useDispatch } from "react-redux";
 
 import OperationsMenu from "../../../components/operationsMenu/operationsMenu.component";
 import ProductRecords from "../../../components/productRecords/productRecords.component";
+import { addProduct } from "../../../reduxStore/reducers/productList.reducer";
+// import { updateFamilyPrice } from "../../../reduxStore/reducers/productList.reducer";
 import { addCollectionAndDocuments } from "../../../firestore/postToFirestore.utils";
 
 
-
-const ProductsPagePreview = () => {
-    let dateObj = new Date();
-    let chnagedDate = " ";
-    let year;
+const ProductsPagePreview = ({LatestProducts}) => {
+    const dispatch = useDispatch();
+    const [changedDate, setChangedDate] = useState(" ");
     const [formResponse, setFormResponse] = useState([]);
     const {productType, productName, productPriceDTC, productPriceSR} = formResponse;
-    const Products = {"bread": {"familyBread": {}, "miniBread": 40, "smallBread": 80}, "snacks": {"meatpie": 20, "puffpuff": 10, "doughnut": 5}};
-    
+
     const handleSubmit = (event) => {
         event.preventDefault();
         if (formResponse.length !== 0 && formResponse.productType !== undefined && formResponse.productName !== undefined){
-            Object.assign(Products[productType], {[productName]: {productPriceDTC, productPriceSR}});
-            console.log(Products);
-            let date = getMonthAndDay();
+            const productPrices = {productPriceDTC, productPriceSR}
+            let date = getDate();         
             try{
-                addCollectionAndDocuments(`${"Products"+""+year}`, date, Products);
+                // addCollectionAndDocuments("Products", date, ProductFormat);
+                dispatch(addProduct({date, productType, productName, productPrices}));
             } catch (err){
-                alert("Something went wrong, please refresh and try again" + err);
+                alert("Something went wrong, please refresh and try again" & err);
             }
         }
     }
 
     const handleDateChange = (e) => {
-        chnagedDate = new Date(e.target.value);
-        year = chnagedDate.getUTCFullYear()
-        console.log(chnagedDate);
+        const newDate = new Date(e.target.value);
+        setChangedDate(newDate);
     }
 
-    const getMonthAndDay = () => {
-        let month, day;
-        if (chnagedDate !== " "){
-            month = chnagedDate.getUTCMonth() + 1;
-            day = chnagedDate.getUTCDate();
-        } else{
-            month = dateObj.getUTCMonth() + 1;
-            day = dateObj.getUTCDate();
-        }
+    const getDate = () => {
+        let year = changedDate.getUTCFullYear();
+        let month = changedDate.getUTCMonth() + 1;
+        let day = changedDate.getUTCDate();
         let months = ['january', 'february', 'march', 'april',
                 'may', 'june', 'july', 'august', 'september',
                 'october', 'november', 'december'];
-        return (months[month - 1] + "" + day);
+        return (year + "" + months[month - 1] + "" + day);
     }
 
     const handleChange = (event) => {
@@ -64,22 +58,22 @@ const ProductsPagePreview = () => {
             <Row id="oldPrices">
                 <Col>
                 <h4>Family Loaf:</h4>
-                <h4>DTC: 1000</h4>
-                <h4>Sales Rep: 870</h4>
+                <h4>DTC: {LatestProducts.bread.familyBread.productPriceDTC || "NA"}</h4>
+                <h4>Sales Rep: {LatestProducts.bread.familyBread.productPriceSR || "NA"}</h4>
                 </Col>
                 <Col>
-                <h4>Mini Loaf:</h4>
-                <h4>DTC: 700</h4>
-                <h4>Sales Rep: 600</h4>
+                <h4>Mini Loaf: </h4>
+                <h4>DTC: {LatestProducts.bread.miniBread.productPriceDTC || "N/A"}</h4>
+                <h4>Sales Rep: {LatestProducts.bread.miniBread.productPriceSR || "N/A"}</h4>
                 </Col>
                 <Col>
                 <h4>Small Loaf:</h4>
-                <h4>DTC: 300</h4>
-                <h4>Sales Rep: 240</h4>
+                <h4>DTC: {LatestProducts.bread.smallBread.productPriceDTC || "N/A"}</h4>
+                <h4>Sales Rep: {LatestProducts.bread.smallBread.productPriceSR || "N/A"}</h4>
                 </Col>
             </Row>
             <form onSubmit={handleSubmit} onChange={handleChange}>
-                <h4>Chnage product Prices from: <input type="date" onChange={handleDateChange}/></h4>
+                <h4>Chnage product Prices from: <input type="date" onChange={handleDateChange} required/></h4>
                 <Row id="productRecords">
                     <ProductRecords></ProductRecords>
                 </Row>

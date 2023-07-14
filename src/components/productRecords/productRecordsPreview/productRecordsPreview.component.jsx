@@ -15,47 +15,47 @@ const ProductRecordsPreview = ({Products, Bread, Snacks}) => {
         setProductType(e.target.value);
     }
 
-    const deleteRowFunc = () => {
-        let newProductsRow = [...productsRow];
-        newProductsRow.pop();
-        setProductsRow([...newProductsRow]);
-    }
+    // const deleteRowFunc = () => {
+    //     let newProductsRow = [...productsRow];
+    //     newProductsRow.pop();
+    //     setProductsRow([...newProductsRow]);
+    // }
 
-    const addRowFunc = () => {
-        setProductsRow(oldProductsRow => [...oldProductsRow,             
-            <Row id="products">
-                <h4>Product Type - <span> </span> 
-                    <select name="productType" onChange={changeProductType}>
-                    {Products.map((product) => (
-                        <option value={product}>{product}</option>
-                        ))}
-                    </select>
-                </h4>
-                <h4>Product Name - <span> </span> 
-                    {productsType === "bread" ? (
-                        <select name="productType">
-                        {Bread.bread.map((breadName) => (
-                            <option value={breadName}>{breadName}</option>
-                        ))}
-                        </select>
-                    ) : (
-                        <select name="productType">
-                        {Snacks.snacks.map((snackName) => (
-                            <option value={snackName}>{snackName}</option>
-                        ))}
-                        </select>
-                    )}
-                </h4>
-                <h4>DTC Price - <input type="text" name="productPriceDTC" /></h4>
-                <h4>Sales Rep Price - <input type="text" name="productPriceSR" /></h4>
-            </Row>
-        ]);
-    }
+    // const addRowFunc = () => {
+    //     setProductsRow(oldProductsRow => [...oldProductsRow,             
+    //         <Row id="products">
+    //             <h4>Product Type - <span> </span> 
+    //                 <select name="productType" onChange={changeProductType}>
+    //                 {Products.map((product) => (
+    //                     <option value={product}>{product}</option>
+    //                     ))}
+    //                 </select>
+    //             </h4>
+    //             <h4>Product Name - <span> </span> 
+    //                 {productsType === "bread" ? (
+    //                     <select name="productType">
+    //                     {Bread.bread.map((breadName) => (
+    //                         <option value={breadName}>{breadName}</option>
+    //                     ))}
+    //                     </select>
+    //                 ) : (
+    //                     <select name="productType">
+    //                     {Snacks.snacks.map((snackName) => (
+    //                         <option value={snackName}>{snackName}</option>
+    //                     ))}
+    //                     </select>
+    //                 )}
+    //             </h4>
+    //             <h4>DTC Price - <input type="text" name="productPriceDTC" /></h4>
+    //             <h4>Sales Rep Price - <input type="text" name="productPriceSR" /></h4>
+    //         </Row>
+    //     ]);
+    // }
 
     return(
         <Col className="productRecords col-12">
             <Row id="products">
-                <img title="Delete Product Change" src={DeleteRow} onClick={deleteRowFunc}/>
+                {/* <img title="Delete Product Change" src={DeleteRow} onClick={deleteRowFunc}/> */}
                 <h4>Product Type - <span> </span> 
                     <select name="productType" defaultValue={"default"} onChange={changeProductType}>
                         <option value="default" disabled >Select Product</option>
@@ -83,7 +83,7 @@ const ProductRecordsPreview = ({Products, Bread, Snacks}) => {
                 </h4>
                 <h4>DTC Price - <input type="text" name="productPriceDTC" /></h4>
                 <h4>Sales Rep Price - <input type="text" name="productPriceSR" /></h4>
-                <img title="Add another product change" src={AddRow} onClick={addRowFunc}/>
+                {/* <img title="Add another product change" src={AddRow} onClick={addRowFunc}/> */}
             </Row>
             {productsRow}
         </Col>
