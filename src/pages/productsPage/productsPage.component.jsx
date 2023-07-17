@@ -4,8 +4,14 @@ import { useSelector } from "react-redux";
 
 const ProductsPage = () => {
     const Products = useSelector((state) => state.productList.productList) || {};
-    console.log(Products);
-    const LatestDate = Object.keys(Products).sort((a,b)=> (b-a));
+    
+    const regex = /^(\d{4})(.*)/;
+    const LatestDate = Object.keys(Products).sort((a,b) => {
+        let dateA = new Date(a.replace(regex, "$1 $2"));
+        let dateB = new Date(b.replace(regex, "$1 $2"));
+        return(dateB-dateA);
+    });
+
     const LatestProducts = Products[LatestDate[0]] || {};
 
     return(

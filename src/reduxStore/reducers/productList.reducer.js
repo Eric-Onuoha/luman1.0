@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { addCollectionAndDocuments } from "../../firestore/postToFirestore.utils";
-
+import { getMultipleDocuments } from "../../firestore/getFromFirestore.utils";
 
 export const productsSlice = createSlice({
     name: "productList",

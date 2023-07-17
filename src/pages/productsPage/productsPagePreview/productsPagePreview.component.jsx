@@ -52,24 +52,24 @@ const ProductsPagePreview = ({LatestProducts}) => {
 
     return(
         <Container id="productsPagePreviewComponent" fluid="true">
-            <OperationsMenu menu = "Products"></OperationsMenu>
+            <OperationsMenu menu = {["Update Product Prices", "View Previews Prices"]}></OperationsMenu>
 
             <h4>Products and Current Prices since 12th April:</h4>
             <Row id="oldPrices">
                 <Col>
                 <h4>Family Loaf:</h4>
-                <h4>DTC: {LatestProducts.bread.familyBread.productPriceDTC || "NA"}</h4>
-                <h4>Sales Rep: {LatestProducts.bread.familyBread.productPriceSR || "NA"}</h4>
+                <h4>DTC: {LatestProducts.bread && LatestProducts.bread.familyBread.productPriceDTC}</h4>
+                <h4>Sales Rep: {LatestProducts.bread && LatestProducts.bread.familyBread.productPriceSR}</h4>
                 </Col>
                 <Col>
                 <h4>Mini Loaf: </h4>
-                <h4>DTC: {LatestProducts.bread.miniBread.productPriceDTC || "N/A"}</h4>
-                <h4>Sales Rep: {LatestProducts.bread.miniBread.productPriceSR || "N/A"}</h4>
+                <h4>DTC: {LatestProducts.bread && LatestProducts.bread.miniBread.productPriceDTC }</h4>
+                <h4>Sales Rep: {LatestProducts.bread && LatestProducts.bread.miniBread.productPriceSR }</h4>
                 </Col>
                 <Col>
                 <h4>Small Loaf:</h4>
-                <h4>DTC: {LatestProducts.bread.smallBread.productPriceDTC || "N/A"}</h4>
-                <h4>Sales Rep: {LatestProducts.bread.smallBread.productPriceSR || "N/A"}</h4>
+                <h4>DTC: {LatestProducts.bread && LatestProducts.bread.smallBread.productPriceDTC }</h4>
+                <h4>Sales Rep: {LatestProducts.bread && LatestProducts.bread.smallBread.productPriceSR }</h4>
                 </Col>
             </Row>
             <form onSubmit={handleSubmit} onChange={handleChange}>

@@ -5,6 +5,7 @@ import storage from "redux-persist/lib/storage";
 import logger from "redux-logger"; 
 import { rootReducer } from "./rootReducer";
 
+
 // const loggerMiddleware = (store) => (next) => (action) =>{ // customized loogerMiddleware
 //     if (!action.type){
 //         return next(action);
