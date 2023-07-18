@@ -17,14 +17,18 @@ import { getMultipleDocuments } from './firestore/getFromFirestore.utils';
 
 import { updateCurrentUser } from './reduxStore/reducers/user.reducer';
 import { updateProductList } from './reduxStore/reducers/productList.reducer';
+import { updateStaffList } from './reduxStore/reducers/staff.reducer';
 
 function App() {
   const dispatch = useDispatch();
   const currentUser = useSelector((state) => state.currentUser.currentUser) || "";
 
   useEffect(() => {
-    console.log("triggered");
     getMultipleDocuments("Products").then((ProductDB) => dispatch(updateProductList(ProductDB)));
+  }, []);
+
+  useEffect(() => {
+    getMultipleDocuments("Staff").then((StaffDB) => dispatch(updateStaffList(StaffDB)));
   }, []);
 
   return (

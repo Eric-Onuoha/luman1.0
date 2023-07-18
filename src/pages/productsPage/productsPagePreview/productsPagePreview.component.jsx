@@ -10,7 +10,7 @@ import { addProduct } from "../../../reduxStore/reducers/productList.reducer";
 import { addCollectionAndDocuments } from "../../../firestore/postToFirestore.utils";
 
 
-const ProductsPagePreview = ({LatestProducts}) => {
+const ProductsPagePreview = ({LatestProducts, LatestDate}) => {
     const dispatch = useDispatch();
     const [changedDate, setChangedDate] = useState(" ");
     const [formResponse, setFormResponse] = useState([]);
@@ -54,7 +54,7 @@ const ProductsPagePreview = ({LatestProducts}) => {
         <Container id="productsPagePreviewComponent" fluid="true">
             <OperationsMenu menu = {["Update Product Prices", "View Previews Prices"]}></OperationsMenu>
 
-            <h4>Products and Current Prices since 12th April:</h4>
+            <h4>Products and Current Prices since {LatestDate || " "}:</h4>
             <Row id="oldPrices">
                 <Col>
                 <h4>Family Loaf:</h4>

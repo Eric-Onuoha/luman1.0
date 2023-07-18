@@ -6,6 +6,6 @@ const OperationsMenu = ({menu}) => {
     //     OperationsMenuItems = ["View Records","Enter Records"];
     // }
     return(
-        <OperationsMenuPreview OperationsMenuItems = {menu}></OperationsMenuPreview>
+        <OperationsMenuPreview OperationsMenuItems = {menu || ""}></OperationsMenuPreview>
     )
 }; export default OperationsMenu;
