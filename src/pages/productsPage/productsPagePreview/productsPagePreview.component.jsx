@@ -6,6 +6,7 @@ import { useDispatch } from "react-redux";
 import OperationsMenu from "../../../components/operationsMenu/operationsMenu.component";
 import ProductRecords from "../../../components/productRecords/productRecords.component";
 import { addProduct } from "../../../reduxStore/reducers/productList.reducer";
+import { getDate } from "../../../utils/getMonthAndDay";
 // import { updateFamilyPrice } from "../../../reduxStore/reducers/productList.reducer";
 import { addCollectionAndDocuments } from "../../../firestore/postToFirestore.utils";
 
@@ -20,7 +21,7 @@ const ProductsPagePreview = ({LatestProducts, LatestDate}) => {
         event.preventDefault();
         if (formResponse.length !== 0 && formResponse.productType !== undefined && formResponse.productName !== undefined){
             const productPrices = {productPriceDTC, productPriceSR}
-            let date = getDate();         
+            let date = getDate(changedDate);         
             try{
                 // addCollectionAndDocuments("Products", date, ProductFormat);
                 dispatch(addProduct({date, productType, productName, productPrices}));
@@ -35,15 +36,15 @@ const ProductsPagePreview = ({LatestProducts, LatestDate}) => {
         setChangedDate(newDate);
     }
 
-    const getDate = () => {
-        let year = changedDate.getUTCFullYear();
-        let month = changedDate.getUTCMonth() + 1;
-        let day = changedDate.getUTCDate();
-        let months = ['january', 'february', 'march', 'april',
-                'may', 'june', 'july', 'august', 'september',
-                'october', 'november', 'december'];
-        return (year + "" + months[month - 1] + "" + day);
-    }
+    // const getDate = () => {
+    //     let year = changedDate.getUTCFullYear();
+    //     let month = changedDate.getUTCMonth() + 1;
+    //     let day = changedDate.getUTCDate();
+    //     let months = ['january', 'february', 'march', 'april',
+    //             'may', 'june', 'july', 'august', 'september',
+    //             'october', 'november', 'december'];
+    //     return (year + "" + months[month - 1] + "" + day);
+    // }
 
     const handleChange = (event) => {
         const {name, value} = event.target;

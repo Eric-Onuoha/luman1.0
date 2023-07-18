@@ -12,13 +12,8 @@ export const staffSlice = createSlice({
   addStaff: (state, action) => {
     const { StaffName, staffDetails } = action.payload;
 
-    // if (!state.staffList[StaffName]) {
-        state.staffList[StaffName] = staffDetails;
-    // }
+    state.staffList[StaffName] = staffDetails;
 
-
-    //   state.staffList[StaffName] = {staffDetails};
-    //   console.log(state.staffList[StaffName]);
     addCollectionAndDocuments("Staff", StaffName, staffDetails);
   }
   },

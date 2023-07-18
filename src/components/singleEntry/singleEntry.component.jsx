@@ -1,7 +1,7 @@
 import SingleEntryPreview from "./singleEntryPreview/singleEntryPreview.component";
 
-const SingleEntry = ({type}) => {
+const SingleEntry = () => {
     return(
-        <SingleEntryPreview type = {type}></SingleEntryPreview>
+        <SingleEntryPreview></SingleEntryPreview>
     )
 }; export default SingleEntry;

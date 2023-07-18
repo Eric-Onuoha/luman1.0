@@ -30,15 +30,17 @@ const Storage = getStorage(app);
 const analytics = getAnalytics(app);
 export const db = getFirestore();
 
-export const addCollectionAndDocuments = async (CollectionKey, docKey, docToAdd, mergeStatus = true) => {
-  try{
-    await setDoc(doc(db, CollectionKey, docKey), docToAdd, mergeStatus = true);
-  } catch(err){
-    alert("Something went wrong, please refresh and try again");
-    console.log(err);
-  }
-    
-}
+
+export const addCollectionAndDocuments = (CollectionKey, docKey, docToAdd, mergeStatus = true) => {
+  return new Promise(async (resolve, reject) => {
+    try {
+      await setDoc(doc(db, CollectionKey, docKey), docToAdd, mergeStatus);
+      resolve(); // Resolve the promise when the async operation is completed
+    } catch (err) {
+      reject(err); // Reject the promise if there is an error
+    }
+  });
+};
 
 export const uploadDocWithImages = (filesToUpload, CollectionKey, docKey, docToAdd, mergeStatus = true) => {
 

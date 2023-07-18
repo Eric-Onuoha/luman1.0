@@ -14,7 +14,6 @@ const StaffPagePreview = ({StaffMembers}) => {
     const handleChange = (event) => {
         const {name, value} = event.target;
         setStaffFormResponse({...staffFormResponse, [name]: value});
-        console.log(staffFormResponse);
     }
 
     const handleSubmit = (event) => {
@@ -40,11 +39,12 @@ const StaffPagePreview = ({StaffMembers}) => {
             <Row>
                 <Col className="staffList mr-4 col-3">
                 <h4>Current Staff List:</h4>
-                {StaffMembers.map((staffMember) => (
                 <ol>
+                {StaffMembers.map((staffMember) => (
                     <li>{staffMember.replace(/_/g, " ")}</li>
-                 </ol>
                 ))}
+                 </ol>
+
                 </Col>
                 <Col className="staffList addStaff">
                     <form onSubmit={handleSubmit} onChange={handleChange}>

@@ -25,7 +25,11 @@ export const productsSlice = createSlice({
         [productName]: productPrices,
       },
     };
-    addCollectionAndDocuments("Products", date, state.productList[date]);
+    addCollectionAndDocuments("Products", date, state.productList[date]).then(()=>{
+      console.log("Response recieved");
+    }).catch((err)=>{
+      console.log(err)
+    })
   },
   },
 });

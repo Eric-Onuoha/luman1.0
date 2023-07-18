@@ -18,6 +18,8 @@ import { getMultipleDocuments } from './firestore/getFromFirestore.utils';
 import { updateCurrentUser } from './reduxStore/reducers/user.reducer';
 import { updateProductList } from './reduxStore/reducers/productList.reducer';
 import { updateStaffList } from './reduxStore/reducers/staff.reducer';
+import { updateSalesRecord } from './reduxStore/reducers/sales.reducer';
+import { updateSalesRepRecord } from './reduxStore/reducers/salesRep.reducer';
 
 function App() {
   const dispatch = useDispatch();
@@ -29,6 +31,14 @@ function App() {
 
   useEffect(() => {
     getMultipleDocuments("Staff").then((StaffDB) => dispatch(updateStaffList(StaffDB)));
+  }, []);
+
+  useEffect(() => {
+    getMultipleDocuments("DTCSales").then((SalesDB) => dispatch(updateSalesRecord(SalesDB)));
+  }, []);
+
+  useEffect(() => {
+    getMultipleDocuments("SRSales").then((SRSalesDB) => dispatch(updateSalesRepRecord(SRSalesDB)));
   }, []);
 
   return (
