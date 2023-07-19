@@ -20,6 +20,7 @@ import { updateProductList } from './reduxStore/reducers/productList.reducer';
 import { updateStaffList } from './reduxStore/reducers/staff.reducer';
 import { updateSalesRecord } from './reduxStore/reducers/sales.reducer';
 import { updateSalesRepRecord } from './reduxStore/reducers/salesRep.reducer';
+import { updateStock } from './reduxStore/reducers/stock.reducer';
 
 function App() {
   const dispatch = useDispatch();
@@ -39,6 +40,10 @@ function App() {
 
   useEffect(() => {
     getMultipleDocuments("SRSales").then((SRSalesDB) => dispatch(updateSalesRepRecord(SRSalesDB)));
+  }, []);
+
+  useEffect(() => {
+    getMultipleDocuments("Stock").then((StockDB) => dispatch(updateStock(StockDB)));
   }, []);
 
   return (

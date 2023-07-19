@@ -40,11 +40,6 @@ const SalesPagePreview = ({distributors}) => {
             },
           }));
 
-
-
-        // setSrFormResponse({...srFormResponse, [name]: value});
-
-        console.log(srFormResponse);
     }
 
     const handleButtonHover = () => {

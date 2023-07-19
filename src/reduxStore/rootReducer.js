@@ -5,11 +5,13 @@ import { productReducer } from "./reducers/productList.reducer";
 import { staffReducer } from "./reducers/staff.reducer";
 import { salesReducer } from "./reducers/sales.reducer";
 import { salesRepReducer } from "./reducers/salesRep.reducer";
+import { stockReducer } from "./reducers/stock.reducer";
 
 export const rootReducer = combineReducers({
     currentUser: userReducer,
     productList: productReducer,
     staffList: staffReducer,
     salesRecord: salesReducer,
-    salesRepRecord: salesRepReducer
+    salesRepRecord: salesRepReducer,
+    stock: stockReducer
 })
