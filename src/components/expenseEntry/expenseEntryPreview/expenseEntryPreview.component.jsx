@@ -7,13 +7,16 @@ import DeleteRow from "../../../assets/images/remove.png";
 const ExpenseEntryPreview = () => {
     return(
         <Col className="expenseEntry col-12">
+            <Row id="daysExpenses">
+
+            </Row>
+
             <Row id="expenses">
-            <img title="Delete Expense" src={DeleteRow}/>
-                <h4>Item - <input name="familySalesRep" type="text" /></h4>
+                <h4>Item - <input name="item" type="text" /></h4>
                 <h4>Quantity - <input type="text" /></h4>
                 <h4>Category - <select name="category">
                         <option value="Ingridient">Ingridient</option>
-                        <option value="Taxes">Taxes</option>
+                        <option value="Taxes">Tax</option>
                         <option value="Operations">Operations</option>
                         <option value="Others">Others</option>
                     </select></h4>
@@ -23,7 +26,6 @@ const ExpenseEntryPreview = () => {
                         <option value="Bank">Bank</option>
                         <option value="External">External</option>
                     </select></h4>
-                <img title="Add another expense" src={AddRow}/>
              </Row>
         </Col>
     )

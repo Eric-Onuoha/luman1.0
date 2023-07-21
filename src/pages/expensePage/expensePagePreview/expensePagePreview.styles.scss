@@ -8,6 +8,22 @@
     }
 
     #expenseRecords{
-        margin-bottom: 50px;
+        margin-bottom: 15px;
+    }
+
+    button{
+        color: #C82736;
+        background-color: #FFFFFF;
+        padding: 5px 8px;
+        border: 1px solid #C82736;
+        border-radius: 6px;
+        cursor: pointer;
+        display: block;
+        float: right;
+
+        &:hover{
+            color: #FFFFFF;
+            background-color: #C82736;
+        }
     }
 }
