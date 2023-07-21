@@ -21,21 +21,19 @@ const StockPagePreview = ({bread, LatestStockRecord, LatestDTCSales, totalSmallS
                         <option key={breadType} name={breadType} value={breadType}>{breadType}</option>
                     ))}
                 </select></h4>
-            <form>
                 <Row id="stockRecords">
                     {product === " " ? (
                         <StockEntry stockInfo = {{}}></StockEntry>
                     ) : (product === "familyBread" ? (
-                        <StockEntry stockInfo = {LatestStockRecord && LatestStockRecord.familyBread} LatestDTCSales = {LatestDTCSales} totalSRSales = {totalFamilySales}></StockEntry>
+                        <StockEntry Product = {product} LatestStock = {LatestStockRecord} stockInfo = {LatestStockRecord && LatestStockRecord.familyBread} LatestDTCSales = {LatestDTCSales && LatestDTCSales.familyDTC} totalSRSales = {totalFamilySales}></StockEntry>
                     ) : (product === "miniBread") ? (
-                        <StockEntry stockInfo = {LatestStockRecord} LatestDTCSales = {LatestDTCSales} totalSRSales = {totalMiniSales}></StockEntry>
+                        <StockEntry Product = {product} LatestStock = {LatestStockRecord} stockInfo = {LatestStockRecord && LatestStockRecord.miniBread} LatestDTCSales = {LatestDTCSales && LatestDTCSales.miniDTC} totalSRSales = {totalMiniSales}></StockEntry>
                     ) : (product === "smallBread") ? (
-                        <StockEntry stockInfo = {LatestStockRecord} LatestDTCSales = {LatestDTCSales} totalSRSales = {totalSmallSales}></StockEntry>
+                        <StockEntry Product = {product} LatestStock = {LatestStockRecord} stockInfo = {LatestStockRecord && LatestStockRecord.smallBread} LatestDTCSales = {LatestDTCSales && LatestDTCSales.smallDTC} totalSRSales = {totalSmallSales}></StockEntry>
                     ) : (
                         <p></p>
                     ))}
                 </Row>
-            </form>
         </Container>
     )
 }; export default StockPagePreview;

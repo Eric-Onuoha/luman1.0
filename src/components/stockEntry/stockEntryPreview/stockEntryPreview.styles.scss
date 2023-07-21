@@ -27,4 +27,21 @@
             margin: 3px 0 11px 0;
         }
     }
+
+    button{
+        color: #C82736;
+        background-color: #FFFFFF;
+        padding: 5px 8px;
+        border: 1px solid #C82736;
+        border-radius: 6px;
+        cursor: pointer;
+        display: block;
+        float: right;
+        margin: 0 10px 20px 0;
+
+        &:hover{
+            color: #FFFFFF;
+            background-color: #C82736;
+        }
+    }
 }

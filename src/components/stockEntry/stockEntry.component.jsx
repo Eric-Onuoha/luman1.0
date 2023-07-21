@@ -1,12 +1,11 @@
 import StockEntryPreview from "./stockEntryPreview/stockEntryPreview.component";
 
-const StockEntry = ({stockInfo, LatestDTCSales, totalSRSales}) => {
-    console.log(totalSRSales);
-    const openStock = stockInfo && stockInfo.openningStock;
-    const totSales = LatestDTCSales && totalSRSales && (parseInt(LatestDTCSales.familyDTC) + parseInt(totalSRSales)); //needs to be plus SR sales - add total sr sales to sr submission
-    const currStock = (openStock - totSales);
+const StockEntry = ({Product, LatestStock, stockInfo, LatestDTCSales, totalSRSales}) => {
+    const openStock = stockInfo && stockInfo.currentStock;
+    const totSales = LatestDTCSales && totalSRSales && (parseInt(LatestDTCSales) + parseInt(totalSRSales)); 
+    const currStock = (openStock - totSales) || 0;
 
     return(
-        <StockEntryPreview openStock = {openStock} totSales = {totSales} currStock = {currStock}></StockEntryPreview>
+        <StockEntryPreview Product = {Product} LatestStock = {LatestStock} openStock = {openStock} totSales = {totSales} currStock = {currStock}></StockEntryPreview>
     )
 }; export default StockEntry;

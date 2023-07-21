@@ -51,7 +51,6 @@ const StockPage = () => {
         return(dateB-dateA);
     });
 
-
     const ProductList = [{"bread":["familyBread", "miniBread", "smallBread"]}, {"snacks":["meatpie", "puffpuff", "doughnut"]}];
     return(
         <StockPagePreview bread = {ProductList[0].bread} LatestStockRecord = {prevStock[LatestStockRecord[0]]} LatestDTCSales = {prevDTCSales[LatestDTCSales[0]]} totalSmallSales = {totalSmallSales} totalMiniSales = {totalMiniSales} totalFamilySales = {totalFamilySales}></StockPagePreview>

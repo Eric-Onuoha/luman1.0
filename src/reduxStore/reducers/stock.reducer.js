@@ -8,13 +8,13 @@ export const stockSlice = createSlice({
         updateStock: (state, action) => {
         state.stock = action.payload;
         },
-        // addStock: (state, action) => {
-        //     const { srFormResponse, currentDate } = action.payload;
-        //     state.salesRepRecord[currentDate] = srFormResponse;
-        //     addCollectionAndDocuments("SRSales", currentDate, srFormResponse);
-        // }
+        addStock: (state, action) => {
+            const { newStock, currentDate } = action.payload;
+            state.stock[currentDate] = newStock;
+            addCollectionAndDocuments("Stock", currentDate, newStock);
+        }
     }
 });
 
-    export const { updateStock } = stockSlice.actions;
+    export const { addStock, updateStock } = stockSlice.actions;
     export const stockReducer = stockSlice.reducer;

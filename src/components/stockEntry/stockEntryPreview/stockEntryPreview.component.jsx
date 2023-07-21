@@ -1,9 +1,46 @@
 import { useState } from "react";
 import "./stockEntryPreview.styles.scss";
 import { Row, Col } from "bootstrap-4-react/lib/components/layout";
+import { getDate } from "../../../utils/getMonthAndDay";
+import { useDispatch } from "react-redux";
 
-const StockEntryPreview = ({openStock, totSales, currStock}) => {
+import { addStock } from "../../../reduxStore/reducers/stock.reducer";
+
+const StockEntryPreview = ({Product, LatestStock, openStock, totSales, currStock}) => {
+    const dispatch = useDispatch();
+    const todaysDate = new Date();
     const [amountProduced, setAmountProduced] = useState(0);
+    const [stockForm, setStockForm] = useState([]);
+    const {openningStock, totalSales, currentStock, quantityProduced, countedStock, comment} = stockForm;
+
+    const handleStockChange = (e) => {
+        const {name, value} = e.target;
+        setStockForm({...stockForm, [name]: value});
+
+
+    }
+
+    const handleStockSubmit = (e) => {
+        e.preventDefault();
+
+        if (stockForm.length !== 0){
+            const currentDate = getDate(todaysDate);
+            stockForm.openningStock = openStock;
+            stockForm.totalSales = totSales;
+            stockForm.currentStock = currStock + parseInt(amountProduced);
+            const newStock = {
+                ...LatestStock,
+                [Product]: {
+                    ...stockForm
+                }
+            }
+            try{
+                dispatch(addStock({newStock, currentDate}));
+            } catch(err){
+                console.log(err);
+            }
+        }
+    }
 
     const addToStock = (e) => {
         {e.target.value == "" ? setAmountProduced(0) : setAmountProduced(e.target.value)}
@@ -11,6 +48,7 @@ const StockEntryPreview = ({openStock, totSales, currStock}) => {
 
     return(
         <Col className="stockEntry col-12">
+            <form onChange={handleStockChange} onSubmit={handleStockSubmit}>
             <Row id="stock">
                 <Col>
                     <h4>Openning Stock <input type="text" disabled = {true} value={openStock} name="openningStock"/></h4>               
@@ -25,6 +63,8 @@ const StockEntryPreview = ({openStock, totSales, currStock}) => {
                 </Col>
 
              </Row>
+             <button type="submit">Submit Stock Record</button>
+             </form>
         </Col>
     )
 }; export default StockEntryPreview;
