@@ -6,7 +6,6 @@ const ExpensePage = () => {
     const Expenses = useSelector((state) => state.expenses.expenses) || {};
     const date = getTodaysDate();
     const daysExpenses = Expenses[date] && Object.keys(Expenses[date]);
-    console.log(daysExpenses);
 
     return(
         <ExpensePagePreview Expenses = {Expenses[date]} DaysExpenses = {daysExpenses}></ExpensePagePreview>

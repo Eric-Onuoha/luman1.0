@@ -19,9 +19,7 @@ const ExpensePagePreview = ({Expenses, DaysExpenses}) => {
         const {name, value} = event.target;
         setExpenseForm({...expenseForm, [name]: value});
     }
-
-    console.log(Expenses);
-
+    
     const expenseFormSubmit = (event) => {
         event.preventDefault();
         if (expenseForm.length !== 0){
