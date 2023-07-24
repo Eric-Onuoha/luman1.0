@@ -6,6 +6,7 @@ import { staffReducer } from "./reducers/staff.reducer";
 import { salesReducer } from "./reducers/sales.reducer";
 import { salesRepReducer } from "./reducers/salesRep.reducer";
 import { stockReducer } from "./reducers/stock.reducer";
+import { expenseReducer } from "./reducers/expense.reducer";
 
 export const rootReducer = combineReducers({
     currentUser: userReducer,
@@ -13,5 +14,6 @@ export const rootReducer = combineReducers({
     staffList: staffReducer,
     salesRecord: salesReducer,
     salesRepRecord: salesRepReducer,
-    stock: stockReducer
+    stock: stockReducer,
+    expenses: expenseReducer
 })
