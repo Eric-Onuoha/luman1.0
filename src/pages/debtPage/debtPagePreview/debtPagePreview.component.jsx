@@ -5,19 +5,32 @@ import OperationsMenu from "../../../components/operationsMenu/operationsMenu.co
 import DebtEntry from "../../../components/debtEntry/debtEntry.component";
 import { getTodaysPlainDate } from "../../../utils/getMonthAndDay";
 import { useState } from "react";
+import { getTodaysDate } from "../../../utils/getMonthAndDay";
+import { useDispatch } from "react-redux";
 
-const DebtPagePreview = () => {
+import { addDebtRecord } from "../../../reduxStore/reducers/debt.reducer";
 
+const DebtPagePreview = ({DebtorsDB}) => {
+    const dispatch = useDispatch();
     const [debtForm, setDebtForm] = useState([]);
     const {debtor, description, newDebt, paidAmount} = debtForm;
-    
+
     const debtFormSubmit = (event) => {
         event.preventDefault();
         if (debtForm.length !== 0){
+            const currentDate = getTodaysDate();
+            const debtorid = debtor.replace(/\s/g, "_");
+            const oldDebtTotal = (DebtorsDB[debtorid] && parseInt(DebtorsDB[debtorid].totalDebt)) || 0;
+            const debtAddition = (oldDebtTotal - parseInt(newDebt));
+            const newDebtRecord = {
+                ...DebtorsDB[debtorid],
+                [currentDate]: {description, newDebt, paidAmount}, 
+                "totalDebt": ( debtAddition + parseInt(paidAmount))
+            };
 
             try{
-                // addCollectionAndDocuments("Products", date, ProductFormat);
-                // dispatch(addExpense({newExpense, currentDate}));
+                console.log(newDebtRecord);
+                dispatch(addDebtRecord({debtorid, newDebtRecord}));
             } catch (err){
                 alert("Something went wrong, please refresh and try again" & err);
             }

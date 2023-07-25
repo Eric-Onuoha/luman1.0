@@ -9,9 +9,9 @@ export const debtSlice = createSlice({
         state.debtRecord = action.payload;
         },
         addDebtRecord: (state, action) => {
-            // const { newExpense, currentDate } = action.payload;
-            // state.expenses[currentDate] = newExpense;
-            // addCollectionAndDocuments("Expenses", currentDate, newExpense);
+            const { debtorid, newDebtRecord } = action.payload;
+            state.debtRecord[debtorid] = newDebtRecord;
+            addCollectionAndDocuments("Debt", debtorid, newDebtRecord);
         }
     }
 });

@@ -3,16 +3,13 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getMultipleDocuments } from "../../firestore/getFromFirestore.utils";
 
-import { updateUtilities } from "../../reduxStore/reducers/utilities.reducer";
-
 const DebtPage = () => {
     const dispatch = useDispatch();
 
-    useEffect(() => {
-        getMultipleDocuments("Utilities").then((UtilitiesDB) => dispatch(updateUtilities(UtilitiesDB)));
-      }, []);
+    const DebtorsDB = useSelector((state) => state.debtRecord.debtRecord) || {};
+    // const DebtorName = DebtorsDB && Object.keys(DebtorsDB);
 
     return(
-        <DebtPagePreview></DebtPagePreview>
+        <DebtPagePreview DebtorsDB = {DebtorsDB}></DebtPagePreview>
     )
 }; export default DebtPage;

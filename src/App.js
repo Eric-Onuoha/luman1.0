@@ -22,6 +22,8 @@ import { updateSalesRecord } from './reduxStore/reducers/sales.reducer';
 import { updateSalesRepRecord } from './reduxStore/reducers/salesRep.reducer';
 import { updateStock } from './reduxStore/reducers/stock.reducer';
 import { updateExpense } from './reduxStore/reducers/expense.reducer';
+import { updateUtilities } from './reduxStore/reducers/utilities.reducer';
+import { updateDebtRecord } from './reduxStore/reducers/debt.reducer';
 
 function App() {
   const dispatch = useDispatch();
@@ -50,6 +52,14 @@ function App() {
   useEffect(() => {
     getMultipleDocuments("Expenses").then((ExpenseDB) => dispatch(updateExpense(ExpenseDB)));
   }, []);
+
+  useEffect(() => {
+    getMultipleDocuments("Utilities").then((UtilitiesDB) => dispatch(updateUtilities(UtilitiesDB)));
+  }, []);
+
+  useEffect(() => {
+    getMultipleDocuments("Debt").then((DebtDB) => dispatch(updateDebtRecord(DebtDB)));
+  });
 
   return (
     <div className="App">
