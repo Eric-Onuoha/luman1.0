@@ -6,16 +6,16 @@ const DebtEntryPreview = ({Partners}) => {
         <Col className="debtEntry col-12">
             <Row id="debt">
                 <h4>Debtor - 
-                    <select name="category" defaultValue={"default"}>
+                    <select name="debtor" defaultValue={"default"}>
                         <option value="default" disabled = {true}>Select Debtor</option>
                         {Partners.map((partner) => (
                             <option key={partner} value={partner}>{partner}</option>
                         ))}
                     </select>
                 </h4>
-                <h4>Description - <input type="text" /></h4>
-                <h4>New Debt (NGN) - <input name="familySalesRep" type="text" /></h4>
-                <h4>Paid Debt (NGN) - <input type="text" id="amount" /></h4>
+                <h4>Description - <input type="text" name="description" /></h4>
+                <h4>New Debt (NGN) - <input name="newDebt" type="text" /></h4>
+                <h4>Paid Debt (NGN) - <input type="text" name="paidAmount" id="amount" /></h4>
              </Row>
         </Col>
     )
