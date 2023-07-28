@@ -10,22 +10,20 @@ import { useDispatch } from "react-redux";
 
 import { addDebtRecord } from "../../../reduxStore/reducers/debt.reducer";
 
-const DebtPagePreview = ({DebtorsDB}) => {
+const DebtPagePreview = ({DebtorsDB, Debtors}) => {
     const dispatch = useDispatch();
     const [debtForm, setDebtForm] = useState([]);
     const {debtor, description, newDebt, paidAmount} = debtForm;
+    const currentDate = getTodaysDate();
 
     const debtFormSubmit = (event) => {
         event.preventDefault();
         if (debtForm.length !== 0){
-            const currentDate = getTodaysDate();
             const debtorid = debtor.replace(/\s/g, "_");
-            const oldDebtTotal = (DebtorsDB[debtorid] && parseInt(DebtorsDB[debtorid].totalDebt)) || 0;
-            const debtAddition = (oldDebtTotal - parseInt(newDebt));
+            const debt = (parseInt(paidAmount) - parseInt(newDebt));
             const newDebtRecord = {
                 ...DebtorsDB[debtorid],
-                [currentDate]: {description, newDebt, paidAmount}, 
-                "totalDebt": ( debtAddition + parseInt(paidAmount))
+                [currentDate]: {description, newDebt, paidAmount, "daysDebt": debt}
             };
 
             try{
@@ -44,9 +42,17 @@ const DebtPagePreview = ({DebtorsDB}) => {
 
     return(
         <Container id="debtPagePreviewComponent" fluid="true">
-            <OperationsMenu menu = "Expense"></OperationsMenu>
+            <OperationsMenu></OperationsMenu>
             <h4>Debt for: {getTodaysPlainDate()}</h4>
-
+            {Debtors.map((debtor) => (
+            <Row key={debtor} id="updatedDebtRecords">
+                <Col>Debtor: {debtor}</Col>
+                <Col>Description: {DebtorsDB[debtor][currentDate].description}</Col>
+                <Col>New Debt: {DebtorsDB[debtor][currentDate].newDebt}</Col>
+                <Col>Paid Amount: {DebtorsDB[debtor][currentDate].paidAmount}</Col>
+                <Col>Todays Debt: {DebtorsDB[debtor][currentDate].daysDebt}</Col>
+            </Row>
+            ))}
             <form onChange={debtFormChange} onSubmit={debtFormSubmit}>
                 <Row id="debtRecords">
                     <DebtEntry></DebtEntry>

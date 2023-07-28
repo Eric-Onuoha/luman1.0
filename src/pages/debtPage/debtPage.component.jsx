@@ -8,8 +8,9 @@ const DebtPage = () => {
 
     const DebtorsDB = useSelector((state) => state.debtRecord.debtRecord) || {};
     // const DebtorName = DebtorsDB && Object.keys(DebtorsDB);
+    const Debtors = Object.keys(DebtorsDB);
 
     return(
-        <DebtPagePreview DebtorsDB = {DebtorsDB}></DebtPagePreview>
+        <DebtPagePreview DebtorsDB = {DebtorsDB} Debtors = {Debtors}></DebtPagePreview>
     )
 }; export default DebtPage;
