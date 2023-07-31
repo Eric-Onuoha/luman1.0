@@ -1,83 +1,43 @@
 import { useSelector } from "react-redux";
-import { getTodaysDate } from "./getMonthAndDay";
+import { getTodaysDate, getDate } from "./getMonthAndDay";
 
 const currentDate = getTodaysDate();
 
-export const GetCurrentDTCSalesQuantity = () => {
+export const GetCurrentDTCSalesQuantity = (product) => {
     const Sales = useSelector((state) => state.salesRecord.salesRecord) || {};
 
-        const regex = /^(\d{4})(.*)/;
-        const  DTCSales = Object.keys(Sales).sort((a,b) => {
-        let dateA = new Date(a.replace(regex, "$1 $2"));
-        let dateB = new Date(b.replace(regex, "$1 $2"));
-        return(dateB-dateA);
-    });
-
-    const DTCQuantity = (Sales[DTCSales[currentDate]].familyDTC + Sales[DTCSales[currentDate]].miniDTC + Sales[DTCSales[currentDate]].smallDTC) || 0;
-
-    return DTCQuantity
-}
-
-export const GetCurrentDTCFamilySalesQuantity = () => {
-    const Sales = useSelector((state) => state.salesRecord.salesRecord) || {};
-
-        const regex = /^(\d{4})(.*)/;
-        const  DTCSales = Object.keys(Sales).sort((a,b) => {
-        let dateA = new Date(a.replace(regex, "$1 $2"));
-        let dateB = new Date(b.replace(regex, "$1 $2"));
-        return(dateB-dateA);
-    });
-
-    // const DTCQuantity = Sales[DTCSales[currentDate]].familyDTC || 0;
-    const DTCQuantity = Sales[DTCSales[0]] && Sales[DTCSales[0]].familyDTC;
+    const DTCQuantity = (Sales[currentDate] && Sales[currentDate][product]) || 0;
 
     return DTCQuantity;
 }
 
-export const GetCurrentDTCMiniSalesQuantity = () => {
-    const Sales = useSelector((state) => state.salesRecord.salesRecord) || {};
+export const GetCurrentSRSalesQuantity = (product) => {
+    const Sales = useSelector((state) => state.salesRepRecord.salesRepRecord) || {};
+    let SRSales = 0;
 
-        const regex = /^(\d{4})(.*)/;
-        const  DTCSales = Object.keys(Sales).sort((a,b) => {
-        let dateA = new Date(a.replace(regex, "$1 $2"));
-        let dateB = new Date(b.replace(regex, "$1 $2"));
-        return(dateB-dateA);
-    });
-
-    // const DTCQuantity = Sales[DTCSales[currentDate]].familyDTC || 0;
-    const miniDTCQuantity = Sales[DTCSales[0]] && Sales[DTCSales[0]].miniDTC;
-
-    return miniDTCQuantity;
-}
-
-export const GetCurrentDTCSmallSalesQuantity = () => {
-    const Sales = useSelector((state) => state.salesRecord.salesRecord) || {};
-
-        const regex = /^(\d{4})(.*)/;
-        const  DTCSales = Object.keys(Sales).sort((a,b) => {
-        let dateA = new Date(a.replace(regex, "$1 $2"));
-        let dateB = new Date(b.replace(regex, "$1 $2"));
-        return(dateB-dateA);
-    });
-
-    // const DTCQuantity = Sales[DTCSales[currentDate]].familyDTC || 0;
-    const smallDTCQuantity = Sales[DTCSales[0]] && Sales[DTCSales[0]].smallDTC;
-
-    return smallDTCQuantity;
+    for (const key in Sales[currentDate]) {
+      const subObject = Sales[currentDate][key];
+  
+      if (typeof subObject === "object" && subObject !== null) {
+        for (const prop in subObject) {
+          const salesRep = subObject[prop];
+  
+          if (prop === product) {
+            SRSales += parseInt(salesRep);
+          }
+        }
+      }
+    }
+  
+    return SRSales;
 }
 
 export const GetDTCSalesQuantityAtDay = (day, product) => {
     const Sales = useSelector((state) => state.salesRecord.salesRecord) || {};
+    const date = getDate(day);
 
-        const regex = /^(\d{4})(.*)/;
-        const  DTCSales = Object.keys(Sales);
+    const DTCQuantity = (Sales[date] && Sales[date][product]) || 0;
 
-        const daysIndex = DTCSales.indexOf(day);
-
-        if (daysIndex < 0){
-            return 0;
-        }
-
-    return Sales[DTCSales[daysIndex]][product];
+    return DTCQuantity;
 }
 
