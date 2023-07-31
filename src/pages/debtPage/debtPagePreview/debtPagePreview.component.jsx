@@ -44,9 +44,9 @@ const DebtPagePreview = ({DebtorsDB, Debtors}) => {
         <Container id="debtPagePreviewComponent" fluid="true">
             <OperationsMenu></OperationsMenu>
             <h4>Debt for: {getTodaysPlainDate()}</h4>
-            {Debtors.map((debtor) => (
+            {Debtors.map((debtor) => ( DebtorsDB[debtor][currentDate] &&
             <Row key={debtor} id="updatedDebtRecords">
-                <Col>Debtor: {debtor}</Col>
+                <Col>Debtor: {debtor.replace(/_/g, " ")}</Col>
                 <Col>Description: {DebtorsDB[debtor][currentDate].description}</Col>
                 <Col>New Debt: {DebtorsDB[debtor][currentDate].newDebt}</Col>
                 <Col>Paid Amount: {DebtorsDB[debtor][currentDate].paidAmount}</Col>

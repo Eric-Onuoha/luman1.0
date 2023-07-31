@@ -1,7 +1,8 @@
 import CashAccountPreview from "./cashAccountPreview/cashAccountPreview.component";
 
 const CashAccount = () => {
+
     return(
-        <CashAccountPreview name="Ajao Kehinde"></CashAccountPreview>
+        <CashAccountPreview></CashAccountPreview>
     )
 }; export default CashAccount;
