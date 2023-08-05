@@ -10,9 +10,9 @@ export const salesSlice = createSlice({
         },
         addSales: (state, action) => {
             const { DTCSales, currentDate } = action.payload;
+            console.log(DTCSales);
             state.salesRecord[currentDate] = DTCSales;
             addCollectionAndDocuments("DTCSales", currentDate, DTCSales);
-
         }
     }
 });

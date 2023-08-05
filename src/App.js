@@ -10,6 +10,7 @@ import Footer from './components/footer/footer.component';
 import Navigation from './components/navigation/navigation.component';
 import OperationsPage from './pages/operationsPage/operationsPage.component';
 
+
 import Authenticate from './authenticator/authenticate.component';
 import SignUp from './authenticator/signUp/signUp.component';
 import { useSelector } from 'react-redux';
@@ -24,6 +25,7 @@ import { updateStock } from './reduxStore/reducers/stock.reducer';
 import { updateExpense } from './reduxStore/reducers/expense.reducer';
 import { updateUtilities } from './reduxStore/reducers/utilities.reducer';
 import { updateDebtRecord } from './reduxStore/reducers/debt.reducer';
+import { updateAccount } from './reduxStore/reducers/account.reducer';
 
 function App() {
   const dispatch = useDispatch();
@@ -61,6 +63,10 @@ function App() {
     getMultipleDocuments("Debt").then((DebtDB) => dispatch(updateDebtRecord(DebtDB)));
   });
 
+  useEffect(() => {
+    getMultipleDocuments("Account").then((AccountDB) => dispatch(updateAccount(AccountDB)));
+  });
+
   return (
     <div className="App">
     <Routes>
@@ -71,7 +77,7 @@ function App() {
         <Route path='announcements' element={<LandingPage/>}></Route>
         <Route path='operations' element={<Authenticate component={OperationsPage} user={currentUser}/>}></Route>
         <Route path='pricing' element={<LandingPage/>}></Route>
-        <Route path='signup' element={<SignUp/>}></Route>
+        <Route path='signup' element={<Authenticate component={SignUp} user={currentUser}/>}></Route>
       </Route>
       <Route path='*' element={[<Navigation></Navigation>, <LandingPage></LandingPage>, <Footer></Footer>]}></Route>
     </Routes>

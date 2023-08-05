@@ -1,11 +1,12 @@
 .cashEntry{
     margin: 0 auto 20px auto;
-    box-shadow: 1px 1px 4px rgb(0 0 0 / 0.2);
-    background-color: #FFFFFF;
+
 
     #cashRecords{
         display: flex;
         justify-content: space-between;
+        box-shadow: 1px 1px 4px rgb(0 0 0 / 0.2);
+        background-color: #FFFFFF;
         padding: 30px 25px 4px 25px;
 
         h4{
@@ -25,6 +26,22 @@
         input, textarea{
             display: block;
             margin: 3px 0 11px 0;
+        }
+    }
+
+    button{
+        color: #C82736;
+        background-color: #FFFFFF;
+        padding: 5px 8px;
+        border: 1px solid #C82736;
+        border-radius: 6px;
+        cursor: pointer;
+        display: block;
+        float: right;
+
+        &:hover{
+            color: #FFFFFF;
+            background-color: #C82736;
         }
     }
 }

@@ -27,7 +27,6 @@ const DebtPagePreview = ({DebtorsDB, Debtors}) => {
             };
 
             try{
-                console.log(newDebtRecord);
                 dispatch(addDebtRecord({debtorid, newDebtRecord}));
             } catch (err){
                 alert("Something went wrong, please refresh and try again" & err);

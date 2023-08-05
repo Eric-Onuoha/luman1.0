@@ -46,11 +46,11 @@ const SalesPagePreview = ({distributors}) => {
         setStatus("Check again to make sure all fields are correct");
     }
 
-    const handleDTCSubmit =  (e) => {
+    const handleDTCSubmit = (e) => {
         e.preventDefault();
         if (DTCFormResponse.length !== 0){
             const currentDate = getDate(todaysDate);
-            const DTCSales = {familyDTC, miniDTC, smallDTC};
+            const DTCSales = DTCFormResponse;
             try{
                 // console.log(DTCSales);
                  dispatch(addSales({DTCSales, currentDate}));
