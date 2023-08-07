@@ -58,7 +58,7 @@ const StaffPagePreview = ({StaffMembers}) => {
                                 <option value="default" disabled >Select Department</option>
                                 <option value="Baker">Baker</option>
                                 <option value="Distributor">Distributor</option>
-                                <option value="Distributor">Others</option>
+                                <option value="Others">Others</option>
                             </select>
 
                             <label htmlFor="phone">Phone Number:</label>
