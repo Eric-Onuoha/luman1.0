@@ -1,8 +1,10 @@
 #dashboardComponent{
     padding: 86px 0 0 0;
+    // margin: 0;
 
     #dashboardRow{
         height: 100vh;
+        margin: 0;
 
         #dashboardMenu, #dashboardItems{
             height: inherit;
@@ -12,6 +14,9 @@
             background-color: #252525;
             color: #FFFFFF;
             padding: 0;
+            // display: flex;
+            // flex-direction: column;
+            // justify-content: space-between;
 
             .menuItem{
 

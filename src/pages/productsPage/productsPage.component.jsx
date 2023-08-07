@@ -13,8 +13,9 @@ const ProductsPage = () => {
     });
 
     const LatestProducts = Products[LatestDate[0]] || {};
+    const Latest = LatestDate[0] && LatestDate[0].replace(/^(\d{4})(.*)(\d{2})/, "$3 $2 $1");
 
     return(
-        <ProductsPagePreview LatestProducts = {LatestProducts} LatestDate = {LatestDate[0].replace(/^(\d{4})(.*)(\d{2})/, "$3 $2 $1")}></ProductsPagePreview>
+        <ProductsPagePreview LatestProducts = {LatestProducts} LatestDate = {Latest}></ProductsPagePreview>
     )
 }; export default ProductsPage;

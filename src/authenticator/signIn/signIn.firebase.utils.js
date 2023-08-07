@@ -1,6 +1,7 @@
 import { initializeApp } from 'firebase/app';
 import {
   getAuth,
+  signOut,
   signInWithEmailAndPassword,
   onAuthStateChanged
 } from 'firebase/auth';
@@ -33,6 +34,14 @@ const firebaseConfig = {
 
   export const monitorAuthState = (cb) => {
     onAuthStateChanged(auth, cb);
+  }
+
+  export const SignUserOut = () => {
+    signOut(auth).then(() => {
+      // Sign-out successful.
+    }).catch((error) => {
+      console.log(error);
+    });
   }
 
 
