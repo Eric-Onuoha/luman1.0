@@ -21,7 +21,7 @@ const ExpenseEntryPreview = () => {
             <Row id="expenses">
                 <h4>Category - <select name="category" defaultValue={"default"} onChange={changeCategory}>
                         <option value="default" disabled = {true}>Select Category</option>
-                        <option value="ingridient">Ingridient</option>
+                        <option value="ingredient">Ingredient</option>
                         <option value="tax">Tax</option>
                         <option value="diesel">Diesel</option>
                         <option value="salary">Salary</option>
@@ -31,11 +31,11 @@ const ExpenseEntryPreview = () => {
                         <option value="miscellaneous">Miscellaneous</option>
                     </select>
                 </h4>
-                {category !== "ingridient" ? (
+                {category !== "ingredient" ? (
                     <h4>Item - <input name="item" type="text" /></h4>
                 ) : (
-                    <h4>Ingridient - <select name="ingridient" defaultValue={"default"}>
-                            <option value="default" disabled = {true}>Select Ingridient</option>
+                    <h4>Ingredient - <select name="ingredient" defaultValue={"default"}>
+                            <option value="default" disabled = {true}>Select Ingredient</option>
                             <option value="flour">Flour</option>
                             <option value="milk">Milk</option>
                             <option value="sugar">Sugar</option>

@@ -8,8 +8,10 @@ export const GetCurrentDaysExpense = (date = currentDate) => {
     let totalExpense = 0;
 
     for (const key in ExpenseList[date]) {
-        const paidAmount = parseInt(ExpenseList[date][key].amount, 10);
-        totalExpense += paidAmount;
+        if(ExpenseList[date][key].paymentBy === "Cash"){
+            const paidAmount = parseInt(ExpenseList[date][key].amount, 10);
+            totalExpense += paidAmount;
+        }
     }
   
     return totalExpense;
