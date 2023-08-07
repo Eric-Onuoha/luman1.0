@@ -13,7 +13,7 @@ const ExpensePagePreview = ({Expenses, DaysExpenses}) => {
     const todaysDate = new Date();
     const [count, setCount] = useState(1);
     const [expenseForm, setExpenseForm] = useState([]);
-    const {category, ingridient, item, quantity, amount, paymentBy} = expenseForm;
+    const {category, ingredient, item, quantity, amount, paymentBy} = expenseForm;
 
     const expenseFormChange = (event) => {
         const {name, value} = event.target;
@@ -27,7 +27,7 @@ const ExpensePagePreview = ({Expenses, DaysExpenses}) => {
             const currentDate = getDate(todaysDate);
             let newExpense;
 
-            if(ingridient === undefined){
+            if(ingredient === undefined){
                 newExpense = {
                     ...Expenses,
                     [number]: {category, item, item, quantity, amount, paymentBy}
@@ -35,7 +35,7 @@ const ExpensePagePreview = ({Expenses, DaysExpenses}) => {
             } else {
                 newExpense = {
                     ...Expenses,
-                    [number]: {category, ingridient, item, quantity, amount, paymentBy}
+                    [number]: {category, ingredient, item, quantity, amount, paymentBy}
                 }
             }
             console.log(newExpense);         
@@ -55,7 +55,7 @@ const ExpensePagePreview = ({Expenses, DaysExpenses}) => {
                 {DaysExpenses && DaysExpenses.map((expenseItem) => (
                 <Row id="updatedExpenses" key={expenseItem}>
                     <Col><h4>Categories: {Expenses && Expenses[expenseItem].category}</h4></Col>
-                    <Col><h4>Item: {Expenses && Expenses[expenseItem].item || Expenses[expenseItem].ingridient}</h4></Col>
+                    <Col><h4>Item: {Expenses && Expenses[expenseItem].item || Expenses[expenseItem].ingredient}</h4></Col>
                     <Col><h4>Quantity: {Expenses && Expenses[expenseItem].quantity}</h4></Col>
                     <Col><h4>Amount: {Expenses && Expenses[expenseItem].amount}</h4></Col>
                     <Col><h4>Payment Method: {Expenses && Expenses[expenseItem].paymentBy}</h4></Col>
