@@ -3,6 +3,7 @@ import { Container, Row, Col } from "bootstrap-4-react/lib/components/layout";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 
+import { getPlainDate } from "../../../utils/getMonthAndDay";
 import OperationsMenu from "../../../components/operationsMenu/operationsMenu.component";
 import ProductRecords from "../../../components/productRecords/productRecords.component";
 import { addProduct } from "../../../reduxStore/reducers/productList.reducer";
@@ -16,6 +17,7 @@ const ProductsPagePreview = ({LatestProducts, LatestDate}) => {
     const [changedDate, setChangedDate] = useState(" ");
     const [formResponse, setFormResponse] = useState([]);
     const {productType, productName, productPriceDTC, productPriceSR} = formResponse;
+    const regex = /^(\d{4})(.*)/;
 
     const handleSubmit = (event) => {
         event.preventDefault();
@@ -51,11 +53,12 @@ const ProductsPagePreview = ({LatestProducts, LatestDate}) => {
         setFormResponse({...formResponse, [name]: value});
     }
 
+    
     return(
         <Container id="productsPagePreviewComponent" fluid="true">
             <OperationsMenu menu = {["Update Product Prices", "View Previews Prices"]}></OperationsMenu>
 
-            <h4>Products and Current Prices since {LatestDate || " "}:</h4>
+            <h4>Products and Current Prices since {getPlainDate(LatestDate && LatestDate.replace(regex, "$1 $2")) || " "}:</h4>
             <Row id="oldPrices">
                 <Col>
                 <h4>Family Loaf:</h4>

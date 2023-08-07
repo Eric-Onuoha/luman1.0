@@ -12,7 +12,7 @@ const CashPagePreview = () => {
         <Container id="cashPagePreviewComponent" fluid="true">
             {/* <OperationsMenu menu = "stock"></OperationsMenu> */}
             {/* <form> */}
-                <h4>Debt for: {getTodaysPlainDate()}</h4>
+                <h4>Cash Account for: {getTodaysPlainDate()}</h4>
                 <Row id="cashRecords">
                     <CashAccount></CashAccount>
                 </Row>
