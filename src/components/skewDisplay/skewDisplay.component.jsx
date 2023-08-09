@@ -1,9 +1,8 @@
-import SkewDisplayPreview from "./skewDisplayPreview/skewDisplay.component";
+import SkewDisplayPreview from "./skewDisplayPreview/skewDisplayPreview.component";
 
-const SkewDisplay = () => {
-
-    const SkewData = {"family": 600, "mini": 500, "small": 1000};
+const SkewDisplay = ({heading, indicator, skewData}) => {
+    //indicatorGood, indicatorBad
     return(
-        <SkewDisplayPreview indicator="indicatorGood" heading="Sales for the week" skewData={SkewData}></SkewDisplayPreview>
+        <SkewDisplayPreview indicator={indicator} heading={heading} skewData = {skewData}></SkewDisplayPreview>
     )
 }; export default SkewDisplay;

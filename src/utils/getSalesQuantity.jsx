@@ -3,10 +3,10 @@ import { getTodaysDate, getDate } from "./getMonthAndDay";
 
 const currentDate = getTodaysDate();
 
-export const GetCurrentDTCSalesQuantity = (product) => {
+export const GetCurrentDTCSalesQuantity = (date = currentDate, product) => {
     const Sales = useSelector((state) => state.salesRecord.salesRecord) || {};
 
-    const DTCQuantity = (Sales[currentDate] && Sales[currentDate][product]) || 0;
+    const DTCQuantity = (Sales[date] && Sales[date][product]) || 0;
 
     return DTCQuantity;
 }

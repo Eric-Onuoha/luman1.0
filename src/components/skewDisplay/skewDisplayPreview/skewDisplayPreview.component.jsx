@@ -1,7 +1,7 @@
 import "./skewDisplayPreview.styles.scss";
 import { Col } from "bootstrap-4-react/lib/components/layout";
 
-const SkewDisplayPreview = ({indicator, heading, skewData}) => {
+const SkewDisplayPreview = ({heading, indicator, skewData}) => {
 
     return(
         <Col className ="dashboardDisplay">
