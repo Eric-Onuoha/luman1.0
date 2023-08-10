@@ -14,24 +14,29 @@ const GetAllSRSales = () => {
 }
 
 export const GetMonthlyDTCSales = () => {
+    let activeDays = 0;
     const DTCSales = GetAllDTCSales();
     const dateRange = getMonthRange();
     let salesdtc = {"family": 0, "mini": 0, "small": 0};
-    
+
     const salesDates = Object.keys(DTCSales);
     salesDates.push(dateRange.firstDay, dateRange.lastDay);
     const sortedDates = salesDates.sort(orderDates);
-
-    const firstDay = sortedDates.indexOf(dateRange.firstDay) + 1;
-    const lastDay = sortedDates.indexOf(dateRange.lastDay);
-
-        for (let i = firstDay; i < lastDay; i++){
-            salesdtc.family += parseInt(DTCSales[sortedDates[i]]["familyDTC"] && DTCSales[sortedDates[i]]["familyDTC"]) || 0;
-            salesdtc.mini += parseInt(DTCSales[sortedDates[i]]["miniDTC"] && DTCSales[sortedDates[i]]["miniDTC"]) || 0;
-            salesdtc.small += parseInt(DTCSales[sortedDates[i]]["smallDTC"] && DTCSales[sortedDates[i]]["smallDTC"]) || 0;
-        }
-
-return salesdtc;
+    
+    const firstDayIndex = sortedDates.indexOf(dateRange.firstDay) + 1;
+    const lastDayIndex = sortedDates.indexOf(dateRange.lastDay);
+    
+    for (let i = firstDayIndex; i < lastDayIndex; i++) {
+        const currentDate = sortedDates[i];
+        const dailySales = DTCSales[currentDate] || {};
+    
+        activeDays++;
+        salesdtc.family += parseInt(dailySales["familyDTC"]) || 0;
+        salesdtc.mini += parseInt(dailySales["miniDTC"]) || 0;
+        salesdtc.small += parseInt(dailySales["smallDTC"]) || 0;
+    }
+    
+return {salesdtc, activeDays};
 
 }
 
@@ -84,4 +89,33 @@ export const GetMonthlySRSales = () => {
     
 return totals;
 
+}
+
+export const GetMonthlyBagPerDay = () => {
+    const DTCObject = GetMonthlyDTCSales();
+    const SRObject = GetMonthlySRSales();
+
+
+    let totalFamily = 0;
+    let totalMini = 0;
+    let totalSmall = 0;
+
+    // Add values from the first object
+    totalFamily += DTCObject.salesdtc.family;
+    totalMini += DTCObject.salesdtc.mini;
+    totalSmall += DTCObject.salesdtc.small;
+
+    // Add values from the second object
+    for (const key in SRObject) {
+    const values = SRObject[key];
+    totalFamily += values.family;
+    totalMini += values.mini;
+    totalSmall += values.small;
+    }
+
+    const familybpd = ((totalFamily/102)/DTCObject.activeDays);
+    const minibpd = ((totalMini/176)/DTCObject.activeDays);
+    const bagsperday = (familybpd + minibpd);
+
+    return {bagsperday, familybpd, minibpd};
 }
