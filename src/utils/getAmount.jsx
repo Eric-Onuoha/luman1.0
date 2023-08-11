@@ -40,5 +40,6 @@ export const getCurrentAmount = () => {
     const miniAmount = getCurrentMiniAmount(); 
     const smallAmount = getCurrentSmallAmount();
 
+
     return (familyAmount + miniAmount + smallAmount);
 }
