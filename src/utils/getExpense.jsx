@@ -5,6 +5,7 @@ const currentDate = getTodaysDate();
 
 export const GetCurrentDaysExpense = (date = currentDate) => {
     const ExpenseList = useSelector((state) => state.expenses.expenses) || {};
+    console.log(ExpenseList);
     let totalExpense = 0;
 
     for (const key in ExpenseList[date]) {
