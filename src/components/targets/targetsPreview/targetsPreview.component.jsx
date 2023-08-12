@@ -13,7 +13,6 @@ const TargetsPreview = () => {
     const monthSRTarget = {"family": 1320, "mini":600, "small": 0};
     const bagsPerDay = GetMonthlyBagPerDay();
     const targetBagsPerDay = 1;
-    console.log(bagsPerDay);
 
     return(
         <Container id="targetsPreviewComponent" fluid="true">

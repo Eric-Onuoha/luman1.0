@@ -7,7 +7,6 @@ const SingleDisplay = ({indicator, heading, data}) => {
     ? "indicatorGood"
     : "indicatorBad";
 
-    console.log(message);
     return (
         <SingleDisplayPreview indicator={message} heading = {heading} data={data}></SingleDisplayPreview>
     )

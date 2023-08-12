@@ -1,5 +1,5 @@
 import { useSelector } from "react-redux";
-import { getMonthRange } from "./getMonthAndDay";
+import { getCurrentMonth, getMonthRange } from "./getMonthAndDay";
 import { orderDates } from "./orderDates";
 import { GetDistributors } from "./getDistributors";
 
@@ -16,24 +16,16 @@ const GetAllSRSales = () => {
 export const GetMonthlyDTCSales = () => {
     let activeDays = 0;
     const DTCSales = GetAllDTCSales();
-    const dateRange = getMonthRange();
+    const month = getCurrentMonth();
     let salesdtc = {"family": 0, "mini": 0, "small": 0};
-
-    const salesDates = Object.keys(DTCSales);
-    salesDates.push(dateRange.firstDay, dateRange.lastDay);
-    const sortedDates = salesDates.sort(orderDates);
     
-    const firstDayIndex = sortedDates.indexOf(dateRange.firstDay) + 1;
-    const lastDayIndex = sortedDates.indexOf(dateRange.lastDay);
-    
-    for (let i = firstDayIndex; i < lastDayIndex; i++) {
-        const currentDate = sortedDates[i];
-        const dailySales = DTCSales[currentDate] || {};
-    
-        activeDays++;
-        salesdtc.family += parseInt(dailySales["familyDTC"]) || 0;
-        salesdtc.mini += parseInt(dailySales["miniDTC"]) || 0;
-        salesdtc.small += parseInt(dailySales["smallDTC"]) || 0;
+    for (const key in DTCSales) {
+      if (key.includes(month)) {
+        activeDays += 1;
+        salesdtc.family += parseInt(DTCSales[key].familyDTC);
+        salesdtc.mini += parseInt(DTCSales[key].miniDTC);
+        salesdtc.small += parseInt(DTCSales[key].miniDTC);
+      }
     }
     
 return {salesdtc, activeDays};
@@ -44,11 +36,10 @@ export const GetMonthlySRSales = () => {
     const SRSales = GetAllSRSales();
     const dateRange = getMonthRange();
     const salesReps = GetDistributors();
-    // salesReps.forEach((salesRep) => {
-    //     let salesSR = {[salesRep]: {"family": 0, "mini": 0, "small": 0}};
-    // })
-    
-    
+
+    //When you have records, try a solution that just checks if the date include the currentmonth and 
+    //then adds. Similar to the DTC one
+        
     const salesDates = Object.keys(SRSales);
     salesDates.push(dateRange.firstDay, dateRange.lastDay);
     const sortedDates = salesDates.sort(orderDates);
@@ -100,6 +91,10 @@ export const GetMonthlyBagPerDay = () => {
     let totalMini = 0;
     let totalSmall = 0;
 
+    let familybpd = 0;
+    let minibpd = 0;
+    let bagsperday = 0;
+
     // Add values from the first object
     totalFamily += DTCObject.salesdtc.family;
     totalMini += DTCObject.salesdtc.mini;
@@ -113,9 +108,11 @@ export const GetMonthlyBagPerDay = () => {
     totalSmall += values.small;
     }
 
-    const familybpd = ((totalFamily/102)/DTCObject.activeDays);
-    const minibpd = ((totalMini/176)/DTCObject.activeDays);
-    const bagsperday = (familybpd + minibpd);
+    if (DTCObject.activeDays != 0){
+      familybpd = ((totalFamily/102)/DTCObject.activeDays);
+      minibpd = ((totalMini/176)/DTCObject.activeDays);
+      bagsperday = (familybpd + minibpd);
+    }
 
     return {bagsperday, familybpd, minibpd};
 }

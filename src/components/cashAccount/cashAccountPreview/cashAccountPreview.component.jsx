@@ -25,10 +25,7 @@ const CashAccountPreview = () => {
     const {bankDeposit, cah, comment} = accountForm;
     const currentDate = getTodaysDate();
 
-    console.log(salesAmount);
-
     const expectedCash = ((parseInt(salesAmount) + parseInt(paidDebt) + parseInt(previousCash.replace(',', ''))) - (parseInt(newDebt) + parseInt(totalExpense) + parseInt(bankDeposit))).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-    console.log(parseInt(previousCash));
     const accountFormChange = (event) => {
         const {name, value} = event.target;
         setAccountForm({...accountForm, [name]: value});
