@@ -16,7 +16,7 @@ const TargetsPreview = () => {
 
     return(
         <Container id="targetsPreviewComponent" fluid="true">
-            <OperationsMenu></OperationsMenu>
+            {/* <OperationsMenu></OperationsMenu> */}
             <h4>Bags/day Monthly Target</h4>
             <Row id="weeklyTargets">
                 <SingleDisplay indicator={bagsPerDay.bagsperday - targetBagsPerDay} heading = {"Current Bag(s) per day"} data={bagsPerDay.bagsperday.toFixed(2) + " of " + targetBagsPerDay}></SingleDisplay>
@@ -30,7 +30,7 @@ const TargetsPreview = () => {
                         <SkewDisplay key={salesRep} heading={salesRep.replace("_", " ")} skewData={monthSR[salesRep]}></SkewDisplay>
                     ))
                 }
-                <SkewDisplay indicator={"noIndicator"} heading={"Sales Reps Target for the Month"} skewData={monthSRTarget}></SkewDisplay>
+                <SkewDisplay indicator={"noIndicator"} heading={"Sales Reps Target this Month"} skewData={monthSRTarget}></SkewDisplay>
             </Row>
 
             

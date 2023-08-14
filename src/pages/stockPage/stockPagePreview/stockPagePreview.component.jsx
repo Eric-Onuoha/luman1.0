@@ -14,7 +14,7 @@ const StockPagePreview = ({bread, LatestStockRecord, LatestDTCSales, totalSmallS
 
     return(
         <Container id="stockPagePreviewComponent" fluid="true">
-            <OperationsMenu menu = "stock"></OperationsMenu>
+            <OperationsMenu menu = {["Update Stock", "View Stock"]}></OperationsMenu>
                 <h4>Update Stock for: <select name="stockDate" defaultValue={"default"} onChange={changeProduct}>
                     <option disabled = {true} value="default">Select Product</option>
                     {bread.map((breadType) => (

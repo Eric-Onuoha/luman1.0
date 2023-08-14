@@ -34,7 +34,7 @@ const StaffPagePreview = ({StaffMembers}) => {
 
     return(
         <Container id="staffPagePreviewComponent" fluid="true">
-            <OperationsMenu></OperationsMenu>
+            {/* <OperationsMenu ></OperationsMenu> */}
 
             <Row>
                 <Col className="staffList mr-4 col-3">

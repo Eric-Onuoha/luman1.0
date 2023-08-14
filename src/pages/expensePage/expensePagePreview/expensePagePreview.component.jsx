@@ -30,17 +30,15 @@ const ExpensePagePreview = ({Expenses, DaysExpenses}) => {
             if(ingredient === undefined){
                 newExpense = {
                     ...Expenses,
-                    [number]: {category, item, item, quantity, amount, paymentBy}
+                    [number]: {category, item, quantity, amount, paymentBy}
                 }
             } else {
                 newExpense = {
                     ...Expenses,
-                    [number]: {category, ingredient, item, quantity, amount, paymentBy}
+                    [number]: {category, ingredient, quantity, amount, paymentBy}
                 }
             }
-            console.log(newExpense);         
             try{
-                // addCollectionAndDocuments("Products", date, ProductFormat);
                 dispatch(addExpense({newExpense, currentDate}));
             } catch (err){
                 alert("Something went wrong, please refresh and try again" & err);
@@ -50,7 +48,7 @@ const ExpensePagePreview = ({Expenses, DaysExpenses}) => {
 
     return(
         <Container id="expensePagePreviewComponent" fluid="true">
-            <OperationsMenu menu = "Expense"></OperationsMenu>
+            <OperationsMenu menu = {["Update Expense", "View Expenses"]}></OperationsMenu>
                 <h4>Expenses for {getPlainDate(todaysDate)}</h4>
                 {DaysExpenses && DaysExpenses.map((expenseItem) => (
                 <Row id="updatedExpenses" key={expenseItem}>
@@ -62,11 +60,11 @@ const ExpensePagePreview = ({Expenses, DaysExpenses}) => {
                 </Row>
                 ))}
                 <form onChange={expenseFormChange} onSubmit={expenseFormSubmit}>
-                <Row id="expenseRecords">
-                    <ExpenseEntry></ExpenseEntry>
-                </Row>
-                <button type="submit">Update Expense for today</button>
-            </form>
+                    <Row id="expenseRecords">
+                        <ExpenseEntry></ExpenseEntry>
+                    </Row>
+                    <button type="submit">Update Expense for today</button>
+                </form>
         </Container>
     )
 }; export default ExpensePagePreview;

@@ -5,8 +5,9 @@ const OperationsMenuPreview = ({OperationsMenuItems}) => {
     return(
         <Col id="operationsMenuPreviewComponent">
             <div id="operationsMenuItems">
-                <p>{OperationsMenuItems[0]}</p>
-                <p>{OperationsMenuItems[1]}</p>
+            {OperationsMenuItems.map((item) => (
+                    <p key={item}>{item}</p>
+                ))}
             </div>
         </Col>
     )

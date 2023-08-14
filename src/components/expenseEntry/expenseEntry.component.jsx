@@ -2,6 +2,6 @@ import ExpenseEntryPreview from "./expenseEntryPreview/expenseEntryPreview.compo
 
 const ExpenseEntry = () => {
     return(
-        <ExpenseEntryPreview name="Ajao Kehinde"></ExpenseEntryPreview>
+        <ExpenseEntryPreview></ExpenseEntryPreview>
     )
 }; export default ExpenseEntry;

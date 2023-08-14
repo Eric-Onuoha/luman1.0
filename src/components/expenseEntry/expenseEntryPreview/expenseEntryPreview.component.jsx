@@ -1,8 +1,6 @@
 import "./expenseEntryPreview.styles.scss";
 import { Row, Col } from "bootstrap-4-react/lib/components/layout";
 
-import AddRow from "../../../assets/images/add.png";
-import DeleteRow from "../../../assets/images/remove.png";
 import { useState } from "react";
 
 const ExpenseEntryPreview = () => {
@@ -14,12 +12,8 @@ const ExpenseEntryPreview = () => {
 
     return(
         <Col className="expenseEntry col-12">
-            <Row id="daysExpenses">
-
-            </Row>
-
             <Row id="expenses">
-                <h4>Category - <select name="category" defaultValue={"default"} onChange={changeCategory}>
+                <h4>Category - <select name="category" defaultValue={"default"} onChange={changeCategory} required = {true}>
                         <option value="default" disabled = {true}>Select Category</option>
                         <option value="ingredient">Ingredient</option>
                         <option value="tax">Tax</option>
@@ -32,9 +26,9 @@ const ExpenseEntryPreview = () => {
                     </select>
                 </h4>
                 {category !== "ingredient" ? (
-                    <h4>Item - <input name="item" type="text" /></h4>
+                    <h4>Item - <input name="item" type="text" required = {true} /></h4>
                 ) : (
-                    <h4>Ingredient - <select name="ingredient" defaultValue={"default"}>
+                    <h4>Ingredient - <select name="ingredient" defaultValue={"default"} required = {true}>
                             <option value="default" disabled = {true}>Select Ingredient</option>
                             <option value="flour">Flour</option>
                             <option value="milk">Milk</option>
@@ -50,14 +44,15 @@ const ExpenseEntryPreview = () => {
                         </select>
                     </h4>
                 )}
-                <h4>Quantity - <input type="text" name="quantity"/></h4>
-                <h4>Amount - <input type="text" id="amount" name="amount" /></h4>
-                <h4>Payment Method - <select name="paymentBy" defaultValue={"default"}>
+                <h4>Quantity - <input type="text" name="quantity" required = {true}/></h4>
+                <h4>Amount - <input type="text" id="amount" name="amount" required = {true} /></h4>
+                <h4>Payment Method - <select name="paymentBy" defaultValue={"default"} required = {true}>
                         <option value="default" disabled = {true}>Select Method</option>
                         <option value="Cash">Cash</option>
                         <option value="Bank">Bank</option>
                         <option value="External">External</option>
-                    </select></h4>
+                    </select>
+                </h4>
              </Row>
         </Col>
     )

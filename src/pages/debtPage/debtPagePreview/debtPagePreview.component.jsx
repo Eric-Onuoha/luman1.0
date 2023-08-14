@@ -41,7 +41,7 @@ const DebtPagePreview = ({DebtorsDB, Debtors}) => {
 
     return(
         <Container id="debtPagePreviewComponent" fluid="true">
-            <OperationsMenu></OperationsMenu>
+            <OperationsMenu menu={["Update Debt", "View Debts"]}></OperationsMenu>
             <h4>Debt for: {getTodaysPlainDate()}</h4>
             {Debtors.map((debtor) => ( DebtorsDB[debtor][currentDate] &&
             <Row key={debtor} id="updatedDebtRecords">

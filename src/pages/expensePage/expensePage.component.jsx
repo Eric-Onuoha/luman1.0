@@ -7,6 +7,7 @@ const ExpensePage = () => {
     const date = getTodaysDate();
     const daysExpenses = Expenses[date] && Object.keys(Expenses[date]);
 
+
     return(
         <ExpensePagePreview Expenses = {Expenses[date]} DaysExpenses = {daysExpenses}></ExpensePagePreview>
     )
