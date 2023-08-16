@@ -24,7 +24,7 @@ export const GetMonthlyDTCSales = () => {
         activeDays += 1;
         salesdtc.family += parseInt(DTCSales[key].familyDTC);
         salesdtc.mini += parseInt(DTCSales[key].miniDTC);
-        salesdtc.small += parseInt(DTCSales[key].miniDTC);
+        salesdtc.small += parseInt(DTCSales[key].smallDTC);
       }
     }
     
