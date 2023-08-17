@@ -23,7 +23,7 @@ import { rootReducer } from "./rootReducer";
 const persistConfig = {
     key: "root",
     storage,
-    blacklist: ["productList", "staffList", "salesRecord", "stock", "expenses", "utilities", "debtRecord", "account"]
+    blacklist: ["productList", "staffList", "salesRecord", "stock", "expenses", "utilities", "debtRecord", "account", "operationsMenu"]
 }
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

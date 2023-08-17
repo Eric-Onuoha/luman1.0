@@ -17,6 +17,7 @@ import StockPage from "../../stockPage/stockPage.component";
 import CashPage from "../../cashPage/cashPage.component";
 import ProductsPage from "../../productsPage/productsPage.component";
 import StaffPage from "../../staffPage/staffPage.component";
+import { updateOperationsMenu } from "../../../reduxStore/reducers/operationsMenu";
 
 import { useState } from "react";
 
@@ -30,6 +31,7 @@ const OperationsPagePreview = () => {
     }
 
     const changeCurrentTab = (e) => {
+        dispatch(updateOperationsMenu("Update"));
         setMenuTab(e.target.outerText);
     }
 
@@ -70,25 +72,32 @@ const OperationsPagePreview = () => {
                     </div>
                 </Col>
                 <Col id="dashboardItems" className="col-10">
-                    {menuTab === "Targets" ? (
-                        <Targets></Targets>
-                    ) : (menuTab === "Sales" ? (
-                        <SalesPage></SalesPage>
-                    ) : (menuTab === "Stock") ? (
-                        <StockPage></StockPage>
-                    ) : (menuTab === "Expense") ? (
-                        <ExpensePage></ExpensePage>
-                    ) : (menuTab === "Accounts") ? (
-                        <CashPage></CashPage>
-                    ) : (menuTab === "Debt") ? (
-                        <DebtPage></DebtPage>
-                    ) : (menuTab === "Staff Records") ? (
-                        <StaffPage></StaffPage>
-                    ) : (menuTab === "Product Records") ? (
-                        <ProductsPage></ProductsPage>
-                    ) : ( 
+                    {   menuTab === "Targets" ? 
+                        (<Targets></Targets>)
+
+                    :   menuTab === "Sales" ?
+                        (<SalesPage></SalesPage>) 
+
+                    :   menuTab === "Stock" ? 
+                        (<StockPage></StockPage>) 
+
+                    :   menuTab === "Expense" ? 
+                        (<ExpensePage></ExpensePage>)
+
+                    :   menuTab === "Accounts" ? 
+                        (<CashPage></CashPage>)
+
+                    :   menuTab === "Debt" ? 
+                        (<DebtPage></DebtPage>)
+
+                    :   menuTab === "Staff Records" ? 
+                        (<StaffPage></StaffPage>) 
+
+                    :   menuTab === "Product Records" ? 
+                        (<ProductsPage></ProductsPage>) 
+                    : 
                         <p></p>
-                    ))}
+                    }
                 </Col>
             </Row>            
         </Container>

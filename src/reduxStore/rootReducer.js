@@ -10,6 +10,7 @@ import { expenseReducer } from "./reducers/expense.reducer";
 import { utilitiesReducer } from "./reducers/utilities.reducer";
 import { debtReducer } from "./reducers/debt.reducer";
 import { accountReducer } from "./reducers/account.reducer";
+import { operationsMenuReducer } from "./reducers/operationsMenu";
 
 export const rootReducer = combineReducers({
     currentUser: userReducer,
@@ -21,5 +22,6 @@ export const rootReducer = combineReducers({
     expenses: expenseReducer,
     utilities: utilitiesReducer,
     debtRecord: debtReducer,
-    account: accountReducer
+    account: accountReducer,
+    operationsMenu: operationsMenuReducer
 })

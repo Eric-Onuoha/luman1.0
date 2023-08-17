@@ -24,7 +24,7 @@ export const GetMonthlyDTCSales = () => {
         activeDays += 1;
         salesdtc.family += parseInt(DTCSales[key].familyDTC);
         salesdtc.mini += parseInt(DTCSales[key].miniDTC);
-        salesdtc.small += parseInt(DTCSales[key].smallDTC);
+        salesdtc.small += (DTCSales[key].smallDTC && parseInt(DTCSales[key].smallDTC)) || 0;
       }
     }
     
@@ -110,7 +110,7 @@ export const GetMonthlyBagPerDay = () => {
 
     if (DTCObject.activeDays != 0){
       familybpd = ((totalFamily/102)/DTCObject.activeDays);
-      minibpd = ((totalMini/176)/DTCObject.activeDays);
+      minibpd = ((totalMini/160)/DTCObject.activeDays);
       bagsperday = (familybpd + minibpd);
     }
 

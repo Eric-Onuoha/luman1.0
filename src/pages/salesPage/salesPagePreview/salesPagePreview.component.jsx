@@ -6,12 +6,13 @@ import OperationsMenu from "../../../components/operationsMenu/operationsMenu.co
 import { getPlainDate, getDate } from "../../../utils/getMonthAndDay";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-
+import { useSelector } from "react-redux";
 import { addSales } from "../../../reduxStore/reducers/sales.reducer";
 import { addSalesRepRecord } from "../../../reduxStore/reducers/salesRep.reducer";
-import { addCollectionAndDocuments } from "../../../firestore/postToFirestore.utils";
 
 const SalesPagePreview = ({distributors}) => {
+    const OperationsMenuType = useSelector((state) => state.operationsMenu.operationsMenu);
+
     const dispatch = useDispatch();
     const [status, setStatus] = useState(" ");
     const [DTCFormResponse, setDTCFormResponse] = useState({});
@@ -78,53 +79,68 @@ const SalesPagePreview = ({distributors}) => {
 
     return(
         <Container id="salesPagePreviewComponent" fluid="true">
-            <OperationsMenu menu = {["Add Todays Sales", "Previous day's sales"]}></OperationsMenu>
+            <>
+            <OperationsMenu menu = {["Update Sales", "View Sales"]}></OperationsMenu>
+            </>
+            {OperationsMenuType === "View" ? 
+            (
+                <div>
+                    Coming Soon
+                </div>
+            ) 
+            : 
+            (
+                <>
                 <h4>Direct to Consumer (DTC) sales for {getPlainDate(todaysDate)}</h4>
-                <form onChange={handleDTCChange} onSubmit={handleDTCSubmit}>
-                <Row id="salesRecords">
-                    <Col className ="dashboardEntry">
-                        <p className=""></p>
-                        <p className="displayHeader">Sold from sales point</p>
-                        <div id="breadSkews">
-                            <h4>Family <input name="familyDTC" type="text"/></h4>
-                        </div>
-                    </Col>
-                    <Col className ="dashboardEntry">
-                        <p className=""></p>
-                        <p className="displayHeader">Sold from sales point</p>
-                        <div id="breadSkews">
-                            <h4>Mini <input name="miniDTC" type="text" /></h4>
-                        </div>
-                    </Col>
-                    <Col className ="dashboardEntry">
-                        <p className=""></p>
-                        <p className="displayHeader">Sold from sales point</p>
-                        <div id="breadSkews">
-                            <h4>Small <input name="smallDTC" type="text"/></h4>
-                        </div>
-                    </Col>
-                </Row>
-                <button onMouseEnter={handleButtonHover} type="submit">Submit Sales Record</button>
-                </form>
-                <br />
-                <h4>Sales Rep - Company Distributors</h4>
-                <form onChange={handleSRChange} onSubmit={handleSRSubmit}>
-                <Row id="salesRecords">
-                    {distributors.map((distributor, index) => (
-                        <Col className ="dashboardEntry" key={index}>
+                    <form onChange={handleDTCChange} onSubmit={handleDTCSubmit}>
+                    <Row id="salesRecords">
+                        <Col className ="dashboardEntry">
                             <p className=""></p>
-                            <p className="displayHeader">{distributor && distributor.replace(/_/g, " ")}</p>
+                            <p className="displayHeader">Sold from sales point</p>
                             <div id="breadSkews">
-                                <h4>Family <input name={`${distributor}+familySalesRep`}  type="text" /></h4>
-                                <h4>Mini <input name={`${distributor}+miniSalesRep`}type="text" /></h4>
-                                <h4>Small <input name={`${distributor}+smallSalesRep`} type="text" /></h4>
+                                <h4>Family <input name="familyDTC" type="text"/></h4>
                             </div>
                         </Col>
-                    ))}
-                </Row>
-                <button onMouseEnter={handleButtonHover} type="submit">Submit Sales Record</button>
-                </form>
-                <h3>{status}</h3>
+                        <Col className ="dashboardEntry">
+                            <p className=""></p>
+                            <p className="displayHeader">Sold from sales point</p>
+                            <div id="breadSkews">
+                                <h4>Mini <input name="miniDTC" type="text" /></h4>
+                            </div>
+                        </Col>
+                        <Col className ="dashboardEntry">
+                            <p className=""></p>
+                            <p className="displayHeader">Sold from sales point</p>
+                            <div id="breadSkews">
+                                <h4>Small <input name="smallDTC" type="text"/></h4>
+                            </div>
+                        </Col>
+                    </Row>
+                    <button onMouseEnter={handleButtonHover} type="submit">Submit Sales Record</button>
+                    </form>
+                    <br />
+                    <h4>Sales Rep - Company Distributors</h4>
+                    <form onChange={handleSRChange} onSubmit={handleSRSubmit}>
+                    <Row id="salesRecords">
+                        {distributors.map((distributor, index) => (
+                            <Col className ="dashboardEntry" key={index}>
+                                <p className=""></p>
+                                <p className="displayHeader">{distributor && distributor.replace(/_/g, " ")}</p>
+                                <div id="breadSkews">
+                                    <h4>Family <input name={`${distributor}+familySalesRep`}  type="text" /></h4>
+                                    <h4>Mini <input name={`${distributor}+miniSalesRep`}type="text" /></h4>
+                                    <h4>Small <input name={`${distributor}+smallSalesRep`} type="text" /></h4>
+                                </div>
+                            </Col>
+                        ))}
+                    </Row>
+                    <button onMouseEnter={handleButtonHover} type="submit">Submit Sales Record</button>
+                    </form>
+                    <h3>{status}</h3>
+                </>
+            )
+            }
+          
         </Container>
     )
 }; export default SalesPagePreview;
