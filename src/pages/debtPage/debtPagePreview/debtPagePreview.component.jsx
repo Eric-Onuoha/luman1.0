@@ -1,5 +1,7 @@
 import "./debtPagePreview.styles.scss";
 import { Container, Row, Col } from "bootstrap-4-react/lib/components/layout";
+import ListGroup from 'bootstrap-4-react/lib/components/listGroup';
+import Table from "bootstrap-4-react/lib/components/table";
 
 import OperationsMenu from "../../../components/operationsMenu/operationsMenu.component";
 import DebtEntry from "../../../components/debtEntry/debtEntry.component";
@@ -7,14 +9,16 @@ import { getTodaysPlainDate } from "../../../utils/getMonthAndDay";
 import { useState } from "react";
 import { getTodaysDate } from "../../../utils/getMonthAndDay";
 import { useDispatch } from "react-redux";
-
+import { useSelector } from "react-redux";
 import { addDebtRecord } from "../../../reduxStore/reducers/debt.reducer";
 
 const DebtPagePreview = ({DebtorsDB, Debtors}) => {
+    const OperationsMenuType = useSelector((state) => state.operationsMenu.operationsMenu);
     const dispatch = useDispatch();
     const [debtForm, setDebtForm] = useState([]);
     const {debtor, description, newDebt, paidAmount} = debtForm;
     const currentDate = getTodaysDate();
+    console.log(DebtorsDB);
 
     const debtFormSubmit = (event) => {
         event.preventDefault();
@@ -42,22 +46,65 @@ const DebtPagePreview = ({DebtorsDB, Debtors}) => {
     return(
         <Container id="debtPagePreviewComponent" fluid="true">
             <OperationsMenu menu={["Update Debt", "View Debts"]}></OperationsMenu>
-            <h4>Debt for: {getTodaysPlainDate()}</h4>
-            {Debtors.map((debtor) => ( DebtorsDB[debtor][currentDate] &&
-            <Row key={debtor} id="updatedDebtRecords">
-                <Col>Debtor: {debtor.replace(/_/g, " ")}</Col>
-                <Col>Description: {DebtorsDB[debtor][currentDate].description}</Col>
-                <Col>New Debt: {DebtorsDB[debtor][currentDate].newDebt}</Col>
-                <Col>Paid Amount: {DebtorsDB[debtor][currentDate].paidAmount}</Col>
-                <Col>Todays Debt: {DebtorsDB[debtor][currentDate].daysDebt}</Col>
-            </Row>
-            ))}
-            <form onChange={debtFormChange} onSubmit={debtFormSubmit}>
-                <Row id="debtRecords">
-                    <DebtEntry></DebtEntry>
-                </Row>
-                <button type="submit">Update Debt Records</button>
-            </form>
+
+            {OperationsMenuType === "View" ? 
+                (
+                    <>
+                    {Debtors.map((debtor) => (
+                        <>
+                            <ListGroup as="ul">
+                            <ListGroup.Item as="li" id="debtSummary" bg = "dark">
+                                <h4>{debtor}</h4>
+                            </ListGroup.Item>
+                            <Table striped bordered hover responsive className = "bg-light">
+                                <thead>
+                                    <tr>
+                                        <th>Date</th>
+                                        <th>Days Debt</th>
+                                        <th>Description</th>
+                                        <th>New Debt</th>
+                                        <th>Paid Debt</th>
+                                    </tr>
+                                </thead>
+                            {Object.keys(DebtorsDB[debtor]).map((date) => (
+                                    <tbody>
+                                        <tr>
+                                            <td className="col-2">{date}</td>
+                                            <td className="col-2">{DebtorsDB[debtor][date].daysDebt}</td>
+                                            <td className="col-4">{DebtorsDB[debtor][date].description}</td>
+                                            <td className="col-2">{DebtorsDB[debtor][date].newDebt}</td>
+                                            <td className="col-2">{DebtorsDB[debtor][date].paidAmount}</td>
+                                        </tr>
+                                    </tbody>
+                            ))}
+                            </Table>
+                            </ListGroup>
+                        </>
+                    ))}
+                    </>
+                ) 
+                : 
+                (
+                    <>
+                    <h4>Debt for: {getTodaysPlainDate()}</h4>
+                    {Debtors.map((debtor) => ( DebtorsDB[debtor][currentDate] &&
+                    <Row key={debtor} id="updatedDebtRecords">
+                        <Col>Debtor: {debtor.replace(/_/g, " ")}</Col>
+                        <Col>Description: {DebtorsDB[debtor][currentDate].description}</Col>
+                        <Col>New Debt: {DebtorsDB[debtor][currentDate].newDebt}</Col>
+                        <Col>Paid Amount: {DebtorsDB[debtor][currentDate].paidAmount}</Col>
+                        <Col>Todays Debt: {DebtorsDB[debtor][currentDate].daysDebt}</Col>
+                    </Row>
+                    ))}
+                    <form onChange={debtFormChange} onSubmit={debtFormSubmit}>
+                        <Row id="debtRecords">
+                            <DebtEntry></DebtEntry>
+                        </Row>
+                        <button type="submit">Update Debt Records</button>
+                    </form>
+                    </>
+                )
+            }
         </Container>
     )
 }; export default DebtPagePreview;
