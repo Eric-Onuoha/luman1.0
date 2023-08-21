@@ -7,6 +7,12 @@
         display: flex;
         justify-content: space-between;
         color: #FFFFFF;
+        margin: 10px 0;
+        cursor: pointer;
+    }
+
+    #hideDebts{
+        display: none;
     }
 
     #updatedDebtRecords{

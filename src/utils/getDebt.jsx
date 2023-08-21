@@ -32,3 +32,13 @@ export const GetCurrentDaysDebt = (date = currentDate) => {
   
     return totalDebt;
 }
+
+export const CalculateIndividualsDebt = (debtorsRecord) => {
+  let totalDebt = 0;
+
+  for (let date in debtorsRecord){
+    totalDebt += (parseInt(debtorsRecord[date].paidAmount) - parseInt(debtorsRecord[date].newDebt));
+  }
+  
+  return totalDebt;
+}

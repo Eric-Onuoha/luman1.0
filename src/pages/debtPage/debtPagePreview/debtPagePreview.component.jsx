@@ -11,14 +11,15 @@ import { getTodaysDate } from "../../../utils/getMonthAndDay";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import { addDebtRecord } from "../../../reduxStore/reducers/debt.reducer";
+import { CalculateIndividualsDebt } from "../../../utils/getDebt";
 
 const DebtPagePreview = ({DebtorsDB, Debtors}) => {
     const OperationsMenuType = useSelector((state) => state.operationsMenu.operationsMenu);
     const dispatch = useDispatch();
     const [debtForm, setDebtForm] = useState([]);
+    const [showDebts, setShowDebts] = useState("hideDebts");
     const {debtor, description, newDebt, paidAmount} = debtForm;
     const currentDate = getTodaysDate();
-    console.log(DebtorsDB);
 
     const debtFormSubmit = (event) => {
         event.preventDefault();
@@ -43,6 +44,11 @@ const DebtPagePreview = ({DebtorsDB, Debtors}) => {
         setDebtForm({...debtForm, [name]: value});
     }
 
+    const toggleDebtShow = (e) => {
+        console.log(e.target);
+        {showDebts === "hideDebts" ? setShowDebts(" ") : setShowDebts("hideDebts")}
+    }
+
     return(
         <Container id="debtPagePreviewComponent" fluid="true">
             <OperationsMenu menu={["Update Debt", "View Debts"]}></OperationsMenu>
@@ -53,10 +59,11 @@ const DebtPagePreview = ({DebtorsDB, Debtors}) => {
                     {Debtors.map((debtor) => (
                         <>
                             <ListGroup as="ul">
-                            <ListGroup.Item as="li" id="debtSummary" bg = "dark">
+                            <ListGroup.Item as="li" id="debtSummary" bg = "dark" onClick = {toggleDebtShow}>
                                 <h4>{debtor}</h4>
+                                <h4>Total: {CalculateIndividualsDebt(DebtorsDB[debtor])}</h4>
                             </ListGroup.Item>
-                            <Table striped bordered hover responsive className = "bg-light">
+                            <Table id={showDebts} striped bordered hover className = "bg-light">
                                 <thead>
                                     <tr>
                                         <th>Date</th>
@@ -66,17 +73,17 @@ const DebtPagePreview = ({DebtorsDB, Debtors}) => {
                                         <th>Paid Debt</th>
                                     </tr>
                                 </thead>
-                            {Object.keys(DebtorsDB[debtor]).map((date) => (
-                                    <tbody>
-                                        <tr>
-                                            <td className="col-2">{date}</td>
-                                            <td className="col-2">{DebtorsDB[debtor][date].daysDebt}</td>
-                                            <td className="col-4">{DebtorsDB[debtor][date].description}</td>
-                                            <td className="col-2">{DebtorsDB[debtor][date].newDebt}</td>
-                                            <td className="col-2">{DebtorsDB[debtor][date].paidAmount}</td>
-                                        </tr>
-                                    </tbody>
-                            ))}
+                                <tbody>
+                                {Object.keys(DebtorsDB[debtor]).map((date, i) => (
+                                    <tr key={i}>
+                                        <td className="col-2">{date}</td>
+                                        <td className="col-2">{DebtorsDB[debtor][date].daysDebt}</td>
+                                        <td className="col-4">{DebtorsDB[debtor][date].description}</td>
+                                        <td className="col-2">{DebtorsDB[debtor][date].newDebt}</td>
+                                        <td className="col-2">{DebtorsDB[debtor][date].paidAmount}</td>
+                                    </tr>
+                                ))}
+                                </tbody>
                             </Table>
                             </ListGroup>
                         </>
