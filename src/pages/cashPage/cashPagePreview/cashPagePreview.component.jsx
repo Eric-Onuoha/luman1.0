@@ -1,6 +1,6 @@
 import "./cashPagePreview.styles.scss";
 import { Container, Row, Col } from "bootstrap-4-react/lib/components/layout";
-import {Table} from "bootstrap-4-react";
+import Table from "bootstrap-4-react/lib/components/table";
 
 import OperationsMenu from "../../../components/operationsMenu/operationsMenu.component";
 import CashAccount from "../../../components/cashAccount/cashAccount.component";

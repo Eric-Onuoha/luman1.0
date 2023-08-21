@@ -1,5 +1,6 @@
 import "./salesPagePreview.styles.scss";
 import { Container, Row, Col } from "bootstrap-4-react/lib/components/layout";
+import Table from "bootstrap-4-react/lib/components/table";
 
 // import SkewEntry from "../../../components/skewEntry/skewEntry.component";
 import OperationsMenu from "../../../components/operationsMenu/operationsMenu.component";
@@ -11,7 +12,10 @@ import { addSales } from "../../../reduxStore/reducers/sales.reducer";
 import { addSalesRepRecord } from "../../../reduxStore/reducers/salesRep.reducer";
 
 const SalesPagePreview = ({distributors}) => {
+    const regex = /^(\d{4})([a-zA-Z]+)(\d+)$/;
     const OperationsMenuType = useSelector((state) => state.operationsMenu.operationsMenu);
+    const DTCSales = useSelector((state) => state.salesRecord.salesRecord);
+    const SRSales = useSelector((state) => state.salesRepRecord.salesRepRecord);
 
     const dispatch = useDispatch();
     const [status, setStatus] = useState(" ");
@@ -84,9 +88,33 @@ const SalesPagePreview = ({distributors}) => {
             </>
             {OperationsMenuType === "View" ? 
             (
-                <div>
-                    Coming Soon
-                </div>
+                <div id="salesTables"> 
+                    <Table striped bordered hover responsive className = "bg-light"> 
+                        <thead>
+                            <tr className="bg-dark">
+                                <th colSpan={1}>Date</th>
+                                <th colSpan={3}>DTC Sales</th>
+                            </tr>
+                            <tr>
+                                <th> </th>
+                                <th>Family</th>
+                                <th>Mini</th>
+                                <th>Small</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        {Object.keys(DTCSales).map((salesno) => (
+                                    <tr>
+                                        <td>{salesno.replace(regex, "$3_$2_$1")}</td>
+                                        <td>{DTCSales[salesno]["familyDTC"]}</td>
+                                        <td>{DTCSales[salesno]["miniDTC"]}</td>
+                                        <td>{DTCSales[salesno]["smallDTC"]}</td>
+                                    </tr>
+                                ))}
+                        </tbody>
+                    </Table>
+                    </div>
+
             ) 
             : 
             (
