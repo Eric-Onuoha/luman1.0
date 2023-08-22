@@ -113,6 +113,33 @@ const SalesPagePreview = ({distributors}) => {
                                 ))}
                         </tbody>
                     </Table>
+
+                    <Table striped bordered hover responsive className = "bg-light"> 
+                    {Object.keys(SRSales).map((salesdate) => (
+                        <>
+                        <thead>
+                            <tr className="bg-dark">
+                                <th colSpan={1}>Date</th>
+                                <th colSpan={3}></th>
+                            </tr>
+                            <tr>
+                                <th> </th>
+                                <th>Family</th>
+                                <th>Mini</th>
+                                <th>Small</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                                <tr>
+                                    <td>{salesdate.replace(regex, "$3_$2_$1")}</td>
+                                    <td>{SRSales[salesdate]["familySalesRep"]}</td>
+                                    <td>{SRSales[salesdate]["miniSalesRep"]}</td>
+                                    <td>{SRSales[salesdate]["smallSalesRep"]}</td>
+                                </tr>
+                        </tbody>
+                        </>
+                    ))}
+                    </Table>
                     </div>
 
             ) 

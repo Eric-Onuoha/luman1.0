@@ -1,14 +1,21 @@
 import "./expensePagePreview.styles.scss";
 import { Container, Row, Col } from "bootstrap-4-react/lib/components/layout";
+import Table from "bootstrap-4-react/lib/components/table";
 import { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { getTodaysDate } from "../../../utils/getMonthAndDay";
 
 import OperationsMenu from "../../../components/operationsMenu/operationsMenu.component";
 import ExpenseEntry from "../../../components/expenseEntry/expenseEntry.component";
 import { getDate, getPlainDate } from "../../../utils/getMonthAndDay";
 import { addExpense } from "../../../reduxStore/reducers/expense.reducer";
 
-const ExpensePagePreview = ({Expenses, DaysExpenses}) => {
+const ExpensePagePreview = () => {
+    const regex = /^(\d{4})([a-zA-Z]+)(\d+)$/;
+    const Expenses = useSelector((state) => state.expenses.expenses) || {};
+    const date = getTodaysDate();
+    const DaysExpenses = Expenses[date] && Object.keys(Expenses[date]);
+    const OperationsMenuType = useSelector((state) => state.operationsMenu.operationsMenu);
     const dispatch = useDispatch();
     const todaysDate = new Date();
     const [count, setCount] = useState(1);
@@ -49,22 +56,63 @@ const ExpensePagePreview = ({Expenses, DaysExpenses}) => {
     return(
         <Container id="expensePagePreviewComponent" fluid="true">
             <OperationsMenu menu = {["Update Expense", "View Expenses"]}></OperationsMenu>
-                <h4>Expenses for {getPlainDate(todaysDate)}</h4>
-                {DaysExpenses && DaysExpenses.map((expenseItem) => (
-                <Row id="updatedExpenses" key={expenseItem}>
-                    <Col><h4>Categories: {Expenses && Expenses[expenseItem].category}</h4></Col>
-                    <Col><h4>Item: {Expenses && Expenses[expenseItem].item || Expenses[expenseItem].ingredient}</h4></Col>
-                    <Col><h4>Quantity: {Expenses && Expenses[expenseItem].quantity}</h4></Col>
-                    <Col><h4>Amount: {Expenses && Expenses[expenseItem].amount}</h4></Col>
-                    <Col><h4>Payment Method: {Expenses && Expenses[expenseItem].paymentBy}</h4></Col>
-                </Row>
-                ))}
-                <form onChange={expenseFormChange} onSubmit={expenseFormSubmit}>
-                    <Row id="expenseRecords">
-                        <ExpenseEntry></ExpenseEntry>
+
+            {OperationsMenuType === "View" ?
+                (
+                    <>
+                    <Table striped bordered hover responsive className = "bg-light"> 
+                        <thead>
+                            <tr className="bg-dark">
+                                <th>Date</th>
+                                <th>Categories</th>
+                                <th>Item</th>
+                                <th>Quantity</th>
+                                <th>Amount</th>
+                                <th>Payment Method</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        {Object.keys(Expenses).map((expenseDate, i) => (
+                            <>
+                            {Object.keys(Expenses[expenseDate]).map((num) => (
+                                <tr>
+                                <td>{expenseDate.replace(regex, "$3_$2_$1")}</td>
+                                <td>{Expenses && Expenses[expenseDate][num]["category"]}</td>
+                                <td>{Expenses[expenseDate][num]["item"] || Expenses[expenseDate][num]["ingredient"]}</td>
+                                <td>{Expenses && Expenses[expenseDate][num]["quantity"]}</td>
+                                <td>{Expenses && Expenses[expenseDate][num]["amount"]}</td>
+                                <td>{Expenses && Expenses[expenseDate][num]["paymentBy"]}</td>
+                                </tr>
+                            ))}
+                            </>
+                        ))}
+                        </tbody>
+                    </Table>
+                    </>
+                )
+                :
+                (
+                    <>
+                    <h4>Expenses for {getPlainDate(todaysDate)}</h4>
+                    {DaysExpenses && DaysExpenses.map((expenseItem) => (
+                    <Row id="updatedExpenses" key={expenseItem}>
+                        <Col><h4>Categories: {Expenses && Expenses[expenseItem].category}</h4></Col>
+                        <Col><h4>Item: {Expenses && Expenses[expenseItem].item || Expenses[expenseItem].ingredient}</h4></Col>
+                        <Col><h4>Quantity: {Expenses && Expenses[expenseItem].quantity}</h4></Col>
+                        <Col><h4>Amount: {Expenses && Expenses[expenseItem].amount}</h4></Col>
+                        <Col><h4>Payment Method: {Expenses && Expenses[expenseItem].paymentBy}</h4></Col>
                     </Row>
-                    <button type="submit">Update Expense for today</button>
-                </form>
+                    ))}
+                    <form onChange={expenseFormChange} onSubmit={expenseFormSubmit}>
+                        <Row id="expenseRecords">
+                            <ExpenseEntry></ExpenseEntry>
+                        </Row>
+                        <button type="submit">Update Expense for today</button>
+                    </form>
+                    </>
+
+                )
+            }
         </Container>
     )
 }; export default ExpensePagePreview;
