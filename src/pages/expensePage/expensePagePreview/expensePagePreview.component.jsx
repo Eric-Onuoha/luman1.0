@@ -10,11 +10,8 @@ import ExpenseEntry from "../../../components/expenseEntry/expenseEntry.componen
 import { getDate, getPlainDate } from "../../../utils/getMonthAndDay";
 import { addExpense } from "../../../reduxStore/reducers/expense.reducer";
 
-const ExpensePagePreview = () => {
+const ExpensePagePreview = ({TotalExpenses, Expenses, DaysExpenses}) => {
     const regex = /^(\d{4})([a-zA-Z]+)(\d+)$/;
-    const Expenses = useSelector((state) => state.expenses.expenses) || {};
-    const date = getTodaysDate();
-    const DaysExpenses = Expenses[date] && Object.keys(Expenses[date]);
     const OperationsMenuType = useSelector((state) => state.operationsMenu.operationsMenu);
     const dispatch = useDispatch();
     const todaysDate = new Date();
@@ -72,16 +69,16 @@ const ExpensePagePreview = () => {
                             </tr>
                         </thead>
                         <tbody>
-                        {Object.keys(Expenses).map((expenseDate, i) => (
+                        {Object.keys(TotalExpenses).map((expenseDate, i) => (
                             <>
-                            {Object.keys(Expenses[expenseDate]).map((num) => (
+                            {Object.keys(TotalExpenses[expenseDate]).map((num) => (
                                 <tr>
                                 <td>{expenseDate.replace(regex, "$3_$2_$1")}</td>
-                                <td>{Expenses && Expenses[expenseDate][num]["category"]}</td>
-                                <td>{Expenses[expenseDate][num]["item"] || Expenses[expenseDate][num]["ingredient"]}</td>
-                                <td>{Expenses && Expenses[expenseDate][num]["quantity"]}</td>
-                                <td>{Expenses && Expenses[expenseDate][num]["amount"]}</td>
-                                <td>{Expenses && Expenses[expenseDate][num]["paymentBy"]}</td>
+                                <td>{TotalExpenses && TotalExpenses[expenseDate][num]["category"]}</td>
+                                <td>{TotalExpenses[expenseDate][num]["item"] || TotalExpenses[expenseDate][num]["ingredient"]}</td>
+                                <td>{TotalExpenses && TotalExpenses[expenseDate][num]["quantity"]}</td>
+                                <td>{TotalExpenses && TotalExpenses[expenseDate][num]["amount"]}</td>
+                                <td>{TotalExpenses && TotalExpenses[expenseDate][num]["paymentBy"]}</td>
                                 </tr>
                             ))}
                             </>

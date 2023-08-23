@@ -117,7 +117,7 @@ const SalesPagePreview = ({distributors}) => {
                     <Table striped bordered hover responsive className = "bg-light"> 
                     {Object.keys(SRSales).map((salesdate) => (
                         <>
-                        <thead>
+                        {/* <thead>
                             <tr className="bg-dark">
                                 <th colSpan={1}>Date</th>
                                 <th colSpan={3}></th>
@@ -136,7 +136,7 @@ const SalesPagePreview = ({distributors}) => {
                                     <td>{SRSales[salesdate]["miniSalesRep"]}</td>
                                     <td>{SRSales[salesdate]["smallSalesRep"]}</td>
                                 </tr>
-                        </tbody>
+                        </tbody> */}
                         </>
                     ))}
                     </Table>
