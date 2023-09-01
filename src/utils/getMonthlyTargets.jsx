@@ -1,7 +1,5 @@
 import { useSelector } from "react-redux";
 import { getCurrentMonth, getMonthRange } from "./getMonthAndDay";
-import { orderDates } from "./orderDates";
-import { GetDistributors } from "./getDistributors";
 
 const regex = /^(\d{4})(\w+)(\d{1,2})$/;
 
@@ -22,8 +20,8 @@ export const GetMonthlyDTCSales = () => {
     for (const key in DTCSales) {
       if (key.includes(month)) {
         activeDays += 1;
-        salesdtc.family += parseInt(DTCSales[key].familyDTC);
-        salesdtc.mini += parseInt(DTCSales[key].miniDTC);
+        salesdtc.family += (DTCSales[key].familyDTC && parseInt(DTCSales[key].familyDTC)) || 0;
+        salesdtc.mini += (DTCSales[key].miniDTC && parseInt(DTCSales[key].miniDTC)) || 0;
         salesdtc.small += (DTCSales[key].smallDTC && parseInt(DTCSales[key].smallDTC)) || 0;
       }
     }
@@ -34,30 +32,21 @@ return {salesdtc, activeDays};
 
 export const GetMonthlySRSales = () => {
     const SRSales = GetAllSRSales();
-    const dateRange = getMonthRange();
-    const salesReps = GetDistributors();
+    const month = getCurrentMonth();
+    // const salesReps = GetDistributors();
 
     //When you have records, try a solution that just checks if the date include the currentmonth and 
     //then adds. Similar to the DTC one
         
-    const salesDates = Object.keys(SRSales);
-    salesDates.push(dateRange.firstDay, dateRange.lastDay);
-    const sortedDates = salesDates.sort(orderDates);
-
-    const firstDay = sortedDates.indexOf(dateRange.firstDay) + 1;
-    const lastDay = sortedDates.indexOf(dateRange.lastDay);
-
     const totals = {};
 
 
     for (const dateKey in SRSales) {
         if (SRSales.hasOwnProperty(dateKey)) {
-            let currentIndex = sortedDates.indexOf(dateKey);
-          if (currentIndex >= firstDay && currentIndex < lastDay) {
-            const dateEntry = SRSales[dateKey];
-            for (const salespersonName in dateEntry) {
-              if (dateEntry.hasOwnProperty(salespersonName)) {
-                const salespersonData = dateEntry[salespersonName];
+          if (dateKey.includes(month)) {
+            for (const salespersonName in SRSales[dateKey]) {
+              // if (SRSales[dateKey].hasOwnProperty(salespersonName)) {
+                const salespersonData = SRSales[dateKey][salespersonName];
                 for (const salesType in salespersonData) {
                   if (salespersonData.hasOwnProperty(salesType)) {
                     const salesValue = parseInt(salespersonData[salesType]);
@@ -72,12 +61,11 @@ export const GetMonthlySRSales = () => {
                     totals[salespersonName][formattedSalesType] += salesValue;
                   }
                 }
-              }
+              // }
             }
           }
         }
       }
-    
 return totals;
 
 }

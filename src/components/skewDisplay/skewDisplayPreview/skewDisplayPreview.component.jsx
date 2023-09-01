@@ -8,9 +8,9 @@ const SkewDisplayPreview = ({heading, indicator, skewData}) => {
             <p className={indicator}></p>
             <p className="displayHeader">{heading}</p>
             <div id="breadSkews">
-                <h4>Family - {skewData.family}</h4>
-                <h4>Mini - {skewData.mini}</h4>
-                <h4>Small - {skewData.small}</h4>
+                <h4>Family - {skewData.family || skewData.familySalesRep}</h4>
+                <h4>Mini - {skewData.mini || skewData.miniSalesRep}</h4>
+                <h4>Small - {skewData.small || skewData.smallSalesRep}</h4>
              </div>
         </Col>
     )

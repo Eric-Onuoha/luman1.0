@@ -8,11 +8,11 @@ import OperationsMenu from "../../operationsMenu/operationsMenu.component";
 
 const TargetsPreview = () => {
     const monthDTC = GetMonthlyDTCSales();
-    const monthDTCTarget = {"family": 360, "mini":90, "small": 0};
+    const monthDTCTarget = {"family": 750, "mini":0, "small": 0};
     const monthSR = GetMonthlySRSales();
-    const monthSRTarget = {"family": 1320, "mini":600, "small": 0};
+    const monthSRTarget = {"family": 7200, "mini":0, "small": 0};
     const bagsPerDay = GetMonthlyBagPerDay();
-    const targetBagsPerDay = 1;
+    const targetBagsPerDay = 2.6;
 
     return(
         <Container id="targetsPreviewComponent" fluid="true">
@@ -27,7 +27,7 @@ const TargetsPreview = () => {
             <h4>Sales Rep Monthly Targets</h4>
             <Row id="weeklyTargets">
                 {    Object.keys(monthSR).map((salesRep) => (
-                        <SkewDisplay key={salesRep} heading={salesRep.replace("_", " ")} skewData={monthSR[salesRep]}></SkewDisplay>
+                        <SkewDisplay indicator={monthSR[salesRep]["family"] - (monthSRTarget.family/2)} key={salesRep} heading={salesRep.replace("_", " ")} skewData={monthSR[salesRep]}></SkewDisplay>
                     ))
                 }
                 <SkewDisplay indicator={"noIndicator"} heading={"Sales Reps Target this Month"} skewData={monthSRTarget}></SkewDisplay>
@@ -36,8 +36,8 @@ const TargetsPreview = () => {
             
             <h4>DTC Monthly Targets</h4>
             <Row id="weeklyTargets">
-                <SkewDisplay heading={"DTC Sales this month"} skewData = {monthDTC.salesdtc}></SkewDisplay>
-                <SkewDisplay heading={"DTC Target this month"} skewData = {monthDTCTarget}></SkewDisplay>
+                <SkewDisplay indicator={monthDTC.salesdtc.family - monthDTCTarget.family} heading={"DTC Sales this month"} skewData = {monthDTC.salesdtc}></SkewDisplay>
+                <SkewDisplay indicator={"noIndicator"} heading={"DTC Target this month"} skewData = {monthDTCTarget}></SkewDisplay>
             </Row>
         </Container>
     )

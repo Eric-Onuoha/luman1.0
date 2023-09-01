@@ -22,8 +22,8 @@ const StockPagePreview = ({StockData, bread, LatestStockRecord, LatestDTCSales, 
             (
                 <>
                     <Table striped bordered hover responsive className = "bg-light"> 
-                        <thead>
-                            <tr className="bg-dark">
+                        <thead responsive>
+                            <tr id="tableHeader" className="bg-dark">
                                 <th>Date</th>
                                 <th>Type</th>
                                 <th>Openning Stock</th>
@@ -38,7 +38,7 @@ const StockPagePreview = ({StockData, bread, LatestStockRecord, LatestDTCSales, 
                             {Object.keys(StockData).map((stockDate) => (
                             <>
                                 <tr>
-                                    <td rowSpan = {3} >{stockDate}</td>
+                                    <td rowSpan = {2} >{stockDate}</td>
                                     <td>Family</td>
                                     <td>{StockData[stockDate]["familyBread"]["openningStock"]}</td>
                                     <td>{StockData[stockDate]["familyBread"]["quantityProduced"]}</td>
@@ -56,7 +56,7 @@ const StockPagePreview = ({StockData, bread, LatestStockRecord, LatestDTCSales, 
                                     <td>{StockData[stockDate]["miniBread"]["countedStock"]}</td>
                                     <td>{StockData[stockDate]["miniBread"]["comment"]}</td>
                                 </tr>
-                                <tr>
+                                {/* <tr>
                                     <td>Small</td>
                                     <td>{StockData[stockDate]["smallBread"]["openningStock"]}</td>
                                     <td>{StockData[stockDate]["smallBread"]["quantityProduced"]}</td>
@@ -64,7 +64,7 @@ const StockPagePreview = ({StockData, bread, LatestStockRecord, LatestDTCSales, 
                                     <td>{StockData[stockDate]["smallBread"]["currentStock"]}</td>
                                     <td>{StockData[stockDate]["smallBread"]["countedStock"]}</td>
                                     <td>{StockData[stockDate]["smallBread"]["comment"]}</td>
-                                </tr>
+                                </tr> */}
                             </>
                             ))}
                         </tbody>
