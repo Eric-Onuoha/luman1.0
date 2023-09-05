@@ -24,6 +24,7 @@ const ExpenseEntryPreview = () => {
                         <option value="lightbill">Light Bill</option>
                         <option value="repairs">Repairs & Mantenance</option>
                         <option value="nylonBag">Nylon Bag</option>
+                        <option value="dataBundle">Data Bundle</option>
                         <option value="TopesExpense">Topes Approved Expense</option>
                         <option value="miscellaneous">Miscellaneous</option>
                     </select>
