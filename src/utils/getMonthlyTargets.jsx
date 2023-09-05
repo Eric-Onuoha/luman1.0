@@ -33,6 +33,7 @@ return {salesdtc, activeDays};
 export const GetMonthlySRSales = () => {
     const SRSales = GetAllSRSales();
     const month = getCurrentMonth();
+    // const month = "august";
     // const salesReps = GetDistributors();
 
     //When you have records, try a solution that just checks if the date include the currentmonth and 
