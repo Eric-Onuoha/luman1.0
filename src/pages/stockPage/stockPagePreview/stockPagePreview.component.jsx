@@ -35,7 +35,7 @@ const StockPagePreview = ({StockData, bread, LatestStockRecord, LatestDTCSales, 
                             </tr>
                         </thead>
                         <tbody>
-                            {Object.keys(StockData).map((stockDate) => (
+                            {Object.keys(StockData).reverse().map((stockDate) => (
                             <>
                                 <tr>
                                     <td rowSpan = {2} >{stockDate}</td>

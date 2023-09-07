@@ -3,14 +3,8 @@
     height: 90%;
     overflow-y: scroll;
 
-    thead{
-        position: relative;
-
-        #tableHeader{
-            position: fixed;
-            width: 100vw;
-            color: white;
-        }
+    thead{           
+        color: white;
     }
 
     h4{

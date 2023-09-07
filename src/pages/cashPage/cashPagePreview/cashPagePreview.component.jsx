@@ -34,7 +34,7 @@ const CashPagePreview = () => {
                             </tr>
                         </thead>
                         <tbody>
-                        {Accounts.map((account, i) => (
+                        {Accounts.reverse().map((account, i) => (
                             <tr>
                                 <td>{account.replace(regex, "$3_$2_$1")}</td>
                                 <td>{AllAccounts[account] && AllAccounts[account]["salesAmount"].toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</td>

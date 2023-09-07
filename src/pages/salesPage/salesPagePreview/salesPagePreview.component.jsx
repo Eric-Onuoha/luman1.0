@@ -103,7 +103,7 @@ const SalesPagePreview = ({distributors}) => {
                             </tr>
                         </thead>
                         <tbody>
-                        {Object.keys(DTCSales).map((salesno) => (
+                        {Object.keys(DTCSales).reverse().map((salesno) => (
                                     <tr>
                                         <td>{salesno.replace(regex, "$3_$2_$1")}</td>
                                         <td>{DTCSales[salesno]["familyDTC"]}</td>

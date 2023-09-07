@@ -69,7 +69,7 @@ const ExpensePagePreview = ({TotalExpenses, Expenses, DaysExpenses}) => {
                             </tr>
                         </thead>
                         <tbody>
-                        {Object.keys(TotalExpenses).map((expenseDate, i) => (
+                        {Object.keys(TotalExpenses).reverse().map((expenseDate, i) => (
                             <>
                             {Object.keys(TotalExpenses[expenseDate]).map((num) => (
                                 <tr>
