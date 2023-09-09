@@ -3,6 +3,8 @@ import { getCurrentMonth, getMonthRange } from "./getMonthAndDay";
 
 const regex = /^(\d{4})(\w+)(\d{1,2})$/;
 
+const month = getCurrentMonth();
+
 const GetAllDTCSales = () => {
     return useSelector((state) => state.salesRecord.salesRecord) || {};
 }
@@ -11,10 +13,14 @@ const GetAllSRSales = () => {
     return useSelector((state) => state.salesRepRecord.salesRepRecord) || {};
 }
 
+const GetStockRecords = () => {
+  return useSelector((state) => state.stock.stock);
+}
+
 export const GetMonthlyDTCSales = () => {
     let activeDays = 0;
     const DTCSales = GetAllDTCSales();
-    const month = getCurrentMonth();
+    // const month = getCurrentMonth();
     let salesdtc = {"family": 0, "mini": 0, "small": 0};
     
     for (const key in DTCSales) {
@@ -32,7 +38,7 @@ return {salesdtc, activeDays};
 
 export const GetMonthlySRSales = () => {
     const SRSales = GetAllSRSales();
-    const month = getCurrentMonth();
+    // const month = getCurrentMonth();
     // const month = "august";
     // const salesReps = GetDistributors();
 
@@ -72,9 +78,8 @@ return totals;
 }
 
 export const GetMonthlyBagPerDay = () => {
-    const DTCObject = GetMonthlyDTCSales();
-    const SRObject = GetMonthlySRSales();
-
+    const StockRecords = GetStockRecords();
+    let activeDays = 0;
 
     let totalFamily = 0;
     let totalMini = 0;
@@ -84,22 +89,19 @@ export const GetMonthlyBagPerDay = () => {
     let minibpd = 0;
     let bagsperday = 0;
 
-    // Add values from the first object
-    totalFamily += DTCObject.salesdtc.family;
-    totalMini += DTCObject.salesdtc.mini;
-    totalSmall += DTCObject.salesdtc.small;
 
-    // Add values from the second object
-    for (const key in SRObject) {
-    const values = SRObject[key];
-    totalFamily += values.family;
-    totalMini += values.mini;
-    totalSmall += values.small;
+    for (const date in StockRecords){
+      if(date.includes(month)){
+        activeDays ++;
+        totalFamily += parseInt(StockRecords[date]["familyBread"]["totalSales"]) || 0;
+        totalMini += parseInt(StockRecords[date]["miniBread"]["totalSales"]) || 0;
+        totalSmall += parseInt(StockRecords[date]["smallBread"]["totalSales"]) || 0;
+      }
     }
 
-    if (DTCObject.activeDays != 0){
-      familybpd = ((totalFamily/102)/DTCObject.activeDays);
-      minibpd = ((totalMini/160)/DTCObject.activeDays);
+    if (activeDays !== 0){
+      familybpd = ((totalFamily/102)/activeDays);
+      minibpd = ((totalMini/160)/activeDays);
       bagsperday = (familybpd + minibpd);
     }
 
