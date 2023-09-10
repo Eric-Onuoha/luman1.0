@@ -20,7 +20,6 @@ const GetStockRecords = () => {
 export const GetMonthlyDTCSales = () => {
     let activeDays = 0;
     const DTCSales = GetAllDTCSales();
-    // const month = getCurrentMonth();
     let salesdtc = {"family": 0, "mini": 0, "small": 0};
     
     for (const key in DTCSales) {
@@ -105,5 +104,5 @@ export const GetMonthlyBagPerDay = () => {
       bagsperday = (familybpd + minibpd);
     }
 
-    return {bagsperday, familybpd, minibpd};
+    return {bagsperday, familybpd, minibpd, activeDays};
 }

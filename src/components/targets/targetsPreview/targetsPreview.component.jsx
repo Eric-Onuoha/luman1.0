@@ -27,7 +27,7 @@ const TargetsPreview = () => {
             <h4>Sales Rep Monthly Targets</h4>
             <Row id="weeklyTargets">
                 {    Object.keys(monthSR).map((salesRep) => (
-                        <SkewDisplay indicator={monthSR[salesRep]["family"] - (monthSRTarget.family/2)} key={salesRep} heading={salesRep.replace("_", " ")} skewData={monthSR[salesRep]}></SkewDisplay>
+                        <SkewDisplay indicator={(monthSR[salesRep]["family"]/bagsPerDay.activeDays) - ((monthSRTarget.family/2)/28)} key={salesRep} heading={salesRep.replace("_", " ")} skewData={monthSR[salesRep]}></SkewDisplay>
                     ))
                 }
                 <SkewDisplay indicator={"noIndicator"} heading={"Sales Reps Target this Month"} skewData={monthSRTarget}></SkewDisplay>
