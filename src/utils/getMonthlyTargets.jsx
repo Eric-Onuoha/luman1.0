@@ -5,15 +5,15 @@ const regex = /^(\d{4})(\w+)(\d{1,2})$/;
 
 const month = getCurrentMonth();
 
-const GetAllDTCSales = () => {
+export const GetAllDTCSales = () => {
     return useSelector((state) => state.salesRecord.salesRecord) || {};
 }
 
-const GetAllSRSales = () => {
+export const GetAllSRSales = () => {
     return useSelector((state) => state.salesRepRecord.salesRepRecord) || {};
 }
 
-const GetStockRecords = () => {
+export const GetStockRecords = () => {
   return useSelector((state) => state.stock.stock);
 }
 

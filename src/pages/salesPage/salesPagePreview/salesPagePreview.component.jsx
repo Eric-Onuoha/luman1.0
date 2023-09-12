@@ -28,7 +28,6 @@ const SalesPagePreview = ({distributors}) => {
     const handleDTCChange = (e) => {
         const {name, value} = e.target;
         setDTCFormResponse({...DTCFormResponse, [name]: value});
-        console.log(DTCFormResponse);
     }
 
     const handleSRChange = (e) => {

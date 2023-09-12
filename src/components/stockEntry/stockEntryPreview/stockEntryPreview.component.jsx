@@ -4,20 +4,25 @@ import { Row, Col } from "bootstrap-4-react/lib/components/layout";
 import { getDate } from "../../../utils/getMonthAndDay";
 import { useDispatch } from "react-redux";
 
-import { addStock } from "../../../reduxStore/reducers/stock.reducer";
+import { orderedDates } from "../../../utils/orderDates";
 
-const StockEntryPreview = ({Product, LatestStock, openStock, totSales, currStock}) => {
+import { addStock } from "../../../reduxStore/reducers/stock.reducer";
+import { getCurrentStock } from "../../../utils/getStock";
+
+const StockEntryPreview = ({Product, totSales}) => {
     const dispatch = useDispatch();
     const todaysDate = new Date();
     const [amountProduced, setAmountProduced] = useState(0);
     const [stockForm, setStockForm] = useState([]);
     const {openningStock, totalSales, currentStock, quantityProduced, countedStock, comment} = stockForm;
 
+    const LatestStock = getCurrentStock();
+    const openStock = (LatestStock[Product] && LatestStock[Product]["currentStock"]) || 0;
+    const currStock = (openStock - totSales);
+
     const handleStockChange = (e) => {
         const {name, value} = e.target;
         setStockForm({...stockForm, [name]: value});
-
-
     }
 
     const handleStockSubmit = (e) => {

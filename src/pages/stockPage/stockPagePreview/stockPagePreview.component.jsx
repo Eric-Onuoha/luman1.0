@@ -4,16 +4,21 @@ import Table from "bootstrap-4-react/lib/components/table";
 import { useSelector } from "react-redux";
 import OperationsMenu from "../../../components/operationsMenu/operationsMenu.component";
 import StockEntry from "../../../components/stockEntry/stockEntry.component";
+import { getCurrentSales } from "../../../utils/getStock";
 import { useState } from "react";
 
-const StockPagePreview = ({StockData, bread, LatestStockRecord, LatestDTCSales, totalSmallSales, totalMiniSales, totalFamilySales}) => {
+const StockPagePreview = ({bread}) => {
     const OperationsMenuType = useSelector((state) => state.operationsMenu.operationsMenu);
-    console.log(OperationsMenuType);
+    const StockData = useSelector((state) => state.stock.stock) || {};
     const [product, setProduct] = useState(" ");
 
     const changeProduct = (e) => {
         setProduct(e.target.value)
     }
+
+    const currentSales = getCurrentSales();
+
+    // const totalSales
 
     return(
         <Container id="stockPagePreviewComponent" fluid="true">
@@ -84,11 +89,11 @@ const StockPagePreview = ({StockData, bread, LatestStockRecord, LatestDTCSales, 
                         {product === " " ? (
                             <StockEntry stockInfo = {{}}></StockEntry>
                         ) : (product === "familyBread" ? (
-                            <StockEntry Product = {product} LatestStock = {LatestStockRecord} stockInfo = {LatestStockRecord && LatestStockRecord.familyBread} LatestDTCSales = {LatestDTCSales && LatestDTCSales.familyDTC} totalSRSales = {totalFamilySales}></StockEntry>
+                            <StockEntry Product = {product} totSales = {currentSales.totalFamily}></StockEntry>
                         ) : (product === "miniBread") ? (
-                            <StockEntry Product = {product} LatestStock = {LatestStockRecord} stockInfo = {LatestStockRecord && LatestStockRecord.miniBread} LatestDTCSales = {LatestDTCSales && LatestDTCSales.miniDTC} totalSRSales = {totalMiniSales}></StockEntry>
+                            <StockEntry Product = {product} totSales = {currentSales.totalMini}></StockEntry>
                         ) : (product === "smallBread") ? (
-                            <StockEntry Product = {product} LatestStock = {LatestStockRecord} stockInfo = {LatestStockRecord && LatestStockRecord.smallBread} LatestDTCSales = {LatestDTCSales && LatestDTCSales.smallDTC} totalSRSales = {totalSmallSales}></StockEntry>
+                            <StockEntry Product = {product} totSales = {currentSales.totalSmall}></StockEntry>
                         ) : (
                             <p></p>
                         ))}
