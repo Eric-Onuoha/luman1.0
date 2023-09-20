@@ -9,6 +9,7 @@ import OperationsMenu from "../../../components/operationsMenu/operationsMenu.co
 import ExpenseEntry from "../../../components/expenseEntry/expenseEntry.component";
 import { getDate, getPlainDate } from "../../../utils/getMonthAndDay";
 import { addExpense } from "../../../reduxStore/reducers/expense.reducer";
+import { getOrderedDates } from "../../../utils/orderDates";
 
 const ExpensePagePreview = ({TotalExpenses, Expenses, DaysExpenses}) => {
     const regex = /^(\d{4})([a-zA-Z]+)(\d+)$/;
@@ -18,6 +19,8 @@ const ExpensePagePreview = ({TotalExpenses, Expenses, DaysExpenses}) => {
     const [count, setCount] = useState(1);
     const [expenseForm, setExpenseForm] = useState([]);
     const {category, ingredient, item, quantity, amount, paymentBy} = expenseForm;
+
+    const orderedExpenses = getOrderedDates(Object.keys(TotalExpenses)) || [];
 
     const expenseFormChange = (event) => {
         const {name, value} = event.target;
@@ -69,7 +72,7 @@ const ExpensePagePreview = ({TotalExpenses, Expenses, DaysExpenses}) => {
                             </tr>
                         </thead>
                         <tbody>
-                        {Object.keys(TotalExpenses).reverse().map((expenseDate, i) => (
+                        {orderedExpenses.map((expenseDate, i) => (
                             <>
                             {Object.keys(TotalExpenses[expenseDate]).map((num) => (
                                 <tr>

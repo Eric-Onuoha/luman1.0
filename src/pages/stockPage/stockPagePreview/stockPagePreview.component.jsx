@@ -6,11 +6,14 @@ import OperationsMenu from "../../../components/operationsMenu/operationsMenu.co
 import StockEntry from "../../../components/stockEntry/stockEntry.component";
 import { getCurrentSales } from "../../../utils/getStock";
 import { useState } from "react";
+import { getOrderedDates } from "../../../utils/orderDates";
 
 const StockPagePreview = ({bread}) => {
     const OperationsMenuType = useSelector((state) => state.operationsMenu.operationsMenu);
     const StockData = useSelector((state) => state.stock.stock) || {};
     const [product, setProduct] = useState(" ");
+
+    const orderedStocks = getOrderedDates(Object.keys(StockData)) || [];
 
     const changeProduct = (e) => {
         setProduct(e.target.value)
@@ -40,7 +43,7 @@ const StockPagePreview = ({bread}) => {
                             </tr>
                         </thead>
                         <tbody>
-                            {Object.keys(StockData).reverse().map((stockDate) => (
+                            {orderedStocks.map((stockDate) => (
                             <>
                                 <tr>
                                     <td rowSpan = {2} >{stockDate}</td>

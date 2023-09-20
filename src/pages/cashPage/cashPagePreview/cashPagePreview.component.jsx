@@ -6,12 +6,13 @@ import OperationsMenu from "../../../components/operationsMenu/operationsMenu.co
 import CashAccount from "../../../components/cashAccount/cashAccount.component";
 import { getTodaysPlainDate } from "../../../utils/getMonthAndDay";
 import { useSelector } from "react-redux";
+import { getOrderedDates } from "../../../utils/orderDates";
 
 const CashPagePreview = () => {
     const regex = /^(\d{4})([a-zA-Z]+)(\d+)$/;
     const OperationsMenuType = useSelector((state) => state.operationsMenu.operationsMenu);
     const AllAccounts = useSelector((state) => state.account.account) || {};
-    const Accounts = Object.keys(AllAccounts);
+    const sortedAccounts = getOrderedDates(Object.keys(AllAccounts));
 
     return(
         <Container id="cashPagePreviewComponent" fluid="true">
@@ -34,7 +35,7 @@ const CashPagePreview = () => {
                             </tr>
                         </thead>
                         <tbody>
-                        {Accounts.reverse().map((account, i) => (
+                        {sortedAccounts.map((account, i) => (
                             <tr>
                                 <td>{account.replace(regex, "$3_$2_$1")}</td>
                                 <td>{AllAccounts[account] && AllAccounts[account]["salesAmount"].toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</td>

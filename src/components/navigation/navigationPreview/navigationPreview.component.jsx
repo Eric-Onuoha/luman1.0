@@ -15,7 +15,7 @@ const NavigationPreview = ({navItems}) => {
     const toggleMenu = () => {
         (showNav === "navItemsMobile" ? setShowNav(" ") : setShowNav("navItemsMobile"));
         (navFocus === " " ? setNavFocus("navModal") : setNavFocus(" "));
-      }
+    }
 
     const handleNavigation = (e) => {
         toggleMenu();

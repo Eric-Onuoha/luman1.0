@@ -12,6 +12,7 @@ import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import { addDebtRecord } from "../../../reduxStore/reducers/debt.reducer";
 import { CalculateIndividualsDebt } from "../../../utils/getDebt";
+import { getOrderedDates } from "../../../utils/orderDates";
 
 const DebtPagePreview = ({DebtorsDB, Debtors}) => {
     const OperationsMenuType = useSelector((state) => state.operationsMenu.operationsMenu);
@@ -45,8 +46,7 @@ const DebtPagePreview = ({DebtorsDB, Debtors}) => {
     }
 
     const toggleDebtShow = (e) => {
-        console.log(e.target);
-        {showDebts === "hideDebts" ? setShowDebts(" ") : setShowDebts("hideDebts")}
+        {e.currentTarget.children[1].className === "table-striped table-bordered table-hover table  hideDebts" ? e.currentTarget.children[1].className = "table-striped table-bordered table-hover table" : e.currentTarget.children[1].className = "table-striped table-bordered table-hover table  hideDebts"}
     }
 
     return(
@@ -58,12 +58,12 @@ const DebtPagePreview = ({DebtorsDB, Debtors}) => {
                     <>
                     {Debtors.map((debtor) => (
                         <>
-                            <ListGroup as="ul">
-                            <ListGroup.Item as="li" id="debtSummary" bg = "dark" onClick = {toggleDebtShow}>
+                            <ListGroup as="ul" onClick = {toggleDebtShow}>
+                            <ListGroup.Item as="li" id="debtSummary" bg = "dark">
                                 <h4>{debtor}</h4>
                                 <h4>Total: {CalculateIndividualsDebt(DebtorsDB[debtor])}</h4>
                             </ListGroup.Item>
-                            <Table id={showDebts} striped bordered hover className = "bg-light">
+                            <Table striped bordered hover className = {showDebts}>
                                 <thead>
                                     <tr>
                                         <th>Date</th>
@@ -74,7 +74,7 @@ const DebtPagePreview = ({DebtorsDB, Debtors}) => {
                                     </tr>
                                 </thead>
                                 <tbody>
-                                {Object.keys(DebtorsDB[debtor]).map((date, i) => (
+                                {getOrderedDates(Object.keys(DebtorsDB[debtor])).map((date, i) => (
                                     <tr key={i}>
                                         <td className="col-2">{date}</td>
                                         <td className="col-2">{DebtorsDB[debtor][date].daysDebt}</td>

@@ -10,12 +10,15 @@ import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import { addSales } from "../../../reduxStore/reducers/sales.reducer";
 import { addSalesRepRecord } from "../../../reduxStore/reducers/salesRep.reducer";
+import { getOrderedDates } from "../../../utils/orderDates";
 
 const SalesPagePreview = ({distributors}) => {
     const regex = /^(\d{4})([a-zA-Z]+)(\d+)$/;
     const OperationsMenuType = useSelector((state) => state.operationsMenu.operationsMenu);
-    const DTCSales = useSelector((state) => state.salesRecord.salesRecord);
+    const DTCSales = useSelector((state) => state.salesRecord.salesRecord) || {};
     const SRSales = useSelector((state) => state.salesRepRecord.salesRepRecord);
+
+    const orderedSales = getOrderedDates(Object.keys(DTCSales)) || [];
 
     const dispatch = useDispatch();
     const [status, setStatus] = useState(" ");
@@ -102,7 +105,7 @@ const SalesPagePreview = ({distributors}) => {
                             </tr>
                         </thead>
                         <tbody>
-                        {Object.keys(DTCSales).reverse().map((salesno) => (
+                        {orderedSales.map((salesno) => (
                                     <tr>
                                         <td>{salesno.replace(regex, "$3_$2_$1")}</td>
                                         <td>{DTCSales[salesno]["familyDTC"]}</td>
