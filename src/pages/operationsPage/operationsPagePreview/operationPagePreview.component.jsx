@@ -5,6 +5,7 @@ import TargetIcon from "../../../assets/images/targetIcon.png";
 import RecordsIcon from "../../../assets/images/recordsIcons.png";
 import ProductIcon from "../../../assets/images/productIcon.png";
 import SignOutIcon from "../../../assets/images/signout.png";
+import DashboardIcon from "../../../assets/images/dashboardIcon.png"
 
 import { useDispatch } from "react-redux";
 import { updateCurrentUser } from "../../../reduxStore/reducers/user.reducer";
@@ -65,6 +66,9 @@ const OperationsPagePreview = () => {
                         </div>
                         <div className="menuItem" onClick={changeCurrentTab}>
                             <p id="mainMenuItem"><img src={ProductIcon}/>Product Records</p>
+                        </div>
+                        <div className="menuItem" onClick={changeCurrentTab}>
+                            <p id="mainMenuItem"><img src={DashboardIcon}/>Management Dashboard</p>
                         </div>
                     </div>
                     <div className="menuItem" onClick={signOut}>

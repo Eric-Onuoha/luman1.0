@@ -42,3 +42,14 @@ export const CalculateIndividualsDebt = (debtorsRecord) => {
   
   return totalDebt;
 }
+
+export const CalculateTotalDebt = () => {
+  const debtors = useSelector((state) => state.debtRecord.debtRecord) || {};
+  let totalDebt = 0;
+  
+  Object.keys(debtors).forEach(debtor => {
+    totalDebt += CalculateIndividualsDebt(debtors[debtor])
+  });
+
+  return totalDebt;
+}

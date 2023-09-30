@@ -22,6 +22,17 @@ const ExpensePagePreview = ({TotalExpenses, Expenses, DaysExpenses}) => {
 
     const orderedExpenses = getOrderedDates(Object.keys(TotalExpenses)) || [];
 
+    // let topesExpense = 0
+    // for(const date in TotalExpenses) {
+    //     for(const index in TotalExpenses[date]){
+    //         if (TotalExpenses[date][index]["category"] == "TopesExpense"){
+    //             console.log(TotalExpenses[date][index]);
+    //             topesExpense += parseInt(TotalExpenses[date][index]["amount"]);
+    //             console.log(topesExpense);
+    //         }
+    //     }
+    // }
+
     const expenseFormChange = (event) => {
         const {name, value} = event.target;
         setExpenseForm({...expenseForm, [name]: value});

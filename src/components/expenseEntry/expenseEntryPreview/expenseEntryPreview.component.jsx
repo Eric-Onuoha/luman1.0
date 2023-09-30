@@ -22,7 +22,6 @@ const ExpenseEntryPreview = () => {
                         <option value="gas">Gas</option>
                         <option value="waterbill">Water Bill</option>
                         <option value="lightbill">Light Bill</option>
-                        <option value="repairs">Repairs & Mantenance</option>
                         <option value="nylonBag">Nylon Bag</option>
                         <option value="dataBundle">Data Bundle</option>
                         <option value="TopesExpense">Topes Approved Expense</option>

@@ -4,6 +4,7 @@ import { getCurrentMonth, getMonthRange } from "./getMonthAndDay";
 const regex = /^(\d{4})(\w+)(\d{1,2})$/;
 
 const month = getCurrentMonth();
+// const month = "august";
 
 export const GetAllDTCSales = () => {
     return useSelector((state) => state.salesRecord.salesRecord) || {};
