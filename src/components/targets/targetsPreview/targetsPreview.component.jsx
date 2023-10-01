@@ -15,13 +15,13 @@ const TargetsPreview = () => {
 
     const monthSR = GetMonthlySRSales();
     const monthSRTarget = {"family": 7200, "mini":0, "small": 0};
-    const averageSRSalesTarget = ((monthSRTarget.family/2)/28)
+    const averageSRSalesTarget = ((monthSRTarget.family/2)/28);
 
     const bagsPerDay = GetMonthlyBagPerDay();
     const targetBagsPerDay = 2.60;
 
     const totalDebt = CalculateTotalDebt();
-    const hightestDebtTarget = 60000;
+    const hightestDebtTarget = 80000;
 
     const categoryExpenses = GetExpenseByCategory();
 
