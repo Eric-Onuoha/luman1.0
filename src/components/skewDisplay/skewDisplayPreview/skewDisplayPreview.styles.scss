@@ -11,19 +11,25 @@
 
     #skews{
 
+        tr{
+            position: relative;
+
+            #indicatorBad{
+                border-left: 4px solid red;
+            }
+        
+            #indicatorGood{
+                border-left: 4px solid green;
+            }
+        }
+
+        .bg-dark{
+            color: #FFFFFF;
+        }
+
         .category{
             text-transform: capitalize;
         }
-    }
-
-    .indicatorBad{
-        height: 3px;
-        background-color: red;
-    }
-
-    .indicatorGood{
-        height: 3px;
-        background-color: green;
     }
 
     .noIndicator{
