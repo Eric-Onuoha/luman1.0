@@ -2,8 +2,8 @@ import { useSelector } from "react-redux";
 import { getTodaysDate, getCurrentMonth } from "./getMonthAndDay";
 
 const currentDate = getTodaysDate();
-// const currentmonth = getCurrentMonth();
-const currentmonth = "september";
+const currentmonth = getCurrentMonth();
+// const currentmonth = "september";
 
 export const GetCurrentDaysExpense = (date = currentDate) => {
     const ExpenseList = useSelector((state) => state.expenses.expenses) || {};
