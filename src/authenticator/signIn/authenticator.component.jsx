@@ -1,6 +1,7 @@
 import React from "react";
 import { useState } from "react";
 import { signIn } from "./signIn.firebase.utils";
+import { getMultipleDocuments } from "../../firestore/getFromFirestore.utils";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { updateCurrentUser } from "../../reduxStore/reducers/user.reducer";
@@ -30,7 +31,11 @@ const Authenticator = () => {
 
         try{
             const {user} = await signIn(email, password);
-            dispatch(updateCurrentUser(user.email))
+            getMultipleDocuments("Users").then((UsersDB) => {
+                // console.log(UsersDB[user.uid]);
+                dispatch(updateCurrentUser(UsersDB[user.uid]));
+            });
+            // dispatch(updateCurrentUser(user.email));
             navigate(nextPath);
         } catch(error){
             alert(error.message);

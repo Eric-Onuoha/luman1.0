@@ -7,7 +7,7 @@ import ProductIcon from "../../../assets/images/productIcon.png";
 import SignOutIcon from "../../../assets/images/signout.png";
 import DashboardIcon from "../../../assets/images/dashboardIcon.png"
 
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { updateCurrentUser } from "../../../reduxStore/reducers/user.reducer";
 import { SignUserOut } from "../../../authenticator/signIn/signIn.firebase.utils";
 import Targets from "../../../components/targets/targets.component";
@@ -23,6 +23,7 @@ import { updateOperationsMenu } from "../../../reduxStore/reducers/operationsMen
 import { useState } from "react";
 
 const OperationsPagePreview = () => {
+    const currentUser = useSelector((state) => state.currentUser.currentUser) || "";
     const dispatch = useDispatch();
     const [subMenuClass, setSubMenuClass] = useState("subMenuItems");
     const [menuTab, setMenuTab] = useState("Targets");
@@ -99,7 +100,12 @@ const OperationsPagePreview = () => {
 
                     :   menuTab === "Product Records" ? 
                         (<ProductsPage></ProductsPage>) 
-                    : 
+
+                    : menuTab === "Management Dashboard" && currentUser.accessType.includes("manager") ? 
+                        (<ProductsPage></ProductsPage>) 
+                    : menuTab === "Management Dashboard" && !currentUser.accessType.includes("manager") ? 
+                        alert("This area is restricted")
+                    :
                         <p></p>
                     }
                 </Col>
