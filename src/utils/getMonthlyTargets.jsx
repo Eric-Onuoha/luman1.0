@@ -4,7 +4,7 @@ import { getCurrentMonth, getMonthRange } from "./getMonthAndDay";
 const regex = /^(\d{4})(\w+)(\d{1,2})$/;
 
 const month = getCurrentMonth();
-// const month = "august";
+// const month = "september";
 
 export const GetAllDTCSales = () => {
     return useSelector((state) => state.salesRecord.salesRecord) || {};
@@ -77,7 +77,8 @@ return totals;
 
 }
 
-export const GetMonthlyBagPerDay = () => {
+export const GetMonthlyBagPerDay = (currentMonth = month) => {
+  console.log(currentMonth)
     const StockRecords = GetStockRecords();
     let activeDays = 0;
 
@@ -91,7 +92,7 @@ export const GetMonthlyBagPerDay = () => {
 
 
     for (const date in StockRecords){
-      if(date.includes(month)){
+      if(date.includes(currentMonth)){
         activeDays ++;
         totalFamily += parseInt(StockRecords[date]["familyBread"]["totalSales"]) || 0;
         totalMini += parseInt(StockRecords[date]["miniBread"]["totalSales"]) || 0;

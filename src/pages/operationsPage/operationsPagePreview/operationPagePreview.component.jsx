@@ -21,6 +21,7 @@ import StaffPage from "../../staffPage/staffPage.component";
 import { updateOperationsMenu } from "../../../reduxStore/reducers/operationsMenu";
 
 import { useState } from "react";
+import ManagementPage from "../../managementPage/managementPage.component";
 
 const OperationsPagePreview = () => {
     const currentUser = useSelector((state) => state.currentUser.currentUser) || "";
@@ -102,7 +103,8 @@ const OperationsPagePreview = () => {
                         (<ProductsPage></ProductsPage>) 
 
                     : menuTab === "Management Dashboard" && currentUser.accessType.includes("manager") ? 
-                        (<ProductsPage></ProductsPage>) 
+                        (<ManagementPage></ManagementPage>) 
+
                     : menuTab === "Management Dashboard" && !currentUser.accessType.includes("manager") ? 
                         alert("This area is restricted")
                     :

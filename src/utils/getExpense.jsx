@@ -2,12 +2,15 @@ import { useSelector } from "react-redux";
 import { getTodaysDate, getCurrentMonth } from "./getMonthAndDay";
 
 const currentDate = getTodaysDate();
-const currentmonth = getCurrentMonth();
+const month = getCurrentMonth();
 // const currentmonth = "september";
 
+const GetExpenseData = () => {
+    return useSelector((state) => state.expenses.expenses) || {};
+}
+
 export const GetCurrentDaysExpense = (date = currentDate) => {
-    const ExpenseList = useSelector((state) => state.expenses.expenses) || {};
-    console.log(ExpenseList)
+    const ExpenseList = GetExpenseData();
     let totalExpense = 0;
 
     for (const key in ExpenseList[date]) {
@@ -20,13 +23,13 @@ export const GetCurrentDaysExpense = (date = currentDate) => {
     return totalExpense;
 }
 
-export const GetExpenseByCategory = () => {
-    const ExpenseList = useSelector((state) => state.expenses.expenses) || {};
+export const GetExpenseByCategory = (currentMonth = month) => {
+    const ExpenseList = GetExpenseData();
     const categoryExpenses = {};
 
     for (const date in ExpenseList) {
 
-        if(date.includes(currentmonth)){
+        if(date.includes(currentMonth)){
             for (const expenseId in ExpenseList[date]) {
                 const expense = ExpenseList[date][expenseId];
                 const category = expense.category;
@@ -42,4 +45,48 @@ export const GetExpenseByCategory = () => {
     }
 
     return categoryExpenses;
+}
+
+export const getHighestCostOfIngredients = (currentMonth = month) => {
+    const ExpenseList = GetExpenseData();
+    const ingredientCost = {};
+
+    for (const date in ExpenseList){
+        if (date.includes(currentMonth)){
+            for (const eid in ExpenseList[date]){
+                const expense = ExpenseList[date][eid]
+                if (expense.category === "ingredient" && expense.quantity == 1){
+                    const ingredient = expense.ingredient;
+                    const amount = expense.amount
+                    if(!ingredientCost.hasOwnProperty(ingredient) || (ingredientCost[ingredient] < amount )){
+                        ingredientCost[ingredient] = amount;
+                    }
+                }
+            }
+        }
+    }
+
+    return ingredientCost;
+}
+
+export const getTotalExpenseByMonth = (currentMonth = month) => {
+    const ExpenseList = GetExpenseData();
+    let totalExpense = 0;
+
+    for (const date in ExpenseList) {
+
+        if(date.includes(currentMonth)){
+            for (const expenseId in ExpenseList[date]) {
+                const expense = ExpenseList[date][expenseId];
+                const category = expense.category;
+                
+                if(category !== "ingredient"){
+                    totalExpense += parseFloat(expense.amount);
+                }
+
+            }
+        }
+    }
+
+    return totalExpense;
 }

@@ -43,3 +43,4 @@ export const getCurrentAmount = () => {
 
     return (familyAmount + miniAmount + smallAmount);
 }
+

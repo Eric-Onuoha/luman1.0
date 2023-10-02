@@ -1,6 +1,6 @@
 import SingleDisplayPreview from "./singleDisplayPreview/singleDisplayPreview.component"
 
-const SingleDisplay = ({indicator, heading, data}) => {
+const SingleDisplay = ({indicator = "noIndicator", heading, data}) => {
     let message = indicator === "noIndicator"
     ? "noIndicator"
     : indicator > 0
