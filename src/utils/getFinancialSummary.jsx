@@ -20,8 +20,10 @@ export const getRevenueByMonth = (currentMonth = month) => {
     return grossRevenue;
 }
 
-export const getCostPerUnit = (currentMonth = month) => {
+//currentMonth has to be september until I fix the expense records to reflect the cost of 1 item for other months
+export const getCostPerUnit = (currentMonth = "september") => {
     const costOfIngredients = getHighestCostOfIngredients(currentMonth);
+    console.log(costOfIngredients);
     const purchaseWeight = {
         "sugar": "50000",
         "yeast": "10000",

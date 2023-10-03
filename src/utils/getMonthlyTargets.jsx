@@ -78,7 +78,6 @@ return totals;
 }
 
 export const GetMonthlyBagPerDay = (currentMonth = month) => {
-  console.log(currentMonth)
     const StockRecords = GetStockRecords();
     let activeDays = 0;
 
