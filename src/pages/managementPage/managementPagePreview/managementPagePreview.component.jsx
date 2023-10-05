@@ -1,6 +1,5 @@
 import "./managementPagePreview.styles.scss";
 import { Container, Row } from "bootstrap-4-react/lib/components/layout";
-import { Bar } from "react-chartjs-2";
 
 import SingleDisplay from "../../../components/singleDisplay/singleDisplay.component";
 import OperationsMenu from "../../../components/operationsMenu/operationsMenu.component";
@@ -72,10 +71,8 @@ const ManagementPagePreview = () => {
                 <SingleDisplay heading={"Profit Per Unit"} data={"NGN " + averagProfitPerUnit.toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}></SingleDisplay>
                 </Row>
                 <br />
-                <br />
                 <Row>
-                    {/* <Bar options={} data></Bar> */}
-                    {/* <SingleDisplay heading={"Graph"} data={"123"}></SingleDisplay> */}
+                    
                 </Row>
         </Container>
     )

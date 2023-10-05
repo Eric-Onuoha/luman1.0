@@ -37,7 +37,7 @@ const SkewDisplayPreview = ({heading, indicator, skewData}) => {
                                 <td>{i+1}</td>
                                 <td className="category">{skew}</td>
                                 <td>{skewData[skew].toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</td>
-                                {(expenseBudget[skew] > skewData[skew]) ? (
+                                {(expenseBudget[skew] >= skewData[skew]) ? (
                                     <td id={"indicatorGood"}>{expenseBudget[skew]}</td>
                                 ) : (
                                     <td id={"indicatorBad"}>{expenseBudget[skew]}</td>
