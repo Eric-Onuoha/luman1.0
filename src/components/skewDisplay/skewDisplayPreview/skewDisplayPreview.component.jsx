@@ -13,7 +13,7 @@ const SkewDisplayPreview = ({heading, indicator, skewData}) => {
         "nylonBag": 7000,
         "diesel": 125000,
         "gas": 90000,
-        "lightbill": 15000
+        "lightbill": 20000
     }
 
     return(
