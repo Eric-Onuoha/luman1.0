@@ -1,5 +1,6 @@
 import "./skewDisplayPreview.styles.scss";
 import { Col } from "bootstrap-4-react/lib/components/layout";
+import { Fragment } from "react";
 import Table from "bootstrap-4-react/lib/components/table";
 
 const SkewDisplayPreview = ({heading, indicator, skewData}) => {
@@ -10,6 +11,7 @@ const SkewDisplayPreview = ({heading, indicator, skewData}) => {
         "dataBundle": 6000,
         "miscellaneous": 140000,
         "TopesExpense": 120000,
+        "aramansExpense": 108000,
         "nylonBag": 7000,
         "diesel": 125000,
         "gas": 90000,
@@ -21,7 +23,7 @@ const SkewDisplayPreview = ({heading, indicator, skewData}) => {
             <p className={indicator}></p>
             <p className="displayHeader">{heading}</p>
             <div id="skews">
-                    <Table bordered hover responsive className = "bg-light"> 
+                    <Table bordered hover responsive = {true} className = "bg-light"> 
                         <thead>
                             <tr>
                                 <th>No.</th>
@@ -32,7 +34,7 @@ const SkewDisplayPreview = ({heading, indicator, skewData}) => {
                         </thead>
                         <tbody>
                         {expenseCategory.map((skew, i) => (
-                            <>
+                            <Fragment key={i}>
                                 <tr>
                                 <td>{i+1}</td>
                                 <td className="category">{skew}</td>
@@ -43,7 +45,7 @@ const SkewDisplayPreview = ({heading, indicator, skewData}) => {
                                     <td id={"indicatorBad"}>{expenseBudget[skew]}</td>
                                 )}
                                 </tr>
-                            </>
+                            </Fragment>
                         ))}
                         </tbody>
                     </Table>

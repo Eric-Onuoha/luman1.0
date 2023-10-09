@@ -25,6 +25,7 @@ const ExpenseEntryPreview = () => {
                         <option value="nylonBag">Nylon Bag</option>
                         <option value="dataBundle">Data Bundle</option>
                         <option value="TopesExpense">Topes Approved Expense</option>
+                        <option value="aramansExpense">Aramans Approved Expense</option>
                         <option value="miscellaneous">Miscellaneous</option>
                     </select>
                 </h4>

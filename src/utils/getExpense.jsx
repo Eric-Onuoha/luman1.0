@@ -25,6 +25,8 @@ export const GetCurrentDaysExpense = (date = currentDate) => {
 
 export const GetExpenseByCategory = (currentMonth = month) => {
     const ExpenseList = GetExpenseData();
+    console.log(ExpenseList);
+
     const categoryExpenses = {};
 
     for (const date in ExpenseList) {

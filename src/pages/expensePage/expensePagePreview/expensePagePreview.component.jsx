@@ -40,6 +40,7 @@ const ExpensePagePreview = ({TotalExpenses, Expenses, DaysExpenses}) => {
     
     const expenseFormSubmit = (event) => {
         event.preventDefault();
+        const {name, value} = event.target;
         if (expenseForm.length !== 0){
             const number = parseInt(DaysExpenses && DaysExpenses.length) || 0;
             const currentDate = getDate(todaysDate);
@@ -57,6 +58,9 @@ const ExpensePagePreview = ({TotalExpenses, Expenses, DaysExpenses}) => {
                 }
             }
             try{
+                // console.log(expenseForm);
+                // setExpenseForm({});
+                // console.log(expenseForm);
                 dispatch(addExpense({newExpense, currentDate}));
             } catch (err){
                 alert("Something went wrong, please refresh and try again" & err);
