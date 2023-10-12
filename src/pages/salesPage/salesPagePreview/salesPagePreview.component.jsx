@@ -11,6 +11,7 @@ import { useSelector } from "react-redux";
 import { addSales } from "../../../reduxStore/reducers/sales.reducer";
 import { addSalesRepRecord } from "../../../reduxStore/reducers/salesRep.reducer";
 import { getOrderedDates } from "../../../utils/orderDates";
+import { getSalesReps } from "../../../utils/getSalesReps";
 
 const SalesPagePreview = ({distributors}) => {
     const regex = /^(\d{4})([a-zA-Z]+)(\d+)$/;
@@ -19,9 +20,12 @@ const SalesPagePreview = ({distributors}) => {
     const SRSales = useSelector((state) => state.salesRepRecord.salesRepRecord);
 
     const orderedSales = getOrderedDates(Object.keys(DTCSales)) || [];
+    const SalesRepsDates = getOrderedDates(Object.keys(SRSales)) || [];
+    const SalesReps = getSalesReps();
 
     const dispatch = useDispatch();
     const [status, setStatus] = useState(" ");
+    const [currentSalesRep, setCurrentSalesRep] = useState(SalesReps[2]);
     const [DTCFormResponse, setDTCFormResponse] = useState({});
     const [srFormResponse, setSrFormResponse] = useState([]);
     const {familyDTC, miniDTC, smallDTC} = DTCFormResponse;
@@ -83,6 +87,11 @@ const SalesPagePreview = ({distributors}) => {
         }
     }
 
+    const switchSalesRep = (event) => {
+        event.preventDefault();
+        setCurrentSalesRep(event.target.value);
+    }
+
     return(
         <Container id="salesPagePreviewComponent" fluid="true">
             <>
@@ -90,18 +99,19 @@ const SalesPagePreview = ({distributors}) => {
             </>
             {OperationsMenuType === "View" ? 
             (
-                <div id="salesTables"> 
+                <Row id="salesTables"> 
+                    <Col>
                     <Table striped bordered hover responsive className = "bg-light"> 
                         <thead>
                             <tr className="bg-dark">
                                 <th colSpan={1}>Date</th>
-                                <th colSpan={3}>DTC Sales</th>
+                                <th colSpan={2}>DTC Sales</th>
                             </tr>
                             <tr>
                                 <th> </th>
                                 <th>Family</th>
                                 <th>Mini</th>
-                                <th>Small</th>
+                                {/* <th>Small</th> */}
                             </tr>
                         </thead>
                         <tbody>
@@ -110,40 +120,58 @@ const SalesPagePreview = ({distributors}) => {
                                         <td>{salesno.replace(regex, "$3_$2_$1")}</td>
                                         <td>{DTCSales[salesno]["familyDTC"]}</td>
                                         <td>{DTCSales[salesno]["miniDTC"]}</td>
-                                        <td>{DTCSales[salesno]["smallDTC"]}</td>
+                                        {/* <td>{DTCSales[salesno]["smallDTC"]}</td> */}
                                     </tr>
                                 ))}
                         </tbody>
                     </Table>
-
+                    </Col> 
+                    
+                    <Col>
                     <Table striped bordered hover responsive className = "bg-light"> 
-                    {Object.keys(SRSales).map((salesdate) => (
-                        <>
-                        {/* <thead>
-                            <tr className="bg-dark">
-                                <th colSpan={1}>Date</th>
-                                <th colSpan={3}></th>
-                            </tr>
-                            <tr>
-                                <th> </th>
-                                <th>Family</th>
-                                <th>Mini</th>
-                                <th>Small</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                                <tr>
-                                    <td>{salesdate.replace(regex, "$3_$2_$1")}</td>
-                                    <td>{SRSales[salesdate]["familySalesRep"]}</td>
-                                    <td>{SRSales[salesdate]["miniSalesRep"]}</td>
-                                    <td>{SRSales[salesdate]["smallSalesRep"]}</td>
+                            <thead>
+                                <tr className="bg-dark">
+                                    <th colSpan={1}>Date</th>
+                                    <th colSpan={2}>
+                                        <select name="salesRep" id="salesRepSelect" defaultValue={currentSalesRep}>
+                                            {SalesReps.map((salesRep) => (
+                                                <option key={salesRep} onClick={switchSalesRep} value={salesRep}>{salesRep}</option>
+                                            ))}
+                                        </select>
+                                    </th>
                                 </tr>
-                        </tbody> */}
-                        </>
-                    ))}
-                    </Table>
-                    </div>
+                                <tr>
+                                    <th> </th>
+                                    <th>Family</th>
+                                    <th>Mini</th>
+                                    {/* <th>Small</th> */}
+                                </tr>
+                            </thead>
+                            <tbody>
+                            {SalesRepsDates.map((salesdate) => (
+                                    <tr>
+                                        <td>{salesdate.replace(regex, "$3_$2_$1")}</td>
+                                        {SRSales[salesdate][currentSalesRep] === undefined ? (
+                                            <>
+                                            <td>0</td>
+                                            <td>0</td>
+                                            {/* <td>0</td> */}
+                                            </>
+                                        ) : (
+                                            <>
+                                            <td>{SRSales[salesdate][currentSalesRep]["familySalesRep"]}</td>
+                                            <td>{SRSales[salesdate][currentSalesRep]["miniSalesRep"]}</td>
+                                            {/* <td>{SRSales[salesdate][currentSalesRep]["smallSalesRep"]}</td> */}
+                                            </>
 
+                                        )}
+                                    </tr>
+                            ))}
+                            </tbody>
+                    </Table>
+                    </Col>
+                    
+                    </Row>
             ) 
             : 
             (
