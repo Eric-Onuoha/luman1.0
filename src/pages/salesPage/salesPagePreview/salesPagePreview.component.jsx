@@ -133,9 +133,9 @@ const SalesPagePreview = ({distributors}) => {
                                 <tr className="bg-dark">
                                     <th colSpan={1}>Date</th>
                                     <th colSpan={2}>
-                                        <select name="salesRep" id="salesRepSelect" defaultValue={currentSalesRep}>
+                                        <select name="salesRep" id="salesRepSelect" defaultValue={currentSalesRep} onChange={switchSalesRep}>
                                             {SalesReps.map((salesRep) => (
-                                                <option key={salesRep} onClick={switchSalesRep} value={salesRep}>{salesRep}</option>
+                                                <option key={salesRep} value={salesRep}>{salesRep}</option>
                                             ))}
                                         </select>
                                     </th>
