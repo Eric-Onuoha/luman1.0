@@ -3,9 +3,9 @@ import { Container, Row } from "bootstrap-4-react/lib/components/layout";
 
 import SingleDisplay from "../../../components/singleDisplay/singleDisplay.component";
 import OperationsMenu from "../../../components/operationsMenu/operationsMenu.component";
-import { getCostPerUnit, getRevenueByMonth } from "../../../utils/getFinancialSummary";
+import { getCostPerUnit, getQuantitySold, getRevenueByMonth, quantitySold } from "../../../utils/getFinancialSummary";
 import { GetMonthlyBagPerDay } from "../../../utils/getMonthlyTargets";
-import { getTotalExpenseByMonth } from "../../../utils/getExpense";
+import { getTotalExpenseByMonth, getIngredientExpenseByMonth } from "../../../utils/getExpense";
 import { useState } from "react";
 
 const ManagementPagePreview = () => {
@@ -18,15 +18,17 @@ const ManagementPagePreview = () => {
     const grossRevenue = getRevenueByMonth(month);
 
     //currentMonth is left empty to default to september until I fix the expense records to reflect the cost of 1 item for other months
-    const costPerUnit = getCostPerUnit();
+    const costPerUnit = getCostPerUnit(month);
     const bagsPerDay = GetMonthlyBagPerDay(month);
-    const quantitySold = (bagsPerDay.bagsperday * 102 * bagsPerDay.activeDays);
+    // const quantitySold = (bagsPerDay.bagsperday * 102 * bagsPerDay.activeDays);
+    const quantitySold = getQuantitySold(month);
     const grossExpense = (costPerUnit * quantitySold).toFixed(0);
     const averageSalesPrice = (grossRevenue / quantitySold);
     const averagProfitPerUnit = (averageSalesPrice - costPerUnit);
     const grossProfit = (grossRevenue - grossExpense)
     const netExpense = getTotalExpenseByMonth(month);
     const netProfitOrLoss = ((grossRevenue) - (parseInt(grossExpense) + parseInt(netExpense)));
+    const ingredientCost = getIngredientExpenseByMonth(month);
 
     return(
         <Container id="expensePagePreviewComponent" fluid="true">
@@ -54,19 +56,19 @@ const ManagementPagePreview = () => {
                 <br />
                 <Row>
                     <SingleDisplay heading={"Total Sales (Gross Revenue)"} data={"NGN " + grossRevenue.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}></SingleDisplay>
-                    <SingleDisplay heading={"Cost of Production (Gross Expense)"} data={"NGN " + grossExpense.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}></SingleDisplay>
-                    <SingleDisplay heading={"Operational Expense (Net Expense)"} data={"NGN " + netExpense.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}></SingleDisplay>
+                    <SingleDisplay heading={"Est. Cost of Production (Gross Expense)"} data={"NGN " + grossExpense.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}></SingleDisplay>
+                    <SingleDisplay heading={"Actual Cost of Production (Gross Expense)"} data={"NGN " + ingredientCost.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}></SingleDisplay>
                 </Row>
                 <br />
                 <Row>
                     <SingleDisplay heading={"Profit Before Net Expense (Gross Profit)"} data={"NGN " + grossProfit.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}></SingleDisplay>
+                    <SingleDisplay heading={"Operational Expense (Net Expense)"} data={"NGN " + netExpense.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}></SingleDisplay>
                     <SingleDisplay heading={"Actual Profit (Net Income)"} data={"NGN " + netProfitOrLoss.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}></SingleDisplay>
-                    <SingleDisplay heading={"Quantity Sold"} data={"NGN " + quantitySold.toFixed(0).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}></SingleDisplay>
-                    <SingleDisplay heading={"Average Sales Price"} data={"NGN " + averageSalesPrice.toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}></SingleDisplay>
+                    <SingleDisplay heading={"Quantity Sold"} data={quantitySold.toFixed(0).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}></SingleDisplay>
                 </Row>
                 <br />
                 <Row>
-
+                <SingleDisplay heading={"Average Sales Price"} data={"NGN " + averageSalesPrice.toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}></SingleDisplay>
                 <SingleDisplay heading={"Cost Per Unit"} data={"NGN " + costPerUnit.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}></SingleDisplay>
                 <SingleDisplay heading={"Profit Per Unit"} data={"NGN " + averagProfitPerUnit.toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}></SingleDisplay>
                 </Row>

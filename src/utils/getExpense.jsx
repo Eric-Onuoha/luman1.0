@@ -9,6 +9,10 @@ const GetExpenseData = () => {
     return useSelector((state) => state.expenses.expenses) || {};
 }
 
+const GetIngredientCostData = () => {
+    return useSelector((state) => state.utilities.utilities.monthCost) || {}
+}
+
 export const GetCurrentDaysExpense = (date = currentDate) => {
     const ExpenseList = GetExpenseData();
     let totalExpense = 0;
@@ -25,7 +29,6 @@ export const GetCurrentDaysExpense = (date = currentDate) => {
 
 export const GetExpenseByCategory = (currentMonth = month) => {
     const ExpenseList = GetExpenseData();
-    console.log(ExpenseList);
 
     const categoryExpenses = {};
 
@@ -50,25 +53,12 @@ export const GetExpenseByCategory = (currentMonth = month) => {
 }
 
 export const getHighestCostOfIngredients = (currentMonth = month) => {
-    const ExpenseList = GetExpenseData();
-    const ingredientCost = {};
+    const ingredientCost = GetIngredientCostData();
+    
+    let highestIngredientCost = ingredientCost[currentMonth] || {};
+    console.log(highestIngredientCost);
 
-    for (const date in ExpenseList){
-        if (date.includes(currentMonth)){
-            for (const eid in ExpenseList[date]){
-                const expense = ExpenseList[date][eid]
-                if (expense.category === "ingredient" && expense.quantity == 1){
-                    const ingredient = expense.ingredient;
-                    const amount = expense.amount
-                    if(!ingredientCost.hasOwnProperty(ingredient) || (ingredientCost[ingredient] < amount )){
-                        ingredientCost[ingredient] = amount;
-                    }
-                }
-            }
-        }
-    }
-
-    return ingredientCost;
+    return highestIngredientCost;
 }
 
 export const getTotalExpenseByMonth = (currentMonth = month) => {
@@ -83,6 +73,28 @@ export const getTotalExpenseByMonth = (currentMonth = month) => {
                 const category = expense.category;
                 
                 if(category !== "ingredient"){
+                    totalExpense += parseFloat(expense.amount);
+                }
+
+            }
+        }
+    }
+
+    return totalExpense;
+}
+
+export const getIngredientExpenseByMonth = (currentMonth = month) => {
+    const ExpenseList = GetExpenseData();
+    let totalExpense = 0;
+
+    for (const date in ExpenseList) {
+
+        if(date.includes(currentMonth)){
+            for (const expenseId in ExpenseList[date]) {
+                const expense = ExpenseList[date][expenseId];
+                const category = expense.category;
+                
+                if(category === "ingredient"){
                     totalExpense += parseFloat(expense.amount);
                 }
 

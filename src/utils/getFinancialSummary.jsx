@@ -8,6 +8,10 @@ const GetAccountsData = () => {
     return useSelector((state) => state.account.account);
 }
 
+const GetStockData = () => {
+    return useSelector((state) => state.stock.stock);
+}
+
 export const getRevenueByMonth = (currentMonth = month) => {
     const AccountsData = GetAccountsData();
     let grossRevenue = 0;
@@ -20,10 +24,21 @@ export const getRevenueByMonth = (currentMonth = month) => {
     return grossRevenue;
 }
 
+export const getQuantitySold = (currentMonth = month) => {
+    const StockData = GetStockData();
+    let quantitySold = 0;
+
+    for (const day in StockData){
+        if (day.includes(currentMonth)){
+            quantitySold += parseInt(StockData[day]["familyBread"]["totalSales"])
+        }
+    }
+    return quantitySold;
+}
+
 //currentMonth has to be september until I fix the expense records to reflect the cost of 1 item for other months
 export const getCostPerUnit = (currentMonth = "september") => {
     const costOfIngredients = getHighestCostOfIngredients(currentMonth);
-    console.log(costOfIngredients);
     const purchaseWeight = {
         "sugar": "50000",
         "yeast": "10000",

@@ -23,5 +23,5 @@ export const rootReducer = combineReducers({
     utilities: utilitiesReducer,
     debtRecord: debtReducer,
     account: accountReducer,
-    operationsMenu: operationsMenuReducer
+    operationsMenu: operationsMenuReducer,
 })
