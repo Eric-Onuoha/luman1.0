@@ -38,7 +38,7 @@ const Authenticator = () => {
             // dispatch(updateCurrentUser(user.email));
             navigate(nextPath);
         } catch(error){
-            alert(error.message);
+            alert("Please sign in with a recognized Admin Account");
         }
 
     }
