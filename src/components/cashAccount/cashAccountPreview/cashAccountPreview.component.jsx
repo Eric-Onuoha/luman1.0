@@ -7,7 +7,7 @@ import { useDispatch } from "react-redux";
 import { getCurrentAmount} from "../../../utils/getAmount";
 import { GetCurrentPaidDebt, GetCurrentDaysDebt } from "../../../utils/getDebt";
 import { GetCurrentDaysExpense } from "../../../utils/getExpense";
-import { getTodaysDate } from "../../../utils/getMonthAndDay";
+import { getCurrentDateToUpdate, getDate } from "../../../utils/getMonthAndDay";
 import { GetPreviousCashAtHand } from "../../../utils/getCashAtHand";
 
 import { addAccount } from "../../../reduxStore/reducers/account.reducer";
@@ -23,7 +23,8 @@ const CashAccountPreview = () => {
 
     const [accountForm, setAccountForm] = useState([]);
     const {bankDeposit, cah, comment} = accountForm;
-    const currentDate = getTodaysDate();
+    const todaysDate = getCurrentDateToUpdate();
+    const currentDate = getDate(todaysDate);
 
     const calculateExpectedCash = (salesAmount, paidDebt, previousCash, newDebt, totalExpense, bankDeposit) => {
         const parsedPreviousCash = (previousCash && parseInt(previousCash.replace(',', ''))) || 0;

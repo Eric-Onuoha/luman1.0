@@ -5,13 +5,13 @@ import { getDate } from "../../../utils/getMonthAndDay";
 import { useDispatch } from "react-redux";
 
 import { orderedDates } from "../../../utils/orderDates";
-
+import { getCurrentDateToUpdate } from "../../../utils/getMonthAndDay";
 import { addStock } from "../../../reduxStore/reducers/stock.reducer";
 import { getCurrentStock } from "../../../utils/getStock";
 
 const StockEntryPreview = ({Product, totSales}) => {
     const dispatch = useDispatch();
-    const todaysDate = new Date();
+    const todaysDate = getCurrentDateToUpdate();
     const [amountProduced, setAmountProduced] = useState(0);
     const [stockForm, setStockForm] = useState([]);
     const {openningStock, totalSales, currentStock, quantityProduced, countedStock, comment} = stockForm;

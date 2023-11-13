@@ -20,6 +20,12 @@ export const getPlainDate = (dateToChange) => {
     return (day + " " + months[month - 1] + " " + year);
 }
 
+export const getCurrentDateToUpdate = () => {
+    //This determines what day you are making changes to on LUMAN App
+    // return new Date("2023-11-08");
+    return new Date();
+}
+
 export const getTodaysPlainDate = () => {
     const todaysDate = new Date();
     let year = todaysDate.getUTCFullYear();

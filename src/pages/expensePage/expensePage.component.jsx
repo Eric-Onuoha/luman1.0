@@ -1,11 +1,12 @@
 import ExpensePagePreview from "./expensePagePreview/expensePagePreview.component";
 import { useSelector } from "react-redux";
-import { getTodaysDate } from "../../utils/getMonthAndDay";
+import { getDate, getCurrentDateToUpdate } from "../../utils/getMonthAndDay";
 
 const ExpensePage = () => {
 
     const TotalExpenses = useSelector((state) => state.expenses.expenses) || {};
-    const date = getTodaysDate();
+    const todaysDate = getCurrentDateToUpdate();
+    const date = getDate(todaysDate)
     const daysExpenses = TotalExpenses[date] && Object.keys(TotalExpenses[date]);
 
     return(

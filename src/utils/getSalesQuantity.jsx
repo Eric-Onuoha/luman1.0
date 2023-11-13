@@ -1,7 +1,8 @@
 import { useSelector } from "react-redux";
-import { getTodaysDate, getDate } from "./getMonthAndDay";
+import { getDate, getCurrentDateToUpdate } from "./getMonthAndDay";
 
-const currentDate = getTodaysDate();
+const todaysDate = getCurrentDateToUpdate();
+const currentDate = getDate(todaysDate);
 
 export const GetCurrentDTCSalesQuantity = (product, date = currentDate) => {
     const Sales = useSelector((state) => state.salesRecord.salesRecord) || {};

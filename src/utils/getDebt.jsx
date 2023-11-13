@@ -1,7 +1,8 @@
 import { useSelector } from "react-redux";
-import { getTodaysDate } from "./getMonthAndDay";
+import { getCurrentDateToUpdate, getDate } from "./getMonthAndDay";
 
-const currentDate = getTodaysDate();
+const todaysDate = getCurrentDateToUpdate();
+const currentDate = getDate(todaysDate);
 
 export const GetCurrentPaidDebt = (date = currentDate) => {
     const debtors = useSelector((state) => state.debtRecord.debtRecord) || {};

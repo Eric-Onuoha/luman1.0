@@ -10,12 +10,13 @@ import ExpenseEntry from "../../../components/expenseEntry/expenseEntry.componen
 import { getDate, getPlainDate } from "../../../utils/getMonthAndDay";
 import { addExpense } from "../../../reduxStore/reducers/expense.reducer";
 import { getOrderedDates } from "../../../utils/orderDates";
+import { getCurrentDateToUpdate } from "../../../utils/getMonthAndDay";
 
 const ExpensePagePreview = ({TotalExpenses, Expenses, DaysExpenses}) => {
     const regex = /^(\d{4})([a-zA-Z]+)(\d+)$/;
     const OperationsMenuType = useSelector((state) => state.operationsMenu.operationsMenu);
     const dispatch = useDispatch();
-    const todaysDate = new Date();
+    const todaysDate = getCurrentDateToUpdate();
     const [count, setCount] = useState(1);
     const [expenseForm, setExpenseForm] = useState([]);
     const {category, ingredient, item, quantity, amount, paymentBy} = expenseForm;

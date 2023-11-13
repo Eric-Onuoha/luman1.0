@@ -4,7 +4,7 @@ import Table from "bootstrap-4-react/lib/components/table";
 
 import OperationsMenu from "../../../components/operationsMenu/operationsMenu.component";
 import CashAccount from "../../../components/cashAccount/cashAccount.component";
-import { getTodaysPlainDate } from "../../../utils/getMonthAndDay";
+import { getPlainDate, getCurrentDateToUpdate } from "../../../utils/getMonthAndDay";
 import { useSelector } from "react-redux";
 import { getOrderedDates } from "../../../utils/orderDates";
 
@@ -13,6 +13,8 @@ const CashPagePreview = () => {
     const OperationsMenuType = useSelector((state) => state.operationsMenu.operationsMenu);
     const AllAccounts = useSelector((state) => state.account.account) || {};
     const sortedAccounts = getOrderedDates(Object.keys(AllAccounts));
+
+    const todaysDate = getCurrentDateToUpdate();
 
     return(
         <Container id="cashPagePreviewComponent" fluid="true">
@@ -54,7 +56,7 @@ const CashPagePreview = () => {
                 : 
                 (
                     <>
-                    <h4>Cash Account for: {getTodaysPlainDate()}</h4>
+                    <h4>Cash Account for: {getPlainDate(todaysDate)}</h4>
                     <Row id="cashRecords">
                         <CashAccount></CashAccount>
                     </Row>

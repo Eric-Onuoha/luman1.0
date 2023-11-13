@@ -48,7 +48,8 @@ export const getCostPerUnit = (currentMonth = "september") => {
         "butter": "15000",
         "oil": "25000",
         "flour": "50000",
-        "salt": "20000"
+        "salt": "50000"
+        // "salt": "10000"
     }
     const weightPerBag = {
         "sugar": "6700",

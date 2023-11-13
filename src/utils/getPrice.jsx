@@ -1,23 +1,21 @@
 import { useSelector } from "react-redux";
-import { getTodaysDate } from "./getMonthAndDay";
+import { getCurrentDateToUpdate, getDate } from "./getMonthAndDay";
+import { getOrderedDates } from "./orderDates";
 
-const currentDate = getTodaysDate();
+const todaysDate = getCurrentDateToUpdate();
+const currentDate = getDate(todaysDate);
 
 export const GetCurrentPrice = (category, product, salesType) => {
     const ProductsDB = useSelector((state) => state.productList.productList) || {};
 
     const regex = /^(\d{4})(.*)/;
-    const PriceList = Object.keys(ProductsDB).sort((a,b) => {
-        let dateA = new Date(a.replace(regex, "$1 $2"));
-        let dateB = new Date(b.replace(regex, "$1 $2"));
-        return(dateB-dateA);
-    });
+    const PriceList = getOrderedDates(Object.keys(ProductsDB))
     const currentPrice = ProductsDB[PriceList[0]] && ProductsDB[PriceList[0]][category][product][salesType];
 
     return currentPrice;
 }
 
-export const GetPriceAtDay = (day, category, product, salesType) => {
+export const GetPriceAtDay = (day, category, product, salesType) => { // Not sure if this is still in use anywhere
     const ProductsDB = useSelector((state) => state.productList.productList);
 
     const regex = /^(\d{4})(.*)/;

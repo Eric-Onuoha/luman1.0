@@ -5,9 +5,8 @@ import Table from "bootstrap-4-react/lib/components/table";
 
 import OperationsMenu from "../../../components/operationsMenu/operationsMenu.component";
 import DebtEntry from "../../../components/debtEntry/debtEntry.component";
-import { getTodaysPlainDate } from "../../../utils/getMonthAndDay";
 import { useState } from "react";
-import { getTodaysDate } from "../../../utils/getMonthAndDay";
+import { getCurrentDateToUpdate, getDate, getPlainDate } from "../../../utils/getMonthAndDay";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import { addDebtRecord } from "../../../reduxStore/reducers/debt.reducer";
@@ -20,7 +19,9 @@ const DebtPagePreview = ({DebtorsDB, Debtors}) => {
     const [debtForm, setDebtForm] = useState([]);
     const [showDebts, setShowDebts] = useState("hideDebts");
     const {debtor, description, newDebt, paidAmount} = debtForm;
-    const currentDate = getTodaysDate();
+
+    const todaysDate = getCurrentDateToUpdate();
+    const currentDate = getDate(todaysDate);
 
     const debtFormSubmit = (event) => {
         event.preventDefault();
@@ -93,7 +94,7 @@ const DebtPagePreview = ({DebtorsDB, Debtors}) => {
                 : 
                 (
                     <>
-                    <h4>Debt for: {getTodaysPlainDate()}</h4>
+                    <h4>Debt for: {getPlainDate(todaysDate)}</h4>
                     {Debtors.map((debtor) => ( DebtorsDB[debtor][currentDate] &&
                     <Row key={debtor} id="updatedDebtRecords">
                         <Col>Debtor: {debtor.replace(/_/g, " ")}</Col>

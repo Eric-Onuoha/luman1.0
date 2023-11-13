@@ -2,8 +2,9 @@ import { useSelector } from "react-redux";
 import { GetAllDTCSales, GetAllSRSales } from "./getMonthlyTargets";
 import { getDate } from "./getMonthAndDay";
 import { getOrderedDates } from "./orderDates";
+import { getCurrentDateToUpdate } from "./getMonthAndDay";
 
-const currentDate = new Date();
+const currentDate = getCurrentDateToUpdate();
 const todaysDate = getDate(currentDate);
 
 export const GetAllStockRecords = () => {

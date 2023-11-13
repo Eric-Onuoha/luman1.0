@@ -8,8 +8,8 @@ const SkewDisplayPreview = ({heading, indicator, skewData}) => {
     const expenseCategory = Object.keys(skewData).filter(element => element !== "ingredient" && element !== "salary");
 
     const expenseBudget = {
-        "dataBundle": 6000,
-        "miscellaneous": 140000,
+        "dataBundle": 6500,
+        "miscellaneous": 200000,
         "TopesExpense": 120000,
         "aramansExpense": 108000,
         "nylonBag": 7000,

@@ -1,16 +1,13 @@
 import { useSelector } from "react-redux";
 import { getTodaysDate } from "./getMonthAndDay";
+import { getOrderedDates } from "./orderDates";
 
 const currentDate = getTodaysDate();
 const regex = /^(\d{4})(.*)/;
 
 export const GetPreviousCashAtHand = (date = currentDate) => {
     const PreviousAccount = useSelector((state) => state.account.account) || {};
-    const accountDates = Object.keys(PreviousAccount).sort((a,b) => {
-        let dateA = new Date(a.replace(regex, "$1 $2"));
-        let dateB = new Date(b.replace(regex, "$1 $2"));
-        return(dateB-dateA);
-    });
+    const accountDates = getOrderedDates(Object.keys(PreviousAccount))
 
     if (accountDates.length === 0){
         return 0;

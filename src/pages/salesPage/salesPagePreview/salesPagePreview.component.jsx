@@ -12,6 +12,7 @@ import { addSales } from "../../../reduxStore/reducers/sales.reducer";
 import { addSalesRepRecord } from "../../../reduxStore/reducers/salesRep.reducer";
 import { getOrderedDates } from "../../../utils/orderDates";
 import { getSalesReps } from "../../../utils/getSalesReps";
+import { getCurrentDateToUpdate } from "../../../utils/getMonthAndDay";
 
 const SalesPagePreview = ({distributors}) => {
     const regex = /^(\d{4})([a-zA-Z]+)(\d+)$/;
@@ -30,7 +31,7 @@ const SalesPagePreview = ({distributors}) => {
     const [srFormResponse, setSrFormResponse] = useState([]);
     const {familyDTC, miniDTC, smallDTC} = DTCFormResponse;
 
-    const todaysDate = new Date();
+    const todaysDate = getCurrentDateToUpdate();
 
     const handleDTCChange = (e) => {
         const {name, value} = e.target;

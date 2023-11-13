@@ -1,7 +1,9 @@
 import { useSelector } from "react-redux";
-import { getTodaysDate, getCurrentMonth } from "./getMonthAndDay";
+import { getCurrentDateToUpdate, getDate, getCurrentMonth } from "./getMonthAndDay";
 
-const currentDate = getTodaysDate();
+const todaysDate = getCurrentDateToUpdate();
+const currentDate = getDate(todaysDate);
+
 const month = getCurrentMonth();
 // const currentmonth = "september";
 
