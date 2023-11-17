@@ -12,6 +12,10 @@ const GetStockData = () => {
     return useSelector((state) => state.stock.stock);
 }
 
+const GetUtilitiesData = () => {
+    return useSelector((state) => state.utilities.utilities);
+}
+
 export const getRevenueByMonth = (currentMonth = month) => {
     const AccountsData = GetAccountsData();
     let grossRevenue = 0;
@@ -38,7 +42,10 @@ export const getQuantitySold = (currentMonth = month) => {
 
 //currentMonth has to be september until I fix the expense records to reflect the cost of 1 item for other months
 export const getCostPerUnit = (currentMonth = "september") => {
-    const costOfIngredients = getHighestCostOfIngredients(currentMonth);
+    const variables = GetUtilitiesData() || {};
+
+    const costOfIngredients = variables['variables2023'][currentMonth]['cost'] || {};
+    console.log(costOfIngredients)
     const purchaseWeight = {
         "sugar": "50000",
         "yeast": "10000",
@@ -49,19 +56,8 @@ export const getCostPerUnit = (currentMonth = "september") => {
         "oil": "25000",
         "flour": "50000",
         "salt": "50000"
-        // "salt": "10000"
     }
-    const weightPerBag = {
-        "sugar": "6700",
-        "yeast": "400",
-        "milk": "1100",
-        "preservative": "200",
-        "softener": "20",
-        "butter": "1700",
-        "oil": "1150",
-        "flour": "50000",
-        "salt": "840"
-    }
+    const weightPerBag = variables['variables2023'][currentMonth]['recipe'] || {};
 
     let costPerBag = 0;
 
