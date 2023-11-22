@@ -22,6 +22,7 @@ export const getRevenueByMonth = (currentMonth = month) => {
 
     for (const day in AccountsData){
         if (day.includes(currentMonth)){
+            console.log(day)
             grossRevenue += parseInt(AccountsData[day]["salesAmount"])
         }
     }
@@ -45,7 +46,8 @@ export const getCostPerUnit = (currentMonth = "september") => {
     const variables = GetUtilitiesData() || {};
 
     const costOfIngredients = variables['variables2023'][currentMonth]['cost'] || {};
-    console.log(costOfIngredients)
+    const quantityPerBag = variables['variables2023'][currentMonth]['quantityperbag'] || 1;
+
     const purchaseWeight = {
         "sugar": "50000",
         "yeast": "10000",
@@ -65,7 +67,7 @@ export const getCostPerUnit = (currentMonth = "september") => {
         costPerBag += parseInt(((costOfIngredients[ingredient]*weightPerBag[ingredient])/purchaseWeight[ingredient]))
     }
 
-    const costPerUnit = (costPerBag/102).toFixed(2)
+    const costPerUnit = (costPerBag/quantityPerBag).toFixed(2)
 
     return costPerUnit;
 }
