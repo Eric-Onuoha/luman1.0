@@ -11,11 +11,11 @@ import { GetExpenseByCategory } from "../../../utils/getExpense";
 
 const TargetsPreview = () => {
     const monthDTC = GetMonthlyDTCSales();
-    const monthDTCTarget = 16;
+    const monthDTCTarget = 15;
 
     const monthSR = GetMonthlySRSales();
-    const monthSRTarget = {"family": 6180, "mini":0, "small": 0};
-    const averageSRSalesTarget = ((monthSRTarget.family/2)/28);
+    const monthSRTarget = {"family": 6000, "mini":0, "small": 0};
+    const averageSRSalesTarget = (monthSRTarget.family/2);
 
     const bagsPerDay = GetMonthlyBagPerDay();
     const targetBagsPerDay = 2.00;
@@ -38,7 +38,7 @@ const TargetsPreview = () => {
                 {monthDTC.salesdtc.family ? (
                     <>
                     {isFinite((monthDTC.salesdtc.family/bagsPerDay.activeDays)) ? (
-                            <SingleDisplay indicator={(monthDTC.salesdtc.family/bagsPerDay.activeDays) - monthDTCTarget} heading = {"Average DTC Sales Per Day"} data={(monthDTC.salesdtc.family/bagsPerDay.activeDays).toFixed(0) + ` of ${monthDTCTarget.toFixed(0)} / day`}></SingleDisplay>
+                            <SingleDisplay indicator={(monthDTC.salesdtc.family/bagsPerDay.activeDays) + 1 - monthDTCTarget} heading = {"Average DTC Sales Per Day"} data={(monthDTC.salesdtc.family/bagsPerDay.activeDays).toFixed(0) + ` of ${monthDTCTarget.toFixed(0)} / day`}></SingleDisplay>
                         ) : (
                             <SingleDisplay indicator={ - monthDTCTarget} heading = {"Average DTC Sales Per Day"} data={0 + ` of ${monthDTCTarget.toFixed(0)} / day`}></SingleDisplay>
                         )}
@@ -62,7 +62,7 @@ const TargetsPreview = () => {
                             <>
                                 {isFinite(monthSR[salesRep]["family"]/bagsPerDay.activeDays) ? (
                                     <>
-                                    <SingleDisplay key={salesRep} indicator={(monthSR[salesRep]["family"]/bagsPerDay.activeDays) - averageSRSalesTarget} heading = {salesRep.replace("_", " ")} data={(monthSR[salesRep]["family"]/bagsPerDay.activeDays).toFixed(0) +  ` of ${averageSRSalesTarget.toFixed(0)} / day`}></SingleDisplay>
+                                    <SingleDisplay key={salesRep} indicator={monthSR[salesRep]["family"] - averageSRSalesTarget} heading = {salesRep.replace("_", " ")} data={(monthSR[salesRep]["family"]).toFixed(0) +  ` of ${averageSRSalesTarget.toFixed(0)} / day`}></SingleDisplay>
                                     </>
                                 ) : (
                                     <>

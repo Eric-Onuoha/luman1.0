@@ -1,5 +1,5 @@
 import { useSelector } from "react-redux";
-import { getCurrentMonth, getMonthRange } from "./getMonthAndDay";
+import { getCurrentMonth, getMonthRange, getCurrentDateToUpdate } from "./getMonthAndDay";
 
 const regex = /^(\d{4})(\w+)(\d{1,2})$/;
 
@@ -77,9 +77,32 @@ return totals;
 
 }
 
+export const GetActiveDays = (currentMonth = month) => {
+  function countSundays() {
+    const now = new Date();
+    const year = now.getFullYear();
+    const month = now.getMonth();
+    const currentDate = now.getDate();
+    let count = 0;
+  
+    // Loop through the days of the month
+    for (let day = 1; day <= currentDate; day++) {
+      const date = new Date(year, month, day);
+      // Check if the day is a Sunday (0 corresponds to Sunday)
+      if (date.getDay() !== 0) {
+        count++;
+      }
+    }
+    return count;
+  }
+  
+  const activeDays = countSundays();
+  return activeDays;
+}
+
 export const GetMonthlyBagPerDay = (currentMonth = month) => {
     const StockRecords = GetStockRecords();
-    let activeDays = 0;
+    let activeDays = GetActiveDays();
 
     let totalFamily = 0;
     let totalMini = 0;
@@ -92,7 +115,7 @@ export const GetMonthlyBagPerDay = (currentMonth = month) => {
 
     for (const date in StockRecords){
       if(date.includes(currentMonth)){
-        activeDays ++;
+        // activeDays ++;
         totalFamily += parseInt(StockRecords[date]["familyBread"]["totalSales"]) || 0;
         totalMini += parseInt(StockRecords[date]["miniBread"]["totalSales"]) || 0;
         totalSmall += parseInt(StockRecords[date]["smallBread"]["totalSales"]) || 0;
