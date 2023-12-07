@@ -102,7 +102,7 @@ export const GetActiveDays = (currentMonth = month) => {
 
 export const GetMonthlyBagPerDay = (currentMonth = month) => {
     const StockRecords = GetStockRecords();
-    let activeDays = GetActiveDays();
+    let activeDays = (GetActiveDays() - 1);
 
     let totalFamily = 0;
     let totalMini = 0;
