@@ -60,19 +60,21 @@ const ManagementPagePreview = () => {
                         <SingleDisplay heading={"Total Sales (Gross Revenue)"} data={"NGN " + grossRevenue.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}></SingleDisplay>
                         <SingleDisplay heading={"Est. Cost of Production (Gross Expense)"} data={"NGN " + grossExpense.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}></SingleDisplay>
                         <SingleDisplay heading={"Actual Cost of Production (Gross Expense)"} data={"NGN " + ingredientCost.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}></SingleDisplay>
+                        {/* <SingleDisplay heading={"Est. Cash Flow"} data={1}></SingleDisplay> */}
                     </Row>
                     <br />
                     <Row>
                         <SingleDisplay heading={"Profit Before Net Expense (Gross Profit)"} data={"NGN " + grossProfit.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}></SingleDisplay>
                         <SingleDisplay heading={"Operational Expense (Net Expense)"} data={"NGN " + netExpense.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}></SingleDisplay>
-                        <SingleDisplay heading={"Actual Profit (Net Income)"} data={"NGN " + netProfitOrLoss.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}></SingleDisplay>
+                        <SingleDisplay indicator={netProfitOrLoss} heading={"Actual Profit (Net Income)"} data={"NGN " + netProfitOrLoss.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}></SingleDisplay>
                         <SingleDisplay heading={"Quantity Sold"} data={quantitySold.toFixed(0).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}></SingleDisplay>
                     </Row>
                     <br />
                     <Row>
-                    <SingleDisplay heading={"Average Sales Price"} data={"NGN " + averageSalesPrice.toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}></SingleDisplay>
-                    <SingleDisplay heading={"Cost Per Unit"} data={"NGN " + costPerUnit.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}></SingleDisplay>
-                    <SingleDisplay heading={"Profit Per Unit"} data={"NGN " + averagProfitPerUnit.toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}></SingleDisplay>
+                        <SingleDisplay heading={"Average Sales Price"} data={"NGN " + averageSalesPrice.toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}></SingleDisplay>
+                        <SingleDisplay heading={"Cost Per Unit"} data={"NGN " + costPerUnit.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}></SingleDisplay>
+                        <SingleDisplay heading={"Profit Per Unit"} data={"NGN " + averagProfitPerUnit.toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}></SingleDisplay>
+                        {/* <SingleDisplay heading={"Bags Per Day"} data={bagsPerDay.bagsperday}></SingleDisplay> */}
                     </Row>
                     <br />
                     <Row>

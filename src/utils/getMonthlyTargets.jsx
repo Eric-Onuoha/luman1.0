@@ -102,7 +102,8 @@ export const GetActiveDays = (currentMonth = month) => {
 
 export const GetMonthlyBagPerDay = (currentMonth = month) => {
     const StockRecords = GetStockRecords();
-    let activeDays = GetActiveDays();
+    // let activeDays = GetActiveDays();
+    let activeDays = 2;
 
     let totalFamily = 0;
     let totalMini = 0;
@@ -115,7 +116,7 @@ export const GetMonthlyBagPerDay = (currentMonth = month) => {
 
     for (const date in StockRecords){
       if(date.includes(currentMonth)){
-        // activeDays ++;
+        activeDays ++;
         totalFamily += parseInt(StockRecords[date]["familyBread"]["totalSales"]) || 0;
         totalMini += parseInt(StockRecords[date]["miniBread"]["totalSales"]) || 0;
         totalSmall += parseInt(StockRecords[date]["smallBread"]["totalSales"]) || 0;
