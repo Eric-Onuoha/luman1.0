@@ -6,7 +6,7 @@ import { getPlainDate } from "../../../utils/getMonthAndDay";
 import { addStaff } from "../../../reduxStore/reducers/staff.reducer";
 import { useDispatch } from "react-redux";
 
-const StaffPagePreview = ({StaffMembers}) => {
+const StaffPagePreview = ({Staff, StaffMembers}) => {
     const dispatch = useDispatch();
     const [staffFormResponse, setStaffFormResponse] = useState([]);
     const {staffName, department, phone, startDate, dob, address, emergencyContact1, emergencyContact2} = staffFormResponse;
@@ -32,6 +32,11 @@ const StaffPagePreview = ({StaffMembers}) => {
         }
     }
 
+    const populateFields = (staffName, staffData) => {
+        console.log(staffData)
+        setStaffFormResponse({...staffData, staffName:staffName});
+    }
+
     return(
         <Container id="staffPagePreviewComponent" fluid="true">
             {/* <OperationsMenu ></OperationsMenu> */}
@@ -41,7 +46,13 @@ const StaffPagePreview = ({StaffMembers}) => {
                 <h4>Current Staff List:</h4>
                 <ol>
                 {StaffMembers.map((staffMember) => (
-                    <li>{staffMember.replace(/_/g, " ")}</li>
+                    <>
+                        {Staff[staffMember].department !== "Fired" ? (
+                            <li onClick={() => populateFields(staffMember, Staff[staffMember])}>{staffMember.replace(/_/g, " ")}</li>
+                        ) : (
+                            <></>
+                        )}
+                    </>
                 ))}
                  </ol>
 
@@ -78,7 +89,7 @@ const StaffPagePreview = ({StaffMembers}) => {
                             <input type="tell" pattern="[0-9]{3}[0-9]{3}[0-9]{3}[0-9]{2}" name="emergencyContact1" id="emergencyContact1" required value={emergencyContact1}/>
                             <label htmlFor="emergencyContact2">Emergency Contact 2:</label>
                             <input type="tell" pattern="[0-9]{3}[0-9]{3}[0-9]{3}[0-9]{2}" name="emergencyContact2" id="emergencyContact2" required value={emergencyContact2}/>
-                            <button type="submit">Submit Staff Record</button>
+                            <button type="submit">Update Staff Record</button>
                         </Col>
                     </Row>
                     </form>

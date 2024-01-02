@@ -31,7 +31,6 @@ export const GetCurrentDaysExpense = (date = currentDate) => {
 
 export const GetExpenseByCategory = (currentMonth = month) => {
     const ExpenseList = GetExpenseData();
-    console.log(ExpenseList);
     const categoryExpenses = {};
 
     for (const date in ExpenseList) {
@@ -54,14 +53,14 @@ export const GetExpenseByCategory = (currentMonth = month) => {
     return categoryExpenses;
 }
 
-export const getHighestCostOfIngredients = (currentMonth = month) => {
-    const ingredientCost = GetIngredientCostData();
+// export const getHighestCostOfIngredients = (currentMonth = month) => {
+//     const ingredientCost = GetIngredientCostData();
     
-    let highestIngredientCost = ingredientCost[currentMonth] || {};
-    console.log(highestIngredientCost);
+//     let highestIngredientCost = ingredientCost[currentMonth] || {};
+//     // console.log(highestIngredientCost);
 
-    return highestIngredientCost;
-}
+//     return highestIngredientCost;
+// }
 
 export const getTotalExpenseByMonth = (currentMonth = month) => {
     const ExpenseList = GetExpenseData();

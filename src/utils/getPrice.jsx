@@ -2,6 +2,7 @@ import { useSelector } from "react-redux";
 import { getCurrentDateToUpdate, getDate } from "./getMonthAndDay";
 import { getOrderedDates } from "./orderDates";
 
+
 const todaysDate = getCurrentDateToUpdate();
 const currentDate = getDate(todaysDate);
 
@@ -12,6 +13,7 @@ export const GetCurrentPrice = (category, product, salesType) => {
     const PriceList = getOrderedDates(Object.keys(ProductsDB))
     const currentPrice = ProductsDB[PriceList[0]] && ProductsDB[PriceList[0]][category][product][salesType];
 
+    console.log(currentPrice)
     return currentPrice;
 }
 

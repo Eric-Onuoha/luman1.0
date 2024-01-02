@@ -7,6 +7,6 @@ const StaffPage = () => {
     const StaffMembers = Object.keys(Staff);
 
     return(
-        <StaffPagePreview StaffMembers = {StaffMembers}></StaffPagePreview>
+        <StaffPagePreview Staff = {Staff} StaffMembers = {StaffMembers}></StaffPagePreview>
     )
 }; export default StaffPage;
