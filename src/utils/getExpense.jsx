@@ -1,11 +1,11 @@
 import { useSelector } from "react-redux";
-import { getCurrentDateToUpdate, getDate, getCurrentMonth } from "./getMonthAndDay";
+import { getCurrentDateToUpdate, getDate, getCurrentMonth, getCurrentYear } from "./getMonthAndDay";
 
 const todaysDate = getCurrentDateToUpdate();
 const currentDate = getDate(todaysDate);
 
 const month = getCurrentMonth();
-// const currentmonth = "september";
+const year = getCurrentYear();
 
 const GetExpenseData = () => {
     return useSelector((state) => state.expenses.expenses) || {};
@@ -62,13 +62,13 @@ export const GetExpenseByCategory = (currentMonth = month) => {
 //     return highestIngredientCost;
 // }
 
-export const getTotalExpenseByMonth = (currentMonth = month) => {
+export const getTotalExpenseByMonth = (currentYear = year, currentMonth = month) => {
     const ExpenseList = GetExpenseData();
     let totalExpense = 0;
 
     for (const date in ExpenseList) {
 
-        if(date.includes(currentMonth)){
+        if(date.includes(currentMonth) && date.includes(currentYear)){
             for (const expenseId in ExpenseList[date]) {
                 const expense = ExpenseList[date][expenseId];
                 const category = expense.category;
@@ -84,13 +84,13 @@ export const getTotalExpenseByMonth = (currentMonth = month) => {
     return totalExpense;
 }
 
-export const getIngredientExpenseByMonth = (currentMonth = month) => {
+export const getIngredientExpenseByMonth = (currentYear = year, currentMonth = month) => {
     const ExpenseList = GetExpenseData();
     let totalExpense = 0;
 
     for (const date in ExpenseList) {
 
-        if(date.includes(currentMonth)){
+        if(date.includes(currentMonth) && date.includes(currentYear)){
             for (const expenseId in ExpenseList[date]) {
                 const expense = ExpenseList[date][expenseId];
                 const category = expense.category;

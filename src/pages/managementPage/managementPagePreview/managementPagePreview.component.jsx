@@ -7,33 +7,39 @@ import { getCostPerUnit, getQuantitySold, getRevenueByMonth, quantitySold } from
 import { GetMonthlyBagPerDay } from "../../../utils/getMonthlyTargets";
 import { getTotalExpenseByMonth, getIngredientExpenseByMonth } from "../../../utils/getExpense";
 import { useState } from "react";
+import { getCurrentYear } from "../../../utils/getMonthAndDay";
+
+const currentYear = getCurrentYear();
 
 const ManagementPagePreview = () => {
     const [month, setMonth] = useState();
+    const [year, setYear] = useState();
 
     const changeMonth = (e) => {
         setMonth(e.target.value);
     }
 
-    const grossRevenue = getRevenueByMonth(month);
+    const changeYear = (e) => {
+        setYear(e.target.value);
+    }
 
-    //currentMonth is left empty to default to september until I fix the expense records to reflect the cost of 1 item for other months
-    const costPerUnit = getCostPerUnit(month);
+    const grossRevenue = getRevenueByMonth(year, month);
+    const costPerUnit = getCostPerUnit(year, month);
     const bagsPerDay = GetMonthlyBagPerDay(month);
     // const quantitySold = (bagsPerDay.bagsperday * 102 * bagsPerDay.activeDays);
-    const quantitySold = getQuantitySold(month);
+    const quantitySold = getQuantitySold(year, month);
     const grossExpense = (costPerUnit * quantitySold).toFixed(0);
     const averageSalesPrice = (grossRevenue / quantitySold);
     const averagProfitPerUnit = (averageSalesPrice - costPerUnit);
     const grossProfit = (grossRevenue - grossExpense)
-    const netExpense = getTotalExpenseByMonth(month);
+    const netExpense = getTotalExpenseByMonth(year, month);
     const netProfitOrLoss = ((grossRevenue) - (parseInt(grossExpense) + parseInt(netExpense)));
-    const ingredientCost = getIngredientExpenseByMonth(month);
+    const ingredientCost = getIngredientExpenseByMonth(year, month);
 
     return(
         <Container id="expensePagePreviewComponent" fluid="true">
             <OperationsMenu menu = {["Financial Summary", "Performnce Indicators"]}></OperationsMenu>
-                {/* <Row> */}
+                <Row>
                     <form>
                         <span>Get Income Statement for: </span>
                         <select name="currentMonth" id="month" defaultValue={"default"} onChange={changeMonth}> 
@@ -52,9 +58,18 @@ const ManagementPagePreview = () => {
                             <option value="december">December</option> 
                         </select>
                     </form>
-                {/* </Row> */}
+
+                    <form>                   
+                        {/* <span>Get Income Statement for: </span> */}
+                        <select name="currentYear" id="year" defaultValue={"default"} onChange={changeYear}> 
+                            <option value="default" disabled = {true}>Select Year</option>
+                            <option value="2023">2023</option> 
+                            <option value="2024">2024</option> 
+                        </select>
+                    </form>
+                </Row>
                 <br />
-                {month !== undefined ? (
+                {/* {month !== undefined ? ( */}
                     <>
                     <Row>
                         <SingleDisplay heading={"Total Sales (Gross Revenue)"} data={"NGN " + grossRevenue.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}></SingleDisplay>
@@ -81,11 +96,11 @@ const ManagementPagePreview = () => {
                         
                     </Row>
                     </>
-                ) : (
+                {/* ) : (
                     <div>
-                        <h1>Select a month to analyze</h1>
+                        <h1>Select month to analyze</h1>
                     </div>
-                )}
+                )} */}
 
         </Container>
     )

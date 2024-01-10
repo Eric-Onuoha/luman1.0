@@ -66,6 +66,12 @@ export const getCurrentMonth = (date = currentDate) =>{
     return (months[month - 1]);
 }
 
+export const getCurrentYear = (date = currentDate) =>{
+    const currentYear = date.getFullYear();
+
+    return currentYear;
+}
+
 export const getMonthRange = (date = currentDate) => {
     const year = date.getUTCFullYear();
     const month = date.getUTCMonth() + 1;
