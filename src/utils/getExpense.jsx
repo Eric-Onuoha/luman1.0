@@ -29,6 +29,18 @@ export const GetCurrentDaysExpense = (date = currentDate) => {
     return totalExpense;
 }
 
+export const GetCurrentDaysTotalExpense = (date = currentDate) => {
+    const ExpenseList = GetExpenseData();
+    let totalExpense = 0;
+
+    for (const key in ExpenseList[date]) {
+        const paidAmount = parseInt(ExpenseList[date][key].amount, 10);
+        totalExpense += paidAmount;
+    }
+  
+    return totalExpense;
+}
+
 export const GetExpenseByCategory = (currentMonth = month) => {
     const ExpenseList = GetExpenseData();
     const categoryExpenses = {};

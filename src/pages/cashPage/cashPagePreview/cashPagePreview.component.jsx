@@ -13,6 +13,7 @@ const CashPagePreview = () => {
     const OperationsMenuType = useSelector((state) => state.operationsMenu.operationsMenu);
     const AllAccounts = useSelector((state) => state.account.account) || {};
     const sortedAccounts = getOrderedDates(Object.keys(AllAccounts));
+    // console.log(AllAccounts);
 
     const todaysDate = getCurrentDateToUpdate();
 

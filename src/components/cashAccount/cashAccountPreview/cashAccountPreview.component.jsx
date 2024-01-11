@@ -6,9 +6,9 @@ import { useDispatch } from "react-redux";
 
 import { getCurrentAmount} from "../../../utils/getAmount";
 import { GetCurrentPaidDebt, GetCurrentDaysDebt } from "../../../utils/getDebt";
-import { GetCurrentDaysExpense } from "../../../utils/getExpense";
+import { GetCurrentDaysExpense, GetCurrentDaysTotalExpense } from "../../../utils/getExpense";
 import { getCurrentDateToUpdate, getDate } from "../../../utils/getMonthAndDay";
-import { GetPreviousCashAtHand } from "../../../utils/getCashAtHand";
+import { GetPreviousCashAtHand, GetPreviousCashFlow } from "../../../utils/getCashAtHand";
 
 import { addAccount } from "../../../reduxStore/reducers/account.reducer";
 
@@ -19,7 +19,9 @@ const CashAccountPreview = () => {
     const paidDebt = GetCurrentPaidDebt();
     const newDebt = GetCurrentDaysDebt();
     const totalExpense = GetCurrentDaysExpense();
+    const totalExpenseIncludingBankExpenses = GetCurrentDaysTotalExpense();
     const previousCash = GetPreviousCashAtHand();
+    const previousCashFlow = GetPreviousCashFlow();
 
     const [accountForm, setAccountForm] = useState([]);
     const {bankDeposit, cah, comment} = accountForm;
@@ -40,6 +42,20 @@ const CashAccountPreview = () => {
     
     const expectedCash = calculateExpectedCash(salesAmount, paidDebt, previousCash, newDebt, totalExpense, bankDeposit);
 
+    const calculateCashFlow = (salesAmount, paidDebt, previousCash, newDebt, totalExpenseIncludingBankExpenses) => {
+        const parsedPreviousCashFlow = (previousCashFlow && parseInt(previousCashFlow.replace(',', ''))) || 0;
+        console.log("PPCF " + parsedPreviousCashFlow);
+    
+        const cashFlow = (
+            (parseInt(salesAmount) + parseInt(paidDebt) + parsedPreviousCashFlow) -
+            (parseInt(newDebt) + parseInt(totalExpenseIncludingBankExpenses))
+        ).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    
+        return cashFlow;
+    };
+    
+    const currentCashFLow = calculateCashFlow(salesAmount, paidDebt, previousCash, newDebt, totalExpenseIncludingBankExpenses);
+
     const accountFormChange = (event) => {
         const {name, value} = event.target;
         setAccountForm({...accountForm, [name]: value});
@@ -50,7 +66,7 @@ const CashAccountPreview = () => {
         if(accountForm.length !== 0){
             const updatedAccount = {
                 ...accountForm, 
-                salesAmount, paidDebt, newDebt, totalExpense, expectedCash
+                salesAmount, paidDebt, newDebt, totalExpense, expectedCash, currentCashFLow
             }
             try{
                 dispatch(addAccount({currentDate, updatedAccount}));
