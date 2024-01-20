@@ -1,9 +1,10 @@
 import "./managementPagePreview.styles.scss";
 import { Container, Row } from "bootstrap-4-react/lib/components/layout";
 
+import { useSelector } from "react-redux";
 import SingleDisplay from "../../../components/singleDisplay/singleDisplay.component";
 import OperationsMenu from "../../../components/operationsMenu/operationsMenu.component";
-import { getCostPerUnit, getQuantitySold, getRevenueByMonth, quantitySold } from "../../../utils/getFinancialSummary";
+import { getCostPerUnit, getQuantitySold, getRevenueByMonth, quantitySold, getCurrentAvailableCash } from "../../../utils/getFinancialSummary";
 import { GetMonthlyBagPerDay } from "../../../utils/getMonthlyTargets";
 import { getTotalExpenseByMonth, getIngredientExpenseByMonth } from "../../../utils/getExpense";
 import { useState } from "react";
@@ -23,6 +24,8 @@ const ManagementPagePreview = () => {
         setYear(e.target.value);
     }
 
+    const businessReport = useSelector((state) => state.operationsMenu.operationsMenu) || "";
+
     const grossRevenue = getRevenueByMonth(year, month);
     const costPerUnit = getCostPerUnit(year, month);
     const bagsPerDay = GetMonthlyBagPerDay(month);
@@ -35,10 +38,11 @@ const ManagementPagePreview = () => {
     const netExpense = getTotalExpenseByMonth(year, month);
     const netProfitOrLoss = ((grossRevenue) - (parseInt(grossExpense) + parseInt(netExpense)));
     const ingredientCost = getIngredientExpenseByMonth(year, month);
+    const currentAvailableCash = getCurrentAvailableCash();
 
     return(
         <Container id="expensePagePreviewComponent" fluid="true">
-            <OperationsMenu menu = {["Financial Summary", "Performnce Indicators"]}></OperationsMenu>
+            <OperationsMenu menu = {["Income_Statement", "Cash_Flow"]}></OperationsMenu>
                 <Row>
                     <form>
                         <span>Get Income Statement for: </span>
@@ -69,7 +73,7 @@ const ManagementPagePreview = () => {
                     </form>
                 </Row>
                 <br />
-                {/* {month !== undefined ? ( */}
+                {businessReport == "Income_Statement" || businessReport == "Update" ? (
                     <>
                     <Row>
                         <SingleDisplay heading={"Total Sales (Gross Revenue)"} data={"NGN " + grossRevenue.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}></SingleDisplay>
@@ -96,11 +100,17 @@ const ManagementPagePreview = () => {
                         
                     </Row>
                     </>
-                {/* ) : (
-                    <div>
-                        <h1>Select month to analyze</h1>
-                    </div>
-                )} */}
+                ) : (
+                    <>
+                    <Row>
+                        <SingleDisplay heading={"Total Avaliable Cash"} data={"NGN " + currentAvailableCash.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}></SingleDisplay>
+                    </Row>
+                    <br />
+                    <Row>
+                        
+                    </Row>
+                    </>
+                )}
 
         </Container>
     )

@@ -42,9 +42,8 @@ const CashAccountPreview = () => {
     
     const expectedCash = calculateExpectedCash(salesAmount, paidDebt, previousCash, newDebt, totalExpense, bankDeposit);
 
-    const calculateCashFlow = (salesAmount, paidDebt, previousCash, newDebt, totalExpenseIncludingBankExpenses) => {
+    const calculateCashFlow = (salesAmount, paidDebt, newDebt, totalExpenseIncludingBankExpenses) => {
         const parsedPreviousCashFlow = (previousCashFlow && parseInt(previousCashFlow.replace(',', ''))) || 0;
-        console.log("PPCF " + parsedPreviousCashFlow);
     
         const cashFlow = (
             (parseInt(salesAmount) + parseInt(paidDebt) + parsedPreviousCashFlow) -
@@ -53,8 +52,20 @@ const CashAccountPreview = () => {
     
         return cashFlow;
     };
+
+    const currentCashFLow = calculateCashFlow(salesAmount, paidDebt, newDebt, totalExpenseIncludingBankExpenses);
+
+    const calculateCashFlowDifference = (salesAmount, paidDebt, newDebt, totalExpenseIncludingBankExpenses) => {
     
-    const currentCashFLow = calculateCashFlow(salesAmount, paidDebt, previousCash, newDebt, totalExpenseIncludingBankExpenses);
+        const cashFlowDiff = (
+            (parseInt(salesAmount) + parseInt(paidDebt)) -
+            (parseInt(newDebt) + parseInt(totalExpenseIncludingBankExpenses))
+        ).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    
+        return cashFlowDiff;
+    };
+    
+    const cashFlowDifference = calculateCashFlowDifference(salesAmount, paidDebt, newDebt, totalExpenseIncludingBankExpenses);
 
     const accountFormChange = (event) => {
         const {name, value} = event.target;
@@ -66,7 +77,7 @@ const CashAccountPreview = () => {
         if(accountForm.length !== 0){
             const updatedAccount = {
                 ...accountForm, 
-                salesAmount, paidDebt, newDebt, totalExpense, expectedCash, currentCashFLow
+                salesAmount, paidDebt, newDebt, totalExpense, expectedCash, currentCashFLow, cashFlowDifference
             }
             try{
                 dispatch(addAccount({currentDate, updatedAccount}));

@@ -9,6 +9,7 @@ import ApplicationPage from './pages/applicationPage/applicationPage.component';
 import Footer from './components/footer/footer.component';
 import Navigation from './components/navigation/navigation.component';
 import OperationsPage from './pages/operationsPage/operationsPage.component';
+import PricingPage from './pages/pricingPage/pricingPage.component';
 
 
 import Authenticate from './authenticator/authenticate.component';
@@ -76,7 +77,7 @@ function App() {
         <Route path='careers/:position' element={<ApplicationPage/>}></Route>
         <Route path='announcements' element={<LandingPage/>}></Route>
         <Route path='operations' element={<Authenticate component={OperationsPage} user={currentUser}/>}></Route>
-        <Route path='pricing' element={<LandingPage/>}></Route>
+        <Route path='pricing' element={<PricingPage/>}></Route>
         <Route path='signup' element={<Authenticate component={SignUp} user={currentUser}/>}></Route>
       </Route>
       <Route path='*' element={[<Navigation></Navigation>, <LandingPage></LandingPage>, <Footer></Footer>]}></Route>

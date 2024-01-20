@@ -1,6 +1,7 @@
 import { useSelector } from "react-redux";
 import { getHighestCostOfIngredients } from "./getExpense";
 import { getCurrentMonth, getCurrentYear } from "./getMonthAndDay";
+import { getOrderedDates } from "./orderDates";
 
 const month = getCurrentMonth();
 const year = getCurrentYear();
@@ -27,6 +28,26 @@ export const getRevenueByMonth = ( currentYear = year, currentMonth = month) => 
         }
     }
     return grossRevenue;
+}
+
+export const getCurrentAvailableCash = (currentYear = year, currentMonth = month) => {
+    const AccountsData = GetAccountsData();
+    let currentAvailableCash = 0;
+    
+    const OrderedAccountsData = getOrderedDates(Object.keys(AccountsData));
+    console.log(OrderedAccountsData);
+    const lastAccountDay = OrderedAccountsData[0];
+    console.log(lastAccountDay);
+
+    try{
+        currentAvailableCash = AccountsData[lastAccountDay]["currentCashFLow"] || 0;
+    }catch(err){
+        return currentAvailableCash;
+    }
+
+    console.log("here")
+
+    return currentAvailableCash;
 }
 
 export const getQuantitySold = (currentYear = year, currentMonth = month) => {
