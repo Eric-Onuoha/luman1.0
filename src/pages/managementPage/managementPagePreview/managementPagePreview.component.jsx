@@ -39,6 +39,9 @@ const ManagementPagePreview = () => {
     const netProfitOrLoss = ((grossRevenue) - (parseInt(grossExpense) + parseInt(netExpense)));
     const ingredientCost = getIngredientExpenseByMonth(year, month);
     const currentAvailableCash = getCurrentAvailableCash();
+    const currentProfitPercentage = ((100 * averagProfitPerUnit) / averageSalesPrice);
+    const bestProfitPerUnit = ((averageSalesPrice * 40) / 100)
+    const bestPrice = (bestProfitPerUnit - (averagProfitPerUnit)) + averageSalesPrice;
 
     return(
         <Container id="expensePagePreviewComponent" fluid="true">
@@ -95,9 +98,13 @@ const ManagementPagePreview = () => {
                         <SingleDisplay heading={"Profit Per Unit"} data={"NGN " + averagProfitPerUnit.toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}></SingleDisplay>
                         {/* <SingleDisplay heading={"Bags Per Day"} data={bagsPerDay.bagsperday}></SingleDisplay> */}
                     </Row>
-                    <br />
+                    <hr />
+                    <hr />
+                    <p>Price Analysis</p>
                     <Row>
-                        
+                        <SingleDisplay heading={"Current Profit Percentage"} data={currentProfitPercentage.toFixed(2) + "%"}></SingleDisplay>
+                        <SingleDisplay heading={"Best Price"} data={"NGN " + bestPrice.toFixed(2)}></SingleDisplay>
+                        <SingleDisplay heading={"Best Profit Per Unit"} data={"NGN " + bestProfitPerUnit.toFixed(2)}></SingleDisplay>
                     </Row>
                     </>
                 ) : (
