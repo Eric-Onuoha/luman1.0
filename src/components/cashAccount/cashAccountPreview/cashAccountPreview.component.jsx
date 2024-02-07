@@ -60,7 +60,7 @@ const CashAccountPreview = () => {
         const cashFlowDiff = (
             (parseInt(salesAmount) + parseInt(paidDebt)) -
             (parseInt(newDebt) + parseInt(totalExpenseIncludingBankExpenses))
-        ).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        );
     
         return cashFlowDiff;
     };

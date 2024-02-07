@@ -4,7 +4,7 @@ import { Container, Row } from "bootstrap-4-react/lib/components/layout";
 import { useSelector } from "react-redux";
 import SingleDisplay from "../../../components/singleDisplay/singleDisplay.component";
 import OperationsMenu from "../../../components/operationsMenu/operationsMenu.component";
-import { getCostPerUnit, getQuantitySold, getRevenueByMonth, quantitySold, getCurrentAvailableCash } from "../../../utils/getFinancialSummary";
+import { getCostPerUnit, getQuantitySold, getRevenueByMonth, getCurrentAvailableCash, getCashFlowDifference } from "../../../utils/getFinancialSummary";
 import { GetMonthlyBagPerDay } from "../../../utils/getMonthlyTargets";
 import { getTotalExpenseByMonth, getIngredientExpenseByMonth } from "../../../utils/getExpense";
 import { useState } from "react";
@@ -38,7 +38,10 @@ const ManagementPagePreview = () => {
     const netExpense = getTotalExpenseByMonth(year, month);
     const netProfitOrLoss = ((grossRevenue) - (parseInt(grossExpense) + parseInt(netExpense)));
     const ingredientCost = getIngredientExpenseByMonth(year, month);
+
     const currentAvailableCash = getCurrentAvailableCash();
+    const cashFlowDiff = getCashFlowDifference(year, month);
+
     const currentProfitPercentage = ((100 * averagProfitPerUnit) / averageSalesPrice);
     const bestProfitPerUnit = ((averageSalesPrice * 40) / 100)
     const bestPrice = (bestProfitPerUnit - (averagProfitPerUnit)) + averageSalesPrice;
@@ -91,16 +94,16 @@ const ManagementPagePreview = () => {
                         <SingleDisplay indicator={netProfitOrLoss} heading={"Actual Profit (Net Income)"} data={"NGN " + netProfitOrLoss.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}></SingleDisplay>
                         <SingleDisplay heading={"Quantity Sold"} data={quantitySold.toFixed(0).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}></SingleDisplay>
                     </Row>
-                    <br />
+                    <hr />
+                    <p>Price Analysis</p>
+                    <hr />
                     <Row>
                         <SingleDisplay heading={"Average Sales Price"} data={"NGN " + averageSalesPrice.toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}></SingleDisplay>
                         <SingleDisplay heading={"Cost Per Unit"} data={"NGN " + costPerUnit.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}></SingleDisplay>
                         <SingleDisplay heading={"Profit Per Unit"} data={"NGN " + averagProfitPerUnit.toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}></SingleDisplay>
                         {/* <SingleDisplay heading={"Bags Per Day"} data={bagsPerDay.bagsperday}></SingleDisplay> */}
                     </Row>
-                    <hr />
-                    <hr />
-                    <p>Price Analysis</p>
+                    <br />
                     <Row>
                         <SingleDisplay heading={"Current Profit Percentage"} data={currentProfitPercentage.toFixed(2) + "%"}></SingleDisplay>
                         <SingleDisplay heading={"Best Price"} data={"NGN " + bestPrice.toFixed(2)}></SingleDisplay>
@@ -110,6 +113,7 @@ const ManagementPagePreview = () => {
                 ) : (
                     <>
                     <Row>
+                        <SingleDisplay heading={"Cash Flow"} data={"NGN " + cashFlowDiff.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}></SingleDisplay>
                         <SingleDisplay heading={"Total Avaliable Cash"} data={"NGN " + currentAvailableCash.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}></SingleDisplay>
                     </Row>
                     <br />

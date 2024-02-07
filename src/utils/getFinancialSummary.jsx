@@ -35,9 +35,7 @@ export const getCurrentAvailableCash = (currentYear = year, currentMonth = month
     let currentAvailableCash = 0;
     
     const OrderedAccountsData = getOrderedDates(Object.keys(AccountsData));
-    console.log(OrderedAccountsData);
     const lastAccountDay = OrderedAccountsData[0];
-    console.log(lastAccountDay);
 
     try{
         currentAvailableCash = AccountsData[lastAccountDay]["currentCashFLow"] || 0;
@@ -45,10 +43,24 @@ export const getCurrentAvailableCash = (currentYear = year, currentMonth = month
         return currentAvailableCash;
     }
 
-    console.log("here")
-
     return currentAvailableCash;
 }
+
+
+export const getCashFlowDifference = (currentYear = year, currentMonth = month) => {
+    const AccountsData = GetAccountsData();
+    console.log(AccountsData);
+    let cashFlowDiff = 0;
+    
+    for (const day in AccountsData){
+        if (day.includes(currentMonth) && day.includes(currentYear)){
+            cashFlowDiff += parseInt(AccountsData[day]["cashFlowDifference"])
+        }
+    }
+
+    return cashFlowDiff;
+}
+
 
 export const getQuantitySold = (currentYear = year, currentMonth = month) => {
     const StockData = GetStockData();
