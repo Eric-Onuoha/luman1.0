@@ -40,7 +40,7 @@ const ManagementPagePreview = () => {
     const ingredientCost = getIngredientExpenseByMonth(year, month);
 
     const currentAvailableCash = getCurrentAvailableCash();
-    const cashFlowDiff = getCashFlowDifference(year, month);
+    const cashFlowDiff = getCashFlowDifference(year, month)/bagsPerDay.activeDays;
 
     const currentProfitPercentage = ((100 * averagProfitPerUnit) / averageSalesPrice);
     const bestProfitPerUnit = ((averageSalesPrice * 40) / 100)
