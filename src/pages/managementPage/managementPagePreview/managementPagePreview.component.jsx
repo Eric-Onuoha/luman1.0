@@ -113,7 +113,7 @@ const ManagementPagePreview = () => {
                 ) : (
                     <>
                     <Row>
-                        <SingleDisplay heading={"Cash Flow"} data={"NGN " + cashFlowDiff.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}></SingleDisplay>
+                        <SingleDisplay heading={"Cash Flow"} data={"NGN " + cashFlowDiff.toFixed(0).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}></SingleDisplay>
                         <SingleDisplay heading={"Total Avaliable Cash"} data={"NGN " + currentAvailableCash.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}></SingleDisplay>
                     </Row>
                     <br />

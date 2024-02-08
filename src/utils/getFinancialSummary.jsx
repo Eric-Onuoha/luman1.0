@@ -54,7 +54,7 @@ export const getCashFlowDifference = (currentYear = year, currentMonth = month) 
     
     for (const day in AccountsData){
         if (day.includes(currentMonth) && day.includes(currentYear)){
-            cashFlowDiff += parseInt(AccountsData[day]["cashFlowDifference"])
+            cashFlowDiff += parseInt(AccountsData[day]["cashFlowDifference"]) || 0
         }
     }
 
