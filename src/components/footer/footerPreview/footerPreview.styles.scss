@@ -2,13 +2,12 @@
     box-shadow:  0px 1px 4px #888, 0px -1px 1px rgb(0 0 0 / 0.2);;
     background-color: beige;
     min-height: 600px;
-    position: relative;
-    bottom: 0;
-    // margin-top: 50px;
+    position: absolute;
+    bottom: -50;
     padding: 0 100px;
 
     #footerRow{
-        padding: 0;
+        padding: 20px 0;
         margin: 0;
     }
 
