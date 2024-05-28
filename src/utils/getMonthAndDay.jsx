@@ -22,7 +22,7 @@ export const getPlainDate = (dateToChange) => {
 
 export const getCurrentDateToUpdate = () => {
     // This determines what day you are making changes to on LUMAN App
-    return new Date("2024-5-27");
+    return new Date("2024-5-28");
     // return new Date();
 }
 
