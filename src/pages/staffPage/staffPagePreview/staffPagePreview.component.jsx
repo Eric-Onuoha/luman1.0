@@ -33,8 +33,7 @@ const StaffPagePreview = ({Staff, StaffMembers}) => {
     }
 
     const populateFields = (staffName, staffData) => {
-        console.log(staffData)
-        setStaffFormResponse({...staffData, staffName:staffName});
+        setStaffFormResponse({...staffData, staffName:staffName, startDate:staffData.workStartDate, dob:staffData.birthday});
     }
 
     return(
@@ -76,10 +75,22 @@ const StaffPagePreview = ({Staff, StaffMembers}) => {
                             <input type="tel" pattern="[0-9]{3}[0-9]{3}[0-9]{3}[0-9]{2}" name="phone" id="phone" value={phone} required/>
 
                             <label htmlFor="startDate">Work Start Date:</label>
-                            <input type="date" name="startDate" id="startDate" value={startDate} required/>
+                            {
+                                dob ? (
+                                    <input value={startDate} readOnly/>
+                                ):(
+                                    <input type="date" name="startDate" id="startDate" defaultValue={startDate} required/>
+                                )
+                            }
 
-                            <label htmlFor="dob">Date of Birth:</label>
-                            <input type="date" name="dob" id="dob" value={dob} required/>
+                            <label htmlFor="dob">Date of Birth: </label>
+                            {
+                                dob ? (
+                                    <input value={dob} readOnly/>
+                                ):(
+                                    <input type="date" name="dob" id="dob" value={dob} required/>
+                                )
+                            }
 
                             <label htmlFor="address">Address:</label>
                             <input type="text" name="address" id="address" value={address} required/>
