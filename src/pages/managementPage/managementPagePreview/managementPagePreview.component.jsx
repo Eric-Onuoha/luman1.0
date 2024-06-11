@@ -48,7 +48,7 @@ const ManagementPagePreview = () => {
 
     return(
         <Container id="expensePagePreviewComponent" fluid="true">
-            <OperationsMenu menu = {["Income_Statement", "Cash_Flow"]}></OperationsMenu>
+            <OperationsMenu menu = {["Income_Statement", "Cash_Flow", "Variables"]}></OperationsMenu>
                 <Row>
                     <form>
                         <span>Get Income Statement for: </span>
@@ -79,7 +79,7 @@ const ManagementPagePreview = () => {
                     </form>
                 </Row>
                 <br />
-                {businessReport == "Income_Statement" || businessReport == "Update" ? (
+                {businessReport == "Income_Statement" ? (
                     <>
                     <Row>
                         <SingleDisplay heading={"Total Sales (Gross Revenue)"} data={"NGN " + grossRevenue.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}></SingleDisplay>

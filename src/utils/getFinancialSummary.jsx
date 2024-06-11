@@ -91,7 +91,8 @@ export const getCostPerUnit = (currentYear = year, currentMonth = month) => {
             "butter": "15000",
             "oil": "25000",
             "flour": "50000",
-            "salt": "50000"
+            "salt": "50000",
+            "flavour": "1000"
         }
         const weightPerBag = variables[`variables${currentYear}`]                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         [currentMonth]['recipe'] || {};
     
