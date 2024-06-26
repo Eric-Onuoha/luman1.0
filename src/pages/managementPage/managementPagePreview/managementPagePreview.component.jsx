@@ -48,7 +48,7 @@ const ManagementPagePreview = () => {
 
     return(
         <Container id="expensePagePreviewComponent" fluid="true">
-            <OperationsMenu menu = {["Income_Statement", "Cash_Flow", "Variables"]}></OperationsMenu>
+            <OperationsMenu menu = {["Income_Statement", "Cash_Flow", "Estimates", "Variables"]}></OperationsMenu>
                 <Row>
                     <form>
                         <span>Get Income Statement for: </span>

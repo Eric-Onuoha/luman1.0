@@ -62,7 +62,7 @@ const TargetsPreview = () => {
                             <>
                                 {isFinite(monthSR[salesRep]["family"]/bagsPerDay.activeDays) ? (
                                     <>
-                                    <SingleDisplay key={salesRep} indicator={monthSR[salesRep]["family"] - averageSRSalesTarget} heading = {salesRep.replace("_", " ")} data={(monthSR[salesRep]["family"]).toFixed(0) +  ` of ${averageSRSalesTarget.toFixed(0)} / day`}></SingleDisplay>
+                                    <SingleDisplay key={salesRep} indicator={monthSR[salesRep]["family"] - averageSRSalesTarget} heading = {salesRep.replace("_", " ")} data={(monthSR[salesRep]["family"]).toFixed(0) +  ` or ${((monthSR[salesRep]["family"]).toFixed(0) / bagsPerDay.activeDays).toFixed(0)} per day`}></SingleDisplay>
                                     </>
                                 ) : (
                                     <>

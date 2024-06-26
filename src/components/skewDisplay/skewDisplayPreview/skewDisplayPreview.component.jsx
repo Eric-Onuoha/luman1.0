@@ -9,12 +9,12 @@ const SkewDisplayPreview = ({heading, indicator, skewData}) => {
 
     const expenseBudget = {
         "dataBundle": 6500,
-        "miscellaneous": 200000,
+        "miscellaneous": 220000,
         "TopesExpense": 120000,
-        "aramansExpense": 108000,
-        "nylonBag": 7000,
+        "aramansExpense": 120000,
+        "nylonBag": 8000,
         "diesel": 125000,
-        "gas": 90000,
+        "gas": 104000,
         "lightbill": 20000
     }
 
