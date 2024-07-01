@@ -13,7 +13,6 @@ export const GetCurrentPrice = (category, product, salesType) => {
     const PriceList = getOrderedDates(Object.keys(ProductsDB))
     const currentPrice = ProductsDB[PriceList[0]] && ProductsDB[PriceList[0]][category][product][salesType];
 
-    console.log(currentPrice)
     return currentPrice;
 }
 
