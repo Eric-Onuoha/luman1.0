@@ -11,17 +11,17 @@ import { GetExpenseByCategory } from "../../../utils/getExpense";
 
 const TargetsPreview = () => {
     const monthDTC = GetMonthlyDTCSales();
-    const monthDTCTarget = 15;
+    const monthDTCTarget = 16;
 
     const monthSR = GetMonthlySRSales();
     const monthSRTarget = {"family": 6000, "mini":0, "small": 0};
     const averageSRSalesTarget = (monthSRTarget.family/2);
 
     const bagsPerDay = GetMonthlyBagPerDay();
-    const targetBagsPerDay = 2.00;
+    const targetBagsPerDay = 2.50;
 
     const totalDebt = CalculateTotalDebt();
-    const hightestDebtTarget = 85000;
+    const hightestDebtTarget = 150000;
 
     const categoryExpenses = GetExpenseByCategory();
 
