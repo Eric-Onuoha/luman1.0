@@ -1,7 +1,7 @@
 import { useSelector } from "react-redux";
 
 const GetSRSales = () => {
-    return useSelector((state) => state.staffList.staffList)
+    return useSelector((state) => state.staffList.staffList) || {}
 }
 
 export const getSalesReps = () => {
@@ -15,4 +15,17 @@ export const getSalesReps = () => {
     }
 
     return activeSalesReps;
+}
+
+export const getCurrentStaff = () => {
+    const staffList = GetSRSales();
+    const activeStaff = [];
+
+    for (const name in staffList){
+        if(staffList[name]['department'] != "Fired"){
+            activeStaff.push(name)
+        }
+    }
+
+    return activeStaff;
 }

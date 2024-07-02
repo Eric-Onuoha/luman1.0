@@ -11,7 +11,7 @@ import { useSelector } from "react-redux";
 import { addSales } from "../../../reduxStore/reducers/sales.reducer";
 import { addSalesRepRecord } from "../../../reduxStore/reducers/salesRep.reducer";
 import { getOrderedDates } from "../../../utils/orderDates";
-import { getSalesReps } from "../../../utils/getSalesReps";
+import { getSalesReps } from "../../../utils/getStaff";
 import { getCurrentDateToUpdate } from "../../../utils/getMonthAndDay";
 
 const SalesPagePreview = ({distributors}) => {
