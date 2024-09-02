@@ -41,13 +41,13 @@ export const GetCurrentDaysTotalExpense = (date = currentDate) => {
     return totalExpense;
 }
 
-export const GetExpenseByCategory = (currentMonth = month) => {
+export const GetExpenseByCategory = (currentYear = year, currentMonth = month) => {
     const ExpenseList = GetExpenseData();
     const categoryExpenses = {};
 
     for (const date in ExpenseList) {
 
-        if(date.includes(currentMonth)){
+        if(date.includes(currentYear+currentMonth)){
             for (const expenseId in ExpenseList[date]) {
                 const expense = ExpenseList[date][expenseId];
                 const category = expense.category;

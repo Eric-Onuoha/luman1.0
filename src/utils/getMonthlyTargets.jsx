@@ -1,9 +1,9 @@
 import { useSelector } from "react-redux";
-import { getCurrentMonth, getMonthRange, getCurrentDateToUpdate } from "./getMonthAndDay";
+import { getCurrentYear, getCurrentMonth, getMonthRange, getCurrentDateToUpdate } from "./getMonthAndDay";
 
 const regex = /^(\d{4})(\w+)(\d{1,2})$/;
 
-const month = getCurrentMonth();
+const month = getCurrentYear() + getCurrentMonth();
 // const month = "september";
 
 export const GetAllDTCSales = () => {
@@ -23,7 +23,7 @@ export const GetMonthlyDTCSales = () => {
     const DTCSales = GetAllDTCSales();
     let salesdtc = {"family": 0, "mini": 0, "small": 0};
     
-    for (const key in DTCSales) {
+    for (const key in DTCSales) {   
       if (key.includes(month)) {
         activeDays += 1;
         salesdtc.family += (DTCSales[key].familyDTC && parseInt(DTCSales[key].familyDTC)) || 0;
